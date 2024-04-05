@@ -1,12 +1,32 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8"/>
-		<title>404 - chenyuan33.github.io</title>
-	</head>
-	<body>
-		<h1>404</h1>
-		<p>Not found!</p>
-		<p><a href="index.html">Main Page</a></p>
-	</body>
+
+<head>
+	<meta charset="UTF-8" />
+	<title>404 - chenyuan33.github.io</title>
+	<script>
+		function sleep(ms) {
+			return new Promise(resolve => setTimeout(resolve, ms))
+		}
+		async function sleeps() {
+			let a = 3;
+			while (a > 0) {
+				document.getElementById('jump_lable').innerHTML = "<p>after " + a + " second, jump to <a href=\"index.html\">main page</a>.</p>";
+				a--;
+				await sleep(1000)
+			}
+			location.href = "index.html";
+		}
+	</script>
+</head>
+
+<body>
+	<h1>404</h1>
+	<p>404 not found!</p>
+	<p id="jump_lable">after 3 seconds, jump to <a href="index.html">main page</a>.</p>
+	<script>
+		sleeps();
+	</script>
+</body>
+
 </html>
