@@ -7,7 +7,12 @@
 
 <body>
 	<script>
-		location.href = "/en/404.html";
+		if (navigator.language == "zh" || navigator.language == "zh-CN") {
+			location.href = "/zh/404.html";
+		}
+		else {
+			location.href = "/en/404.html";
+		}
 	</script>
 </body>
 
