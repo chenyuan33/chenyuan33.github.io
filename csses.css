@@ -1,9 +1,11 @@
 body {
 	background-color: black;
+	color: white;
 }
 
 #header {
 	background-color: cyan;
+	color: black;
 	position: fixed;
 	top: 0px;
 	right: 0px;
