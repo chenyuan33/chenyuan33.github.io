@@ -5,10 +5,8 @@
 	<meta charset="UTF-8" />
 	<title>404 - chenyuan33.github.io</title>
 	<link rel="stylesheet" type="text/css" href="/csses.css" />
+	<script src="/jses.js"></script>
 	<script>
-		function sleep(ms) {
-			return new Promise(resolve => setTimeout(resolve, ms))
-		}
 		async function sleeps() {
 			let a = 3;
 			while (a > 0) {
@@ -22,14 +20,11 @@
 </head>
 
 <body>
-	<div class="head">
+	<div id="header">
 		<p><a href="/index.html">主页</a></p>
 		<p>其他语言：<a href="/en/404.html">English</a></p>
 	</div>
-	<br />
-	<br />
-	<br />
-	<br />
+	<div id="header_blanks"></div>
 	<h1>404</h1>
 	<p>页面不存在！</p>
 	<p id="jump_lable">3 秒钟后，将跳转至<a href="index.html">主页</a>。</p>
