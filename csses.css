@@ -1,3 +1,7 @@
+body {
+	background-color: black;
+}
+
 #header {
 	background-color: cyan;
 	position: fixed;
