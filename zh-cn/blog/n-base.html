@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>n 进制，但是 n ∈ C - My Blogs - chenyuan33.github.io</title>
+	<link rel="stylesheet" type="text/css" href="/csses.css" />
+	<script src="/jses.js"></script>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+	<div id="header">
+		<p><a href="/zh-cn/index.html">主页</a></p>
+		<p>其他语言：<a href="/en-us/blog/n-base.html">English</a></p>
+	</div>
+	<div id="headerBlanks"></div>
+	<h1>\( n \) 进制，但是 \( n\in C \)（未完待续）</h1>
+	<p>在小学二年级中我们就学过 \( n \) 进制，其中 \( n\in Z \land n>1 \)。但是当我们把约束 \( n\in Z \land n>1 \) 去掉，会发生什么事情呢？</p>
+	<h2>\( 1 \) 进制</h2>
+	<p>\( n \) 进制使用数字 \( 0 \) 到 \( n-1 \)。于是，\( 1 \) 进制使用数字 \( 0 \)，于是如果沿用普通的数制规则，就无法表示除 \( 0 \) 以外的任何数字。于是，我们定义，\( 000
+		... 0 \) 表示的数字为 \( 0 \) 的个数。</p>
+	<h2>\( 0 \) 进制</h2>
+	<p>不存在 \( 0 \) 进制，因为 \( 0 \) 进制没有数字。</p>
+	<h2>\( -n \left(n\in Z^+\right) \) 进制</h2>
+	<p>\( -n \) 进制使用数字 \( 0 \) 到 \( n-1 \)，因此对于 \( n \in Z, n \ne 0 \)，\( n \) 进制使用数字 \( 0 \) 到 \( |n|-1 \)。</p>
+	<h3>\( -n \) 进制转 \( k \) 进制 \( n, r \in Z^+ \)</h3>
+	<p>以 \( \left(10221\right)_{-3} \) 转 \( 10 \) 进制为例：</p>
+	<table>
+		<tr>
+			<th>数位</th>
+			<td>\( 0 \)</td>
+			<td>\( 1 \)</td>
+			<td>\( 2 \)</td>
+			<td>\( 3 \)</td>
+			<td>\( 4 \)</td>
+		</tr>
+		<tr>
+			<th>数字</th>
+			<td>\( 1 \)</td>
+			<td>\( 2 \)</td>
+			<td>\( 2 \)</td>
+			<td>\( 0 \)</td>
+			<td>\( 1 \)</td>
+		</tr>
+		<tr>
+			<th>表示的值</th>
+			<td>\( \left(-3\right)^0 \times 1 = 1 \)</td>
+			<td>\( \left(-3\right)^1 \times 2 = -6 \)</td>
+			<td>\( \left(-3\right)^2 \times 2 = 18 \)</td>
+			<td>\( \left(-3\right)^3 \times 0 = 0 \)</td>
+			<td>\( \left(-3\right)^4 \times 1 = 81 \)</td>
+		</tr>
+	</table>
+	<p>因此，\( \left(10221\right)_{-3} = 1 + \left(-6\right) + 18 + 0 + 81 = 94 \)</p>
+	<h3>\( k \) 进制转 \( -n \) 进制 \( n, r \in Z^+ \)</h3>
+	<p>以 \( 94 \) 转 \( -3 \) 进制为例：</p>
+	<p> \(
+		\begin{align*}
+		94&=\left(-31\right)\times\left(-3\right)+1\times\left(-3\right)^0\\
+		  &=\left(11\times\left(-3\right)+2\right)\times\left(-3\right)+1\times\left(-3\right)^0\\
+		  &=11\times\left(-3\right)^2+2\times\left(-3\right)+1\times\left(-3\right)^0\\
+		  &=\left(\left(-3\right)\times\left(-3\right)+2\right)\times\left(-3\right)^2+2\times\left(-3\right)+1\times\left(-3\right)^0\\
+		  &=1\times\left(-3\right)^4+0\times\left(-3\right)^3+2\times\left(-3\right)^2+2\times\left(-3\right)+1\times\left(-3\right)^0\\
+		  &=\left(10221\right)_{-3}
+		\end{align*}
+	\) </p>
+	<h2>\( \frac pq \) 进制 \( \left( p\in Z^+ \land q\in Z \right) \)</h2>
+	<p>未完待续... 用 <a href="https://github.com/chenyuan33/chenyuan33.github.io/pulls">pr（拉取请求, pull request）</a>或 <a href="https://github.com/chenyuan33/chenyuan33.github.io/issues">issues</a> 催更</p>
+</body>
+
+</html>
