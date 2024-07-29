@@ -3,11 +3,15 @@ body {
 	color: white;
 }
 
-#header {
+div#header {
 	background-color: cyan;
 	color: black;
 	position: fixed;
 	top: 0px;
 	right: 0px;
 	left: 0px;
+}
+
+a#lightMode {
+	text-decoration: none;
 }

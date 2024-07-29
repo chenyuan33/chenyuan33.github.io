@@ -24,14 +24,14 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), updateHeade
 	if (cookie_operator.get("lightMode") === "dark")
 	{
 		cookie_operator.set("lightMode", "light");
-		document.getElementById("lightSwitch").innerHTML = "🌞";
+		document.getElementById("lightSwitch").innerHTML = "🌙";
 		document.body.style.backgroundColor = "white";
 		document.body.style.color = "black";
 	}
 	else
 	{
 		cookie_operator.set("lightMode", "dark");
-		document.getElementById("lightSwitch").innerHTML = "🌙";
+		document.getElementById("lightSwitch").innerHTML = "🌞";
 		document.body.style.backgroundColor = "black";
 		document.body.style.color = "white";
 	}
