@@ -12,7 +12,7 @@
 
 <body>
 	<div id="header">
-		<p><a href="/zh-cn/index.html">主页</a></p>
+		<p><a href="/zh-cn/index.html">主页</a> <a id="lightSwitch" href="javascript:switchLight()">dark</a></p>
 		<p>其他语言：<a href="/en-us/blog/n-base.html">English</a></p>
 	</div>
 	<div id="headerBlanks"></div>
@@ -27,10 +27,15 @@
 	<h2>\( -n \left(n\in Z^+\right) \) 进制</h2>
 	<p>\( -n \) 进制使用数字 \( 0 \) 到 \( n-1 \)，因此对于 \( n \in Z, n \ne 0 \)，\( n \) 进制使用数字 \( 0 \) 到 \( |n|-1 \)。</p>
 	<h3>\( -n \) 进制转 \( k \) 进制 \( n, r \in Z^+ \)</h3>
-	<p>以 \( \left(10221\right)_{-3} \) 转 \( 10 \) 进制为例：</p>
-	<table>
+	<p>以 \( \left(10221.1201\right)_{-3} \) 转 \( 10 \) 进制为例：</p>
+	<table frame="box" rules="all">
 		<tr>
 			<th>数位</th>
+			<td>\( -4 \)</td>
+			<td>\( -3 \)</td>
+			<td>\( -2 \)</td>
+			<td>\( -1 \)</td>
+			<td>.</td>
 			<td>\( 0 \)</td>
 			<td>\( 1 \)</td>
 			<td>\( 2 \)</td>
@@ -40,6 +45,11 @@
 		<tr>
 			<th>数字</th>
 			<td>\( 1 \)</td>
+			<td>\( 0 \)</td>
+			<td>\( 2 \)</td>
+			<td>\( 1 \)</td>
+			<td>.</td>
+			<td>\( 1 \)</td>
 			<td>\( 2 \)</td>
 			<td>\( 2 \)</td>
 			<td>\( 0 \)</td>
@@ -47,26 +57,35 @@
 		</tr>
 		<tr>
 			<th>表示的值</th>
-			<td>\( \left(-3\right)^0 \times 1 = 1 \)</td>
-			<td>\( \left(-3\right)^1 \times 2 = -6 \)</td>
-			<td>\( \left(-3\right)^2 \times 2 = 18 \)</td>
-			<td>\( \left(-3\right)^3 \times 0 = 0 \)</td>
-			<td>\( \left(-3\right)^4 \times 1 = 81 \)</td>
+			<td>\( \left(-3\right)^{-4} \times 1 = \cfrac1{81} \)</td>
+			<td>\( \left(-3\right)^{-3} \times 0 = 0 \)</td>
+			<td>\( \left(-3\right)^{-2} \times 2 = \cfrac29 \)</td>
+			<td>\( \left(-3\right)^{-1} \times 1 = -\cfrac13 \)</td>
+			<td>.</td>
+			<td>\( \left(-3\right)^ 0 \times 1 = 1 \)</td>
+			<td>\( \left(-3\right)^ 1 \times 2 = - 6 \)</td>
+			<td>\( \left(-3\right)^ 2 \times 2 = 18 \)</td>
+			<td>\( \left(-3\right)^ 3 \times 0 = 0 \)</td>
+			<td>\( \left(-3\right)^ 4 \times 1 = 81 \)</td>
 		</tr>
 	</table>
-	<p>因此，\( \left(10221\right)_{-3} = 1 + \left(-6\right) + 18 + 0 + 81 = 94 \)</p>
+	<p>因此，\( \left(10221.1201\right)_{-3} = \cfrac1{81} + 0 + \cfrac29 + \left(-\cfrac13\right) + 1 + \left(-6\right) +
+		18 + 0 + 81 = 93\cfrac{73}{81} \)</p>
 	<h3>\( k \) 进制转 \( -n \) 进制 \( n, r \in Z^+ \)</h3>
-	<p>以 \( 94 \) 转 \( -3 \) 进制为例：</p>
+	<p>以 \( 94\cfrac{73}{81} \) 转 \( -3 \) 进制为例：</p>
 	<p> \(
 		\begin{align*}
-		94&=\left(-31\right)\times\left(-3\right)+1\times\left(-3\right)^0\\
-		  &=\left(11\times\left(-3\right)+2\right)\times\left(-3\right)+1\times\left(-3\right)^0\\
-		  &=11\times\left(-3\right)^2+2\times\left(-3\right)+1\times\left(-3\right)^0\\
-		  &=\left(\left(-3\right)\times\left(-3\right)+2\right)\times\left(-3\right)^2+2\times\left(-3\right)+1\times\left(-3\right)^0\\
-		  &=1\times\left(-3\right)^4+0\times\left(-3\right)^3+2\times\left(-3\right)^2+2\times\left(-3\right)+1\times\left(-3\right)^0\\
-		  &=\left(10221\right)_{-3}
+		94\cfrac{73}{81}&=\left(-31\right)\times\left(-3\right)+1\times\left(-3\right)^0+\cfrac{73}{81}\\
+		&=\left(11\times\left(-3\right)+2\right)\times\left(-3\right)+1\times\left(-3\right)^0+\cfrac{73}{81}\\
+		&=11\times\left(-3\right)^2+2\times\left(-3\right)+1\times\left(-3\right)^0+\cfrac{73}{81}\\
+		&=\left(\left(-3\right)\times\left(-3\right)+2\right)\times\left(-3\right)^2+2\times\left(-3\right)+1\times\left(-3\right)^0+\cfrac{73}{81}\\
+		&=1\times\left(-3\right)^4+0\times\left(-3\right)^3+2\times\left(-3\right)^2+2\times\left(-3\right)+1\times\left(-3\right)^0+\cfrac{73}{81}\\
+		&=1\times\left(-3\right)^4+0\times\left(-3\right)^3+2\times\left(-3\right)^2+2\times\left(-3\right)+1\times\left(-3\right)^0-\cfrac{73}{27}\times\left(-3\right)^{-1}\\
+		&=1\times\left(-3\right)^4+0\times\left(-3\right)^3+2\times\left(-3\right)^2+2\times\left(-3\right)+1\times\left(-3\right)^0+\left(-2-\cfrac{19}{27}\right)\times\left(-3\right)^{-1}\\
+		&=...\\
+		&=\left(10221\right)_{-3}
 		\end{align*}
-	\) </p>
+		\) </p>
 	<h2>\( \frac pq \) 进制 \( \left( p\in Z^+ \land q\in Z \right) \)</h2>
 	<p>未完待续... 用 <a href="https://github.com/chenyuan33/chenyuan33.github.io/pulls">pr（拉取请求, pull request）</a>或 <a href="https://github.com/chenyuan33/chenyuan33.github.io/issues">issues</a> 催更</p>
 </body>
