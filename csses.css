@@ -15,3 +15,12 @@ div#header {
 a#lightSwitch {
 	text-decoration: none;
 }
+
+div#footer {
+	background-color: cyan;
+	color: black;
+	position: fixed;
+	bottom: 0px;
+	right: 0px;
+	left: 0px;
+}
