@@ -17,15 +17,7 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = (
 		}
 	}
 	console.log(`Welcome to chenyuan33.github.io!
-© 2024 @chenyuan33, All rights reserved.
- /$$      /$$           /$$                                            /$$
-| $$  /$ | $$          | $$                                           | $$
-| $$ /$$$| $$  /$$$$$$ | $$  /$$$$$$$  /$$$$$$  /$$$$$$/$$$$   /$$$$$$| $$
-| $$/$$ $$ $$ /$$__  $$| $$ /$$_____/ /$$__  $$| $$_  $$_  $$ /$$__  $| $$
-| $$$$_  $$$$| $$$$$$$$| $$| $$      | $$  \ $$| $$ \ $$ \ $$| $$$$$$$|__/
-| $$$/ \  $$$| $$_____/| $$| $$      | $$  | $$| $$ | $$ | $$| $$_____    
-| $$/   \  $$|  $$$$$$$| $$|  $$$$$$$|  $$$$$$/| $$ | $$ | $$|  $$$$$$ /$$
-|__/     \__/ \_______/|__/ \_______/ \______/ |__/ |__/ |__/ \_______|__/`);
+© Copyright 2024 @chenyuan33, All rights reserved.`);
 }, cookie_operator = {
 	get: (name) => {
 		let key_value = document.cookie.split("; ").find(str => str.startsWith(name + "="));
