@@ -1,4 +1,8 @@
 let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = () => {
+	document.head.appendChild(document.createElement("script")).src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+	document.getElementById("footer").innerHTML = `
+		<p>© Copyright 2024-${new Date().getFullYear()} @<a href="https://github.com/chenyuan33">chenyuan33</a>, All rights reserved.</p>
+	`;
 	document.getElementById("headerBlanks").style.width = document.getElementById("header").offsetWidth + "px";
 	document.getElementById("headerBlanks").style.height = document.getElementById("header").offsetHeight + "px";
 	document.getElementById("footerBlanks").style.width = document.getElementById("footer").offsetWidth + "px";

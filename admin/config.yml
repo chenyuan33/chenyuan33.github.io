@@ -1,0 +1,22 @@
+backend:
+  name: git-gateway
+  branch: main
+  accept_roles:
+    - admin
+  repo: chenyuan33/chenyuan33.github.io
+  base_url: /api/v1
+
+media_folder: 'static/images'
+
+collections:
+  - name: 'blog'
+    label: 'Blog'
+    description: 'Blog Posts'
+    folder: 'content/blog'
+    create: true
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+      - { label: 'Date', name: 'date', widget: 'datetime' }
+      - { label: 'Author', name: 'author', widget: 'string' }
+      - { label: 'Image', name: 'image', widget: 'image' }
