@@ -15,28 +15,31 @@
 				"chenyuan33",
 				"chenyuan33.github.io",
 				lang + "/blog/" + document.getElementById("id").value + ".html",
-				`<!DOCTYPE html>
-<html lang="${lang}">
+				`
+					<!DOCTYPE html>
+					<html lang="${lang}">
 
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>${document.getElementById("title-" + lang).value} - chenyuan33.github.io</title>
-	<link rel="stylesheet" type="text/css" href="/csses.css" />
-	<script src="/jses.js"></script>
-</head>
+					<head>
+						<meta charset="UTF-8" />
+						<meta name="viewport" content="width=device-width, initial-scale=1" />
+						<title>${document.getElementById("title-" + lang).value} - chenyuan33.github.io</title>
+						<link rel="stylesheet" type="text/css" href="/csses.css" />
+						<script src="/jses.js">${"<"}/script>
+					</head>
 
-<body>
-	<div id="header">
-		<p><a href="/${lang}/index.html">${lang == "en-us" ? "Main Page" : "主页"}</a> <a id="lightSwitch" href="javascript:switchLight()">🌙</a></p>
-		<p>${lang == "en-us"
-			? "Other Languages: <a href='/zh-cn/blog/" + document.getElementById("id").value + ".html'>简体中文</a>"
-			: "其他语言：<a href='/en-us/blog/" + document.getElementById("id").value + ".html'>English</a>"}</p>
-	</div>
-	${document.getElementById("content-" + lang).value}
-</body>
+					<body>
+						<div id="header">
+							<p><a href="/${lang}/index.html">${lang == "en-us" ? "Main Page" : "主页"}</a> <a id="lightSwitch"
+									href="javascript:switchLight()">🌙</a></p>
+							<p>${lang == "en-us"
+								? "Other Languages: <a href='/zh-cn/blog/" + document.getElementById("id").value + ".html'>简体中文</a>"
+								: "其他语言：<a href='/en-us/blog/" + document.getElementById("id").value + ".html'>English</a>"}</p>
+						</div>
+						${document.getElementById("content-" + lang).value}
+					</body>
 
-</html>`
+					</html>
+				`
 			);
 		}
 		function updateBlog() {
@@ -44,7 +47,7 @@
 			update("zh-cn");
 			alert("Blog updated!");
 		}
-	</script>
+</script>
 </head>
 
 <body>
@@ -54,16 +57,22 @@
 	<div id="headerBlanks"></div>
 	<label for="token">Token:</label>
 	<input type="password" id="token" />
+	<br />
 	<label for="id">ID:</label>
 	<input type="text" id="id" />
+	<br />
 	<label for="title-en-us">Title (en-us):</label>
 	<input type="text" id="title-en-us" />
+	<br />
 	<label for="content-en-us">Content (en-us):</label>
 	<textarea id="content-en-us"></textarea>
+	<br />
 	<label for="title-zh-cn">Title (zh-cn):</label>
 	<input type="text" id="title-zh-cn" />
+	<br />
 	<label for="content-zh-cn">Content (zh-cn):</label>
 	<textarea id="content-zh-cn"></textarea>
+	<br />
 	<button onclick="updateBlog()">Update Blog</button>
 	<div id="footer"></div>
 	<div id="footerBlanks"></div>
