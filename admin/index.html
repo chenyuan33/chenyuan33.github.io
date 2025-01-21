@@ -1,16 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Content Manager</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Admin Page - chenyuan33.github.io</title>
+	<link rel="stylesheet" type="text/css" href="/csses.css" />
+	<script src="/jses.js"></script>
 </head>
 
 <body>
-	<!-- Include the script that builds the page and powers Netlify CMS -->
-	<script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-	<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+	<div id="header">
+		<p><a href="/index.html">主页</a> <a id="lightSwitch" href="javascript:switchLight()">🌙</a></p>
+	</div>
+	<div id="headerBlanks"></div>
+	<a href="/admin/blog.html">Blog</a>
+	<div id="footer"></div>
+	<div id="footerBlanks"></div>
+	<script>scripts()</script>
 </body>
 
 </html>
