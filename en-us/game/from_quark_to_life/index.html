@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>From Quark to Life - chenyuan33.github.io</title>
+	<link rel="stylesheet" type="text/css" href="/csses.css" />
+	<script src="/jses.js"></script>
+	<link rel="stylesheet" type="text/css" href="/en-us/game/from_quark_to_life/main.css" />
+	<script src="/en-us/game/from_quark_to_life/main.js"></script>
+</head>
+
+<body>
+	<div id="header">
+		<p><a href="/en-us/index.html">Main Page</a> <a id="lightSwitch" href="javascript:switchLight()">🌙</a></p>
+		<p>Other Languages: <a href="/zh-cn/game/from_quark_to_life/index.html">简体中文</a></p>
+	</div>
+	<div id="headerBlanks"></div>
+	<h1>From Quark to Life</h1>
+	<p><strong>Note:</strong> This game does not automatically save your progress, please manually save or load.</p>
+	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv'], 'main')">Game</button>
+	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv'], 'achievements')">Achievements</button>
+	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv'], 'archiveDiv')">Save/Load</button>
+	<div id="main" class="shown">
+		<button onclick="funcs.shown(['quark'], 'quark')" id="quarkButton">Quark</button>
+		<div id="quark" class="shown"></div>
+	</div>
+	<div id="achievements" class="hidden">
+	</div>
+	<div id="archiveDiv" class="hidden">
+		<h2>Save/Load</h2>
+		<button onclick="funcs.get_current_archive()">Save</button>
+		<button onclick="funcs.set_current_archive()">Load</button>
+		<label for="archive">Archive Content:</label>
+		<textarea id="archive" title="Archive Content" placeholder="Archive Content"></textarea>
+	</div>
+	<div id="hadAchievements"></div>
+	<script>mainloop()</script>
+	<div id="footer"></div>
+	<div id="footerBlanks"></div>
+	<script>scripts()</script>
+</body>
+
+</html>

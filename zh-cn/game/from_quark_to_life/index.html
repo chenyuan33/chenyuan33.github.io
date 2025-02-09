@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>从夸克到文明 - chenyuan33.github.io</title>
+	<link rel="stylesheet" type="text/css" href="/csses.css" />
+	<script src="/jses.js"></script>
+	<link rel="stylesheet" type="text/css" href="/zh-cn/game/from_quark_to_life/main.css" />
+	<script src="/zh-cn/game/from_quark_to_life/main.js"></script>
+</head>
+
+<body>
+	<div id="header">
+		<p><a href="/zh-cn/index.html">主页</a> <a id="lightSwitch" href="javascript:switchLight()">🌙</a></p>
+		<p>其他语言：<a href="/en-us/game/from_quark_to_life/index.html">English</a></p>
+	</div>
+	<div id="headerBlanks"></div>
+	<h1>从夸克到文明</h1>
+	<p><strong>注：</strong>本游戏不会自动保存你的进度，请手动存档或读档。</p>
+	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv'], 'main')">游戏</button>
+	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv'], 'achievements')">成就</button>
+	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv'], 'archiveDiv')">读档/存档</button>
+	<div id="main" class="shown">
+		<button onclick="funcs.shown(['quark'], 'quark')" id="quarkButton">夸克</button>
+		<div id="quark" class="shown"></div>
+	</div>
+	<div id="achievements" class="hidden">
+	</div>
+	<div id="archiveDiv" class="hidden">
+		<h2>存档/读档</h2>
+		<button onclick="funcs.get_current_archive()">存档</button>
+		<button onclick="funcs.set_current_archive()">读档</button>
+		<label for="archive">存档内容：</label>
+		<textarea id="archive" title="存档内容" placeholder="存档内容"></textarea>
+	</div>
+	<div id="hadAchievements"></div>
+	<script>mainloop()</script>
+	<div id="footer"></div>
+	<div id="footerBlanks"></div>
+	<script>scripts()</script>
+</body>
+
+</html>
