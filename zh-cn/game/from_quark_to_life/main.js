@@ -26,7 +26,8 @@ var flush = ['all'], funcs = {
 		else {
 			let lognum = Math.floor(Math.log10(num));
 			let x = Math.fround((num / Math.pow(10, lognum)) * 1000);
-			return `\\(${x / 1000 % 10}.${x / 100 % 10}${x / 10 % 10}${x % 10}\\times10^{${lognum}}\\)`;
+			let fx = xx => (xx + "").includes(".") ? (xx + "").split(".")[0] : xx + "";
+			return `\\(${fx(x / 1000 % 10)}.${fx(x / 100 % 10)}${fx(x / 10 % 10)}${fx(x % 10)}\\times10^{${lognum}}\\)`;
 		}
 	},
 	get_quark: level => {
