@@ -31,6 +31,7 @@ var flush = ['all'], funcs = {
 		}
 	},
 	get_quark: level => {
+		document.getElementById(`quarkButton${level}`).disabled = true;
 		if (level == player.quark.length - 1) {
 			player.quark.push([0, 0]);
 		}
@@ -225,7 +226,7 @@ function mainloop() {
 				case 'quark': {
 					let str = `
 						<h2>你有 ${funcs.TeXstr(player.quark[0])} 夸克</h2>
-						<button onclick="funcs.get_quark(0)">获取一个</button>
+						<button onclick="funcs.get_quark(0)" id="quarkButton0">获取一个</button>
 					`;
 					if (player.unlocks.life) {
 						str += `
@@ -256,7 +257,7 @@ function mainloop() {
 								<td>#${funcs.TeXstr(i)}</td>
 								<td>${funcs.TeXstr(player.quark[i][0])}</td>
 								<td>${funcs.TeXstr(player.quark[i][1])}</td>
-								<td><button onclick="funcs.get_quark(${i})" ${(player.quark[i][1] + 1) * Math.pow(10, i)
+								<td><button onclick="funcs.get_quark(${i})" id="quarkButton${i}" ${(player.quark[i][1] + 1) * Math.pow(10, i)
 								<= player.quark[0] ? "" : "disabled"
 							}>
 									花费 ${funcs.TeXstr((player.quark[i][1] + 1) * Math.pow(10, i))} 夸克获取一个
@@ -348,10 +349,6 @@ function mainloop() {
 			}
 			flush.push('quark');
 		}
-		if (player.start_people_machine && player.quark[0] >= funcs.TeXstr(1e40 * Math.pow(1e10, funcs.how_many_people()))) {
-			player.people.unemployed++;
-			player.quark[0] -= funcs.TeXstr(1e40 * Math.pow(1e10, funcs.how_many_people()));
-		}
 	}, 1000);
 	setInterval(() => {
 		for (let key in achievements) {
@@ -367,8 +364,10 @@ function mainloop() {
 			}
 		}
 		flush.push('achievements');
-	}, 50);
-	setInterval(() => {
+		if (player.start_people_machine && player.quark[0] >= funcs.TeXstr(1e40 * Math.pow(1e10, funcs.how_many_people()))) {
+			player.people.unemployed++;
+			player.quark[0] -= funcs.TeXstr(1e40 * Math.pow(1e10, funcs.how_many_people()));
+		}
 		for (let key in unlocks_check) {
 			if (!player.unlocks[key] && unlocks_check[key].check()) {
 				player.unlocks[key] = true;
