@@ -21,13 +21,13 @@ var flush = ['all'], funcs = {
 	},
 	TeXstr: num => {
 		if (num < 1000) {
-			return `\\(${num}\\)`;
+			return `${num}`;
 		}
 		else {
 			let lognum = Math.floor(Math.log10(num));
 			let x = Math.fround((num / Math.pow(10, lognum)) * 1000);
 			let fx = xx => (xx + "").includes(".") ? (xx + "").split(".")[0] : xx + "";
-			return `\\(${fx(x / 1000 % 10)}.${fx(x / 100 % 10)}${fx(x / 10 % 10)}${fx(x % 10)}\\times10^{${lognum}}\\)`;
+			return `${fx(x / 1000 % 10)}.${fx(x / 100 % 10)}${fx(x / 10 % 10)}${fx(x % 10)}e${lognum}`;
 		}
 	},
 	get_quark: level => {
@@ -338,7 +338,6 @@ function mainloop() {
 					break;
 			}
 			flush.shift();
-			MathJax.typesetPromise();
 		}
 	}, 50);
 	setInterval(() => {
