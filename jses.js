@@ -1,6 +1,6 @@
 let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = () => {
 	document.head.appendChild(document.createElement("script")).src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
-	document.body.appendChild(`
+	document.body.append(`
 		<script src="https://giscus.app/client.js"
 			data-repo="chenyuan33/chenyuan33.github.io"
 			data-repo-id="R_kgDOLpttzQ"
@@ -21,7 +21,7 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = (
 	let header = document.createElement("div"), footer = document.createElement("div"), headerBlanks = document.createElement("div"), footerBlanks = document.createElement("div");
 	document.body.insertBefore(header, document.firstChild);
 	document.body.insertBefore(headerBlanks, document.getElementById("header").nextSibling);
-	document.body.append(footerBlanks);
+	document.body.appendChild(footerBlanks);
 	header.innerHTML = `
 		<p>
 			<a href="/${document.URL.split("/")[3]}/index.html">${document.URL.split("/")[3] == "en-us" ? "Main Page" : "主页"}</a>
