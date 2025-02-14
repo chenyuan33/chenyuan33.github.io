@@ -7,9 +7,16 @@ div#header, div#footer {
 	background-color: cyan;
 	color: black;
 	position: fixed;
-	top: 0px;
 	right: 0px;
 	left: 0px;
+}
+
+div#header {
+	top: 0px;
+}
+
+div#footer {
+	bottom: 0px;
 }
 
 a#lightSwitch {
