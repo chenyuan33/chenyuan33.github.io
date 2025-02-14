@@ -1,6 +1,20 @@
 let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = () => {
 	document.head.appendChild(document.createElement("script")).src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+	document.getElementById("header").innerHTML = `
+		<p>
+			<a href="/${document.URL.split("/")[3]}/index.html">${document.URL.split("/")[3] == "en-us" ? "Main Page" : "主页"}</a>
+			<a id="lightSwitch" href="javascript:switchLight()">🌙</a>
+			<a href="/${document.URL.split("/")[3]}/blog/index.html" id="headerBlogShower">${document.URL.split("/")[3] == "en-us" ? "Blog" : "博客"} <div id="headerBlogShowerArrow">&lt;</div></a>
+		</p>
+		<p>
+			${document.URL.split("/")[3] == "en-us" ? "Languages: " : "语言: "}
+			<a href="/en-us/${document.URL.split("/").slice(4).join("/")}">English</a>
+			<a href="/zh-cn/${document.URL.split("/").slice(4).join("/")}">简体中文</a>
+		</p>
+		<p><a href="#footerBlanks">${document.URL.split("/")[3] == "en-us" ? "Jump to the bottom" : "跳转至底部"}</a></p>
+	`;
 	document.getElementById("footer").innerHTML = `
+		<p><a href="#headerBlanks">${document.URL.split("/")[3] == "en-us" ? "Jump to the top" : "跳转至顶部"}</a></p>
 		<p>© Copyright 2024-${new Date().getFullYear()} @<a href="https://github.com/chenyuan33">chenyuan33</a>, All rights reserved.</p>
 	`;
 	document.getElementById("headerBlanks").style.width = document.getElementById("header").offsetWidth + "px";
