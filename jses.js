@@ -3,25 +3,22 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = (
 	mathjax.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
 	document.head.appendChild(mathjax);
 	let giscus = document.createElement("script");
+	giscus.src = "https://giscus.app/client.js";
+	giscus.dataset.repo = "chenyuan33/chenyuan33.github.io";
+	giscus.dataset.repoId = "R_kgDOLpttzQ";
+	giscus.dataset.category = "Announcements";
+	giscus.dataset.categoryId = "DIC_kwDOLpttzc4CgluD";
+	giscus.dataset.mapping = "pathname";
+	giscus.dataset.strict = "0";
+	giscus.dataset.reactionsEnabled = "1";
+	giscus.dataset.emitMetadata = "0";
+	giscus.dataset.inputPosition = "bottom";
+	giscus.dataset.theme = "light";
+	giscus.dataset.lang = "en";
+	giscus.dataset.loading = "lazy";
+	giscus.crossorigin = "anonymous";
+	giscus.async = true;
 	document.body.appendChild(giscus);
-	giscus.outerHTML = `
-		<script src="https://giscus.app/client.js"
-			data-repo="chenyuan33/chenyuan33.github.io"
-			data-repo-id="R_kgDOLpttzQ"
-			data-category="Announcements"
-			data-category-id="DIC_kwDOLpttzc4CgluD"
-			data-mapping="pathname"
-			data-strict="0"
-			data-reactions-enabled="1"
-			data-emit-metadata="0"
-			data-input-position="bottom"
-			data-theme="light"
-			data-lang="en"
-			data-loading="lazy"
-			crossorigin="anonymous"
-			async>
-		</script>
-	`;
 	let header = document.createElement("div"), footer = document.createElement("div"), headerBlanks = document.createElement("div"), footerBlanks = document.createElement("div");
 	header.id = "header";
 	footer.id = "footer";
