@@ -30,7 +30,6 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = (
 		<p>
 			<a href="/${document.URL.split("/")[3]}/index.html">${document.URL.split("/")[3] == "en-us" ? "Main Page" : "主页"}</a>
 			<a id="lightSwitch" href="javascript:switchLight()">🌙</a>
-			<a href="/${document.URL.split("/")[3]}/blog/index.html" id="headerBlogShower">${document.URL.split("/")[3] == "en-us" ? "Blog" : "博客"} <strong id="headerBlogShowerArrow">&lt;</strong></a>
 		</p>
 		<p>
 			${document.URL.split("/")[3] == "en-us" ? "Languages: " : "语言: "}
