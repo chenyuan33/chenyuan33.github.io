@@ -1,4 +1,14 @@
-let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = () => {
+let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), showCurrentDateTime = () => {
+	const now = new Date();
+	const year = now.getFullYear();
+	const month = String(now.getMonth() + 1).padStart(2, '0');
+	const day = String(now.getDate()).padStart(2, '0');
+	const hours = String(now.getHours()).padStart(2, '0');
+	const minutes = String(now.getMinutes()).padStart(2, '0');
+	const seconds = String(now.getSeconds()).padStart(2, '0');
+	const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+	document.getElementById('currentDateTime').textContent = formattedDateTime;
+}, scripts = () => {
 	let mathjax = document.createElement("script");
 	mathjax.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
 	document.head.appendChild(mathjax);
@@ -30,6 +40,7 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = (
 		<p>
 			<a href="/${document.URL.split("/")[3]}/index.html">${document.URL.split("/")[3] == "en-us" ? "Main Page" : "主页"}</a>
 			<a id="lightSwitch" href="javascript:switchLight()">🌙</a>
+			<span id="currentDateTime">${document.URL.split("/")[3] == "en-us" ? "Loading" : "加载中"}...</span>
 		</p>
 		<p>
 			${document.URL.split("/")[3] == "en-us" ? "Languages: " : "语言: "}
@@ -38,6 +49,8 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = (
 		</p>
 		<p><a href="#footerBlanks">${document.URL.split("/")[3] == "en-us" ? "Jump to the bottom" : "跳转至底部"}</a></p>
 	`;
+	showCurrentDateTime();
+	setInterval(showCurrentDateTime, 1000);
 	footer.innerHTML = `
 		<p><a href="#headerBlanks">${document.URL.split("/")[3] == "en-us" ? "Jump to the top" : "跳转至顶部"}</a></p>
 		<p>© Copyright 2024-${new Date().getFullYear()} @<a href="https://github.com/chenyuan33">chenyuan33</a>, All rights reserved.</p>
@@ -46,14 +59,11 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = (
 	headerBlanks.style.height = header.offsetHeight + "px";
 	footerBlanks.style.width = footer.offsetWidth + "px";
 	footerBlanks.style.height = footer.offsetHeight + "px";
-	if (cookie_operator.get("lightMode") === undefined)
-	{
+	if (cookie_operator.get("lightMode") === undefined) {
 		cookie_operator.set("lightMode", "dark");
 	}
-	else
-	{
-		if (cookie_operator.get("lightMode") === "light")
-		{
+	else {
+		if (cookie_operator.get("lightMode") === "light") {
 			document.getElementById("lightSwitch").innerHTML = "🌞";
 			document.body.style.backgroundColor = "white";
 			document.body.style.color = "black";
@@ -68,15 +78,13 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = (
 	},
 	set: (name, value) => document.cookie = name + "=" + value + "; expires=" + new Date(Date.now() + 60 * 60 * 24 * 180).toUTCString() + "; path=/"
 }, switchLight = () => {
-	if (cookie_operator.get("lightMode") === "dark")
-	{
+	if (cookie_operator.get("lightMode") === "dark") {
 		cookie_operator.set("lightMode", "light");
 		document.getElementById("lightSwitch").innerHTML = "🌞";
 		document.body.style.backgroundColor = "white";
 		document.body.style.color = "black";
 	}
-	else
-	{
+	else {
 		cookie_operator.set("lightMode", "dark");
 		document.getElementById("lightSwitch").innerHTML = "🌙";
 		document.body.style.backgroundColor = "black";
