@@ -39,6 +39,7 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), showCurrent
 	header.innerHTML = `
 		<p>
 			<a href="/${document.URL.split("/")[3]}/index.html">${document.URL.split("/")[3] == "en-us" ? "Main Page" : "主页"}</a>
+			<a href="/${document.URL.split("/")[3]}/changelog.html">${document.URL.split("/")[3] == "en-us" ? "Changelog" : "更新日志"}</a>
 			<a id="lightSwitch" href="javascript:switchLight()">🌙</a>
 			<span id="currentDateTime">${document.URL.split("/")[3] == "en-us" ? "Loading" : "加载中"}...</span>
 		</p>
@@ -47,12 +48,10 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), showCurrent
 			<a href="/en-us/${document.URL.split("/").slice(4).join("/")}">English</a>
 			<a href="/zh-cn/${document.URL.split("/").slice(4).join("/")}">简体中文</a>
 		</p>
-		<p><a href="#footerBlanks">${document.URL.split("/")[3] == "en-us" ? "Jump to the bottom" : "跳转至底部"}</a></p>
 	`;
 	showCurrentDateTime();
 	setInterval(showCurrentDateTime, 1000);
 	footer.innerHTML = `
-		<p><a href="#headerBlanks">${document.URL.split("/")[3] == "en-us" ? "Jump to the top" : "跳转至顶部"}</a></p>
 		<p>© Copyright 2024-${new Date().getFullYear()} @<a href="https://github.com/chenyuan33">chenyuan33</a>, All rights reserved.</p>
 	`;
 	headerBlanks.style.width = header.offsetWidth + "px";
