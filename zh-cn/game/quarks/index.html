@@ -17,6 +17,7 @@
 	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv'], 'main')">游戏</button>
 	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv'], 'achievements')">成就</button>
 	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv'], 'archiveDiv')">读档/存档</button>
+	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv', 'changelogDiv'], 'changelogDiv')">更新日志</button>
 	<div id="main" class="shown">
 	</div>
 	<div id="achievements" class="hidden">
@@ -27,6 +28,31 @@
 		<button onclick="funcs.set_current_archive()">读档</button>
 		<label for="archive">存档内容：</label>
 		<textarea id="archive" title="存档内容" placeholder="存档内容"></textarea>
+	</div>
+	<div id="changelogDiv" class="hidden">
+		<h2>更新日志</h2>
+		<h3>v2.0.2</h3>
+		<ul>
+			<li>添加更新日志。</li>
+			<li>添加硬重置按钮。</li>
+			<li>添加自动保存功能。</li>
+		</ul>
+		<h3>v2.0.1</h3>
+		<ul>
+			<li>修复一些 bug。</li>
+		</ul>
+		<h3>v2.0.0</h3>
+		<ul>
+			<li>重命名这个游戏：将 <code>从夸克到生活</code> 改为 <code>夸克</code>。</li>
+			<li>移除生活。</li>
+			<li>添加夸克维度。</li>
+			<li>添加夸克获取器最大化按钮。</li>
+		</ul>
+		<h3>v1.0.0</h3>
+		<ul>
+			<li>初始版本。</li>
+			<li>添加成就、夸克和生活。</li>
+		</ul>
 	</div>
 	<div id="hadAchievements"></div>
 	<script>mainloop()</script>

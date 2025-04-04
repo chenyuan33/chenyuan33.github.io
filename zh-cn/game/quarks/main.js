@@ -30,6 +30,41 @@ var flush = ['all'], funcs = {
 			return `${fx(x / 1000 % 10)}.${fx(x / 100 % 10)}${fx(x / 10 % 10)}${fx(x % 10)}e${lognum}`;
 		}
 	},
+	do_hard_reset: () => {
+		player = {
+			achievements: {
+				first_quark: false,
+				quark_getter: false,
+				quark_getter_2nd: false,
+				quark_getter_3rd: false,
+				quark_getter_4th: false,
+				quark_1e10: false,
+				quark_1e15: false,
+				quark_1e20: false,
+				quark_1e25: false,
+				quark_dimension_1: false,
+				quark_dimension_1_getted_2: false,
+				quark_dimension_1_getter: false,
+				quark_dimension_1_getter_2nd: false,
+				quark_dimension_1_getter_3rd: false,
+				quark_dimension_1_getter_4th: false,
+				quark_dimension_2: false,
+				quark_dimension_2_getter_4th: false,
+				quark_dimension_3: false,
+				quark_dimension_4: false,
+				the_end: false
+			},
+			quark: [[0]],
+			quark_points: [0],
+			unlock_dimension: false
+		};
+		flush.push('all');
+	},
+	hard_reset: () => {
+		if (confirm("你确定要重置你的进度吗？这将会导致丢失所有游戏数据和成就。如果你想要备份存档，请先点击“取消”，然后在读档/存档界面获取并保存。")) {
+			funcs.do_hard_reset();
+		}
+	},
 	get_quark: (dimension, level) => {
 		document.getElementById(`quarkButton${dimension}-${level}`).disabled = true;
 		if (dimension == player.quark.length - 1) {
@@ -83,27 +118,27 @@ var flush = ['all'], funcs = {
 	first_quark: {
 		title: "第一步",
 		desc: "获得第一个夸克。",
-		check: () => player.quark[0] > 0
+		check: () => player.quark[0][0] > 0
 	},
 	quark_getter: {
 		title: "速度！",
 		desc: "获得一个夸克获取器。",
-		check: () => player.quark.length > 1 && player.quark[1][0] > 0
+		check: () => player.quark[0].length > 1 && player.quark[0][1][0] > 0
 	},
 	quark_getter_2nd: {
 		title: "加速度！",
 		desc: "用获取器获取获取器！（达成条件：获取一个夸克获取器 #2）",
-		check: () => player.quark.length > 2 && player.quark[2][0] > 0
+		check: () => player.quark[0].length > 2 && player.quark[0][2][0] > 0
 	},
 	quark_getter_3rd: {
 		title: "加加速度！",
 		desc: "用获取器获取的获取器获取获取器！（达成条件：获取一个夸克获取器 #3）",
-		check: () => player.quark.length > 3 && player.quark[3][0] > 0
+		check: () => player.quark[0].length > 3 && player.quark[0][3][0] > 0
 	},
 	quark_getter_4th: {
 		title: "加加加速度！",
 		desc: "用获取器获取的获取器获取可以获取获取器的获取器！（达成条件：获取一个夸克获取器 #4）",
-		check: () => player.quark.length > 4 && player.quark[4][0] > 0
+		check: () => player.quark[0].length > 4 && player.quark[0][4][0] > 0
 	},
 	quark_1e10: {
 		title: "好多夸克！",
@@ -180,34 +215,18 @@ var flush = ['all'], funcs = {
 		desc: "获取一个拥有维度 10 的夸克。",
 		check: () => player.quark.length > 10 && player.quark[10][0][0] > 0
 	}
-}, player = {
-	achievements: {
-		first_quark: false,
-		quark_getter: false,
-		quark_getter_2nd: false,
-		quark_getter_3rd: false,
-		quark_getter_4th: false,
-		quark_1e10: false,
-		quark_1e15: false,
-		quark_1e20: false,
-		quark_1e25: false,
-		quark_dimension_1: false,
-		quark_dimension_1_getted_2: false,
-		quark_dimension_1_getter: false,
-		quark_dimension_1_getter_2nd: false,
-		quark_dimension_1_getter_3rd: false,
-		quark_dimension_1_getter_4th: false,
-		quark_dimension_2: false,
-		quark_dimension_2_getter_4th: false,
-		quark_dimension_3: false,
-		quark_dimension_4: false,
-		the_end: false
-	},
-	quark: [[0]],
-	quark_points: [0],
-	unlock_dimension: false
-};
+}, player = {};
 function mainloop() {
+	if (localStorage.getItem("game") === null) {
+		localStorage.game = {};
+	}
+	if (localStorage.game.quarks === undefined) {
+		localStorage.game.quarks = {};
+		funcs.do_hard_reset();
+	}
+	else {
+		player = localStorage.game.quarks;
+	}
 	setInterval(() => {
 		while (flush.length > 0) {
 			switch (flush[0]) {
@@ -231,7 +250,7 @@ function mainloop() {
 					break;
 				}
 				case 'quark': {
-					let str = "";
+					let str = "<button onclick='funcs.hard_reset()'>硬重置</button>";
 					if (player.unlock_dimension) {
 						str += "<p>";
 						for (let i = 0; i < player.quark.length; i++) {
@@ -346,4 +365,5 @@ function mainloop() {
 		}
 		flush.push('achievements');
 	}, 50);
+	setInterval(() => localStorage.game.quarks = player, 50);
 };

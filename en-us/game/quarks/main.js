@@ -30,6 +30,41 @@ var flush = ['all'], funcs = {
 			return `${fx(x / 1000 % 10)}.${fx(x / 100 % 10)}${fx(x / 10 % 10)}${fx(x % 10)}e${lognum}`;
 		}
 	},
+	do_hard_reset: () => {
+		player = {
+			achievements: {
+				first_quark: false,
+				quark_getter: false,
+				quark_getter_2nd: false,
+				quark_getter_3rd: false,
+				quark_getter_4th: false,
+				quark_1e10: false,
+				quark_1e15: false,
+				quark_1e20: false,
+				quark_1e25: false,
+				quark_dimension_1: false,
+				quark_dimension_1_getted_2: false,
+				quark_dimension_1_getter: false,
+				quark_dimension_1_getter_2nd: false,
+				quark_dimension_1_getter_3rd: false,
+				quark_dimension_1_getter_4th: false,
+				quark_dimension_2: false,
+				quark_dimension_2_getter_4th: false,
+				quark_dimension_3: false,
+				quark_dimension_4: false,
+				the_end: false
+			},
+			quark: [[0]],
+			quark_points: [0],
+			unlock_dimension: false
+		};
+		flush.push('all');
+	},
+	hard_reset: () => {
+		if (confirm("Are you sure you want to reset the game? This will erase all your progress and achievements. If you want to save your progress, please click 'Cancel' and then visit 'Save/Load' to export your progress.")) {
+			funcs.do_hard_reset();
+		}
+	},
 	get_quark: (dimension, level) => {
 		document.getElementById(`quarkButton${dimension}-${level}`).disabled = true;
 		if (dimension == player.quark.length - 1) {
@@ -180,34 +215,18 @@ var flush = ['all'], funcs = {
 		desc: "Get quarks with a dimension of 10.",
 		check: () => player.quark.length > 10 && player.quark[10][0][0] > 0
 	}
-}, player = {
-	achievements: {
-		first_quark: false,
-		quark_getter: false,
-		quark_getter_2nd: false,
-		quark_getter_3rd: false,
-		quark_getter_4th: false,
-		quark_1e10: false,
-		quark_1e15: false,
-		quark_1e20: false,
-		quark_1e25: false,
-		quark_dimension_1: false,
-		quark_dimension_1_getted_2: false,
-		quark_dimension_1_getter: false,
-		quark_dimension_1_getter_2nd: false,
-		quark_dimension_1_getter_3rd: false,
-		quark_dimension_1_getter_4th: false,
-		quark_dimension_2: false,
-		quark_dimension_2_getter_4th: false,
-		quark_dimension_3: false,
-		quark_dimension_4: false,
-		the_end: false
-	},
-	quark: [[0]],
-	quark_points: [0],
-	unlock_dimension: false
-};
+}, player = {};
 function mainloop() {
+	if (localStorage.getItem("game") === null) {
+		localStorage.game = {};
+	}
+	if (localStorage.game.quarks === undefined) {
+		localStorage.game.quarks = {};
+		funcs.do_hard_reset();
+	}
+	else {
+		player = localStorage.game.quarks;
+	}
 	setInterval(() => {
 		while (flush.length > 0) {
 			switch (flush[0]) {
@@ -231,7 +250,7 @@ function mainloop() {
 					break;
 				}
 				case 'quark': {
-					let str = "";
+					let str = "<button onclick='funcs.hard_reset()'>Hard Reset</button>";
 					if (player.unlock_dimension) {
 						str += "<p>";
 						for (let i = 0; i < player.quark.length; i++) {
@@ -346,4 +365,5 @@ function mainloop() {
 		}
 		flush.push('achievements');
 	}, 50);
+	setInterval(() => localStorage.game.quarks = player, 50);
 };

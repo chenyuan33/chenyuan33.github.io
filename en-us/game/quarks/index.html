@@ -14,9 +14,10 @@
 <body>
 	<h1>Quarks</h1>
 	<p><strong>Note:</strong> This game does not automatically save your progress, please manually save or load.</p>
-	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv'], 'main')">Game</button>
-	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv'], 'achievements')">Achievements</button>
-	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv'], 'archiveDiv')">Save/Load</button>
+	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv', 'changelogDiv'], 'main')">Game</button>
+	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv', 'changelogDiv'], 'achievements')">Achievements</button>
+	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv', 'changelogDiv'], 'archiveDiv')">Save/Load</button>
+	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv', 'changelogDiv'], 'changelogDiv')">Changelog</button>
 	<div id="main" class="shown">
 	</div>
 	<div id="achievements" class="hidden">
@@ -27,6 +28,31 @@
 		<button onclick="funcs.set_current_archive()">Load</button>
 		<label for="archive">Archive Content:</label>
 		<textarea id="archive" title="Archive Content" placeholder="Archive Content"></textarea>
+	</div>
+	<div id="changelogDiv" class="hidden">
+		<h2>Changelog</h2>
+		<h3>v2.0.2</h3>
+		<ul>
+			<li>Add changelog.</li>
+			<li>Add hard-reset button.</li>
+			<li>Add auto-save feature.</li>
+		</ul>
+		<h3>v2.0.1</h3>
+		<ul>
+			<li>Fix some bugs.</li>
+		</ul>
+		<h3>v2.0.0</h3>
+		<ul>
+			<li>Rename the game: <code>From Quark to Life</code> to <code>Quarks</code>.</li>
+			<li>Remove lifes.</li>
+			<li>Add the Dimensions of Quarks.</li>
+			<li>Add quark getter max button.</li>
+		</ul>
+		<h3>v1.0.0</h3>
+		<ul>
+			<li>Initial release.</li>
+			<li>Added achievements, quarks and life.</li>
+		</ul>
 	</div>
 	<div id="hadAchievements"></div>
 	<script>mainloop()</script>
