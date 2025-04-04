@@ -225,7 +225,7 @@ function mainloop() {
 		funcs.do_hard_reset();
 	}
 	else {
-		player = localStorage.game.quarks;
+		player = localStorage.game_quarks;
 	}
 	setInterval(() => {
 		while (flush.length > 0) {
@@ -365,5 +365,5 @@ function mainloop() {
 		}
 		flush.push('achievements');
 	}, 50);
-	setInterval(() => localStorage.game.quarks = player, 50);
+	setInterval(() => localStorage.game_quarks = player, 50);
 };
