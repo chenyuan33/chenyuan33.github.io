@@ -225,7 +225,7 @@ function mainloop() {
 		funcs.do_hard_reset();
 	}
 	else {
-		player = localStorage.game_quarks;
+		player = JSON.parse(atob(localStorage.game_quarks));
 	}
 	setInterval(() => {
 		while (flush.length > 0) {
@@ -365,5 +365,5 @@ function mainloop() {
 		}
 		flush.push('achievements');
 	}, 50);
-	setInterval(() => localStorage.game_quarks = player, 50);
+	setInterval(() => localStorage.game_quarks = btoa(JSON.stringify(player)), 50);
 };
