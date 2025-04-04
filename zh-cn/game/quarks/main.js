@@ -217,11 +217,7 @@ var flush = ['all'], funcs = {
 	}
 }, player = {};
 function mainloop() {
-	if (localStorage.getItem("game") === null) {
-		localStorage.game = {};
-	}
-	if (localStorage.game.quarks === undefined) {
-		localStorage.game.quarks = {};
+	if (localStorage.game_quarks === undefined) {
 		funcs.do_hard_reset();
 	}
 	else {
