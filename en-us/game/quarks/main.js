@@ -365,5 +365,5 @@ function mainloop() {
 		}
 		flush.push('achievements');
 	}, 50);
-	setInterval(() => localStorage.game_quarks = btoa(JSON.stringify(player)), 50);
+	setTimeout(() => setInterval(() => localStorage.game_quarks = btoa(JSON.stringify(player)), 50), 1000);
 };
