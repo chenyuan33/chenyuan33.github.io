@@ -204,7 +204,7 @@ var flush = ['all'], funcs = {
 		the_end: false
 	},
 	quark: [[0]],
-	quark_points: [1],
+	quark_points: [0],
 	unlock_dimension: false
 };
 function mainloop() {
@@ -315,7 +315,7 @@ function mainloop() {
 	setInterval(() => {
 		for (let i = 0; i < player.quark.length; i++) {
 			if (player.quark[i].length > 1 && player.quark[i][1][0] > 0) {
-				while (quark_points.length < i + 2) {
+				while (player.quark_points.length < i + 2) {
 					quark_points.push(0);
 				}
 				if (i == 0) {
@@ -324,7 +324,7 @@ function mainloop() {
 				else {
 					player.quark_points[i - 1] += player.quark[i][1][0] * (player.quark_points[i] + 1 + player.quark[i + 1][0]);
 				}
-				for (let j = 1; j < player.quark.length - 1; j++) {
+				for (let j = 1; j < player.quark[i].length - 1; j++) {
 					player.quark[i][j][0] += player.quark[i][j + 1][0] * (player.quark_points[i] + 1 + player.quark[i + 1][0]);
 				}
 			}
