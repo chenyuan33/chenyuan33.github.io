@@ -313,7 +313,7 @@ function mainloop() {
 											id="convertQuarkButton${i}"
 											${Math.floor(player.quark[i][0] / Math.pow(10, (i + 3) * 10)) < 1 ? "disabled" : ""}
 										>
-											清空这一维度并转换出下一维度 ${Math.floor(player.quark[i][0] / Math.pow(10, (i + 3) * 10))} 夸克
+											清空这一维度并转换出下一维度 ${funcs.TeXstr(Math.floor(player.quark[i][0] / Math.pow(10, (i + 3) * 10)))} 夸克
 										</button>
 									` : (player.quark[0][0] >= 1e25 ? `
 										<button

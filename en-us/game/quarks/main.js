@@ -313,7 +313,7 @@ function mainloop() {
 											id="convertQuarkButton${i}"
 											${Math.floor(player.quark[i][0] / Math.pow(10, (i + 3) * 10)) < 1 ? "disabled" : ""}
 										>
-											Clear this dimension and convert to ${Math.floor(player.quark[i][0] / Math.pow(10, (i + 3) * 10))} quarks in the next dimension
+											Clear this dimension and convert to ${funcs.TeXstr(Math.floor(player.quark[i][0] / Math.pow(10, (i + 3) * 10)))} quarks in the next dimension
 										</button>
 									` : (player.quark[0][0] >= 1e25 ? `
 										<button
