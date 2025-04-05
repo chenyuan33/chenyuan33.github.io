@@ -161,22 +161,22 @@ var flush = ['all'], funcs = {
 	quark_1e10: {
 		title: "好多夸克！",
 		desc: `获得 ${funcs.TeXstr(1e10)} 夸克。`,
-		check: () => player.quark[0] >= 1e10
+		check: () => player.quark[0][0] >= 1e10
 	},
 	quark_1e15: {
 		title: "更多夸克！",
 		desc: `获得 ${funcs.TeXstr(1e15)} 夸克。`,
-		check: () => player.quark[0] >= 1e15
+		check: () => player.quark[0][0] >= 1e15
 	},
 	quark_1e20: {
 		title: "超多夸克！",
 		desc: `获得 ${funcs.TeXstr(1e20)} 夸克。`,
-		check: () => player.quark[0] >= 1e20
+		check: () => player.quark[0][0] >= 1e20
 	},
 	quark_1e25: {
 		title: "这是什么？",
 		desc: `获得 ${funcs.TeXstr(1e25)} 夸克。`,
-		check: () => player.quark[0] >= 1e25
+		check: () => player.quark[0][0] >= 1e25
 	},
 	quark_dimension_1: {
 		title: "另一维度！",
