@@ -88,6 +88,7 @@ var flush = ['all'], funcs = {
 		document.getElementById(`quarkButtonMax${dimension}-${level}`).disabled = true;
 		if (dimension == player.quark.length - 1) {
 			player.quark.push([0]);
+			player.quark_points.push(0);
 		}
 		if (level == player.quark[dimension].length - 1) {
 			player.quark[dimension].push([0, 0]);
@@ -104,6 +105,7 @@ var flush = ['all'], funcs = {
 		document.getElementById(`quarkButtonMaxDimension${dimension}`).disabled = true;
 		if (dimension == player.quark.length - 1) {
 			player.quark.push([0]);
+			player.quark_points.push(0);
 		}
 		for (let i = 1; i < player.quark[dimension].length; i++) {
 			while (player.quark[dimension][0] >= Math.pow(2, player.quark[dimension][i][1]) * Math.pow(10, i) * Math.pow(20, dimension))
@@ -373,7 +375,7 @@ function mainloop() {
 		for (let i = 0; i < player.quark.length; i++) {
 			if (player.quark[i].length > 1 && player.quark[i][1][0] > 0) {
 				while (player.quark_points.length < i + 2) {
-					quark_points.push(0);
+					player.quark_points.push(0);
 				}
 				if (i == 0) {
 					player.quark[i][0] += player.quark[i][1][0] * (player.quark_points[i] + 1 + player.quark[i + 1][0]);
