@@ -88,6 +88,7 @@ var flush = ['all'], funcs = {
 		document.getElementById(`quarkButtonMax${dimension}-${level}`).disabled = true;
 		if (dimension == player.quark.length - 1) {
 			player.quark.push([0]);
+			player.quark_points.push(0);
 		}
 		if (level == player.quark[dimension].length - 1) {
 			player.quark[dimension].push([0, 0]);
@@ -104,6 +105,7 @@ var flush = ['all'], funcs = {
 		document.getElementById(`quarkButtonMaxDimension${dimension}`).disabled = true;
 		if (dimension == player.quark.length - 1) {
 			player.quark.push([0]);
+			player.quark_points.push(0);
 		}
 		for (let i = 1; i < player.quark[dimension].length; i++) {
 			while (player.quark[dimension][0] >= Math.pow(2, player.quark[dimension][i][1]) * Math.pow(10, i) * Math.pow(20, dimension))
@@ -114,6 +116,26 @@ var flush = ['all'], funcs = {
 				player.quark[dimension][0] -= Math.pow(2, player.quark[dimension][i][1]) * Math.pow(10, i) * Math.pow(20, dimension);
 				player.quark[dimension][i][0]++;
 				player.quark[dimension][i][1]++;
+			}
+		}
+		flush.push('quark');
+	},
+	get_quark_max_all: () => {
+		document.getElementById("quarkButtonMaxAll").disabled = true;
+		for (let i = 0; i < player.quark.length; i++) {
+			for (let j = 1; j < player.quark[i].length; j++) {
+				while (player.quark[i][0] >= Math.pow(2, player.quark[i][j][1]) * Math.pow(10, j) * Math.pow(20, i)) {
+					if (i == player.quark.length - 1) {
+						player.quark.push([0]);
+						player.quark_points.push(0);
+					}
+					if (j == player.quark[i].length - 1) {
+						player.quark[i].push([0, 0]);
+					}
+					player.quark[i][0] -= Math.pow(2, player.quark[i][j][1]) * Math.pow(10, j) * Math.pow(20, i);
+					player.quark[i][j][0]++;
+					player.quark[i][j][1]++;
+				}
 			}
 		}
 		flush.push('quark');
@@ -264,7 +286,10 @@ function mainloop() {
 					break;
 				}
 				case 'quark': {
-					let str = "<button onclick='funcs.hard_reset()'>Hard Reset</button>";
+					let str = `
+						<button onclick='funcs.hard_reset()'>Hard Reset</button>
+						<button onclick='funcs.get_quark_max_all()' id='quarkButtonMaxAll'>Get Max All Quark Getters</button>
+					`;
 					if (player.unlock_dimension) {
 						str += "<p>";
 						for (let i = 0; i < player.quark.length; i++) {

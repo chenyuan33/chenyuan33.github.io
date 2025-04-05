@@ -118,6 +118,26 @@ var flush = ['all'], funcs = {
 		}
 		flush.push('quark');
 	},
+	get_quark_max_all: () => {
+		document.getElementById("quarkButtonMaxAll").disabled = true;
+		for (let i = 0; i < player.quark.length; i++) {
+			for (let j = 1; j < player.quark[i].length; j++) {
+				while (player.quark[i][0] >= Math.pow(2, player.quark[i][j][1]) * Math.pow(10, j) * Math.pow(20, i)) {
+					if (i == player.quark.length - 1) {
+						player.quark.push([0]);
+						player.quark_points.push(0);
+					}
+					if (j == player.quark[i].length - 1) {
+						player.quark[i].push([0, 0]);
+					}
+					player.quark[i][0] -= Math.pow(2, player.quark[i][j][1]) * Math.pow(10, j) * Math.pow(20, i);
+					player.quark[i][j][0]++;
+					player.quark[i][j][1]++;
+				}
+			}
+		}
+		flush.push('quark');
+	},
 	convert_quark: dimension => {
 		document.getElementById(`convertQuarkButton${dimension}`).disabled = true;
 		if (dimension == player.quark.length - 1) {
@@ -264,7 +284,10 @@ function mainloop() {
 					break;
 				}
 				case 'quark': {
-					let str = "<button onclick='funcs.hard_reset()'>硬重置</button>";
+					let str = `
+						<button onclick='funcs.hard_reset()'>硬重置</button>
+						<button onclick='funcs.get_quark_max_all()' id='quarkButtonMaxAll'>最大化所有夸克获取器</button>
+					`;
 					if (player.unlock_dimension) {
 						str += "<p>";
 						for (let i = 0; i < player.quark.length; i++) {
