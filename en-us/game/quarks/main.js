@@ -100,6 +100,24 @@ var flush = ['all'], funcs = {
 		}
 		flush.push('quark');
 	},
+	get_quark_max_dimension: dimension => {
+		document.getElementById(`quarkButtonMaxDimension${dimension}`).disabled = true;
+		if (dimension == player.quark.length - 1) {
+			player.quark.push([0]);
+		}
+		for (let i = 1; i < player.quark[dimension].length; i++) {
+			while (player.quark[dimension][0] >= Math.pow(2, player.quark[dimension][i][1]) * Math.pow(10, i) * Math.pow(20, dimension))
+			{
+				if (i == player.quark[dimension].length - 1) {
+					player.quark[dimension].push([0, 0]);
+				}
+				player.quark[dimension][0] -= Math.pow(2, player.quark[dimension][i][1]) * Math.pow(10, i) * Math.pow(20, dimension);
+				player.quark[dimension][i][0]++;
+				player.quark[dimension][i][1]++;
+			}
+		}
+		flush.push('quark');
+	},
 	convert_quark: dimension => {
 		document.getElementById(`convertQuarkButton${dimension}`).disabled = true;
 		if (dimension == player.quark.length - 1) {
@@ -263,6 +281,7 @@ function mainloop() {
 								<h2>You have ${funcs.TeXstr(player.quark[i][0])} quarks${player.unlock_dimension ? ` in dimension ${i}` : ""}.</h2>
 								<p>
 									${i == 0 ? "<button onclick='funcs.get_quark(" + i + ", 0)' id='quarkButton" + i + "-0'>Get One</button>" : ""}
+									<button onclick="funcs.get_quark_max_dimension(${i})" id="quarkButtonMaxDimension${i}">Get Max All the quark getters in this dimension</button>
 									${player.quark.length > 1 && player.quark[1][0] > 0 ? `
 										<button
 											onclick="funcs.convert_quark(${i})"

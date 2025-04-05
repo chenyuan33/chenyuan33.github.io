@@ -100,6 +100,24 @@ var flush = ['all'], funcs = {
 		}
 		flush.push('quark');
 	},
+	get_quark_max_dimension: dimension => {
+		document.getElementById(`quarkButtonMaxDimension${dimension}`).disabled = true;
+		if (dimension == player.quark.length - 1) {
+			player.quark.push([0]);
+		}
+		for (let i = 1; i < player.quark[dimension].length; i++) {
+			while (player.quark[dimension][0] >= Math.pow(2, player.quark[dimension][i][1]) * Math.pow(10, i) * Math.pow(20, dimension))
+			{
+				if (i == player.quark[dimension].length - 1) {
+					player.quark[dimension].push([0, 0]);
+				}
+				player.quark[dimension][0] -= Math.pow(2, player.quark[dimension][i][1]) * Math.pow(10, i) * Math.pow(20, dimension);
+				player.quark[dimension][i][0]++;
+				player.quark[dimension][i][1]++;
+			}
+		}
+		flush.push('quark');
+	},
 	convert_quark: dimension => {
 		document.getElementById(`convertQuarkButton${dimension}`).disabled = true;
 		if (dimension == player.quark.length - 1) {
@@ -263,6 +281,7 @@ function mainloop() {
 								<h2>你${player.unlock_dimension ? `在维度 ${i} ` : ""}有 ${funcs.TeXstr(player.quark[i][0])} 夸克。</h2>
 								<p>
 									${i == 0 ? "<button onclick='funcs.get_quark(" + i + ", 0)' id='quarkButton" + i + "-0'>获取一个</button>" : ""}
+									<button onclick="funcs.get_quark_max_dimension(${i})" id="quarkButtonMaxDimension${i}">最大化这个维度的所有夸克获取器</button>
 									${player.quark.length > 1 && player.quark[1][0] > 0 ? `
 										<button
 											onclick="funcs.convert_quark(${i})"
