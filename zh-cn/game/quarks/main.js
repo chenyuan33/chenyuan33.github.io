@@ -309,9 +309,9 @@ function mainloop() {
 										<button
 											onclick="funcs.convert_quark(${i})"
 											id="convertQuarkButton${i}"
-											${Math.floor((Math.log10(player.quark[i][0]) / 10 - 2) / (i + 1)) < 1 ? "disabled" : ""}
+											${Math.floor(player.quark[i][0] / Math.pow(10, (i + 3) * 10)) < 1 ? "disabled" : ""}
 										>
-											清空这一维度并转换出下一维度 ${Math.floor((Math.log10(player.quark[i][0]) / 10 - 2) / (i + 1))} 夸克。
+											清空这一维度并转换出下一维度 ${Math.floor(player.quark[i][0] / Math.pow(10, (i + 3) * 10))} 夸克
 										</button>
 									` : (player.quark[0][0] >= 1e25 ? `
 										<button

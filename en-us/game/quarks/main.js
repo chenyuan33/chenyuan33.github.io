@@ -311,9 +311,9 @@ function mainloop() {
 										<button
 											onclick="funcs.convert_quark(${i})"
 											id="convertQuarkButton${i}"
-											${Math.floor((Math.log10(player.quark[i][0]) / 10 - 2) / (i + 1)) < 1 ? "disabled" : ""}
+											${Math.floor(player.quark[i][0] / Math.pow(10, (i + 3) * 10)) < 1 ? "disabled" : ""}
 										>
-											Clear this dimension and convert to ${Math.floor((Math.log10(player.quark[i][0]) / 10 - 2) / (i + 1))} quarks in the next dimension
+											Clear this dimension and convert to ${Math.floor(player.quark[i][0] / Math.pow(10, (i + 3) * 10))} quarks in the next dimension
 										</button>
 									` : (player.quark[0][0] >= 1e25 ? `
 										<button
