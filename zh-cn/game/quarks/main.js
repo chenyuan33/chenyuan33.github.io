@@ -307,7 +307,7 @@ function mainloop() {
 								<p>
 									${i == 0 ? "<button onclick='funcs.get_quark(" + i + ", 0)' id='quarkButton" + i + "-0'>获取一个</button>" : ""}
 									<button onclick="funcs.get_quark_max_dimension(${i})" id="quarkButtonMaxDimension${i}">最大化这个维度的所有夸克获取器</button>
-									${player.quark.length > 1 && player.quark[1][0] > 0 ? `
+									${player.unlock_dimension ? `
 										<button
 											onclick="funcs.convert_quark(${i})"
 											id="convertQuarkButton${i}"

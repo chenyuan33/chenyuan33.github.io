@@ -307,7 +307,7 @@ function mainloop() {
 								<p>
 									${i == 0 ? "<button onclick='funcs.get_quark(" + i + ", 0)' id='quarkButton" + i + "-0'>Get One</button>" : ""}
 									<button onclick="funcs.get_quark_max_dimension(${i})" id="quarkButtonMaxDimension${i}">Get Max All the quark getters in this dimension</button>
-									${player.quark.length > 1 && player.quark[1][0] > 0 ? `
+									${player.unlock_dimension ? `
 										<button
 											onclick="funcs.convert_quark(${i})"
 											id="convertQuarkButton${i}"
