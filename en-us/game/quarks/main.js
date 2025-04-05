@@ -375,7 +375,7 @@ function mainloop() {
 		for (let i = 0; i < player.quark.length; i++) {
 			if (player.quark[i].length > 1 && player.quark[i][1][0] > 0) {
 				while (player.quark_points.length < i + 2) {
-					quark_points.push(0);
+					player.quark_points.push(0);
 				}
 				if (i == 0) {
 					player.quark[i][0] += player.quark[i][1][0] * (player.quark_points[i] + 1 + player.quark[i + 1][0]);
