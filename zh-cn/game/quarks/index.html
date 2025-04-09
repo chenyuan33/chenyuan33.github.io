@@ -13,9 +13,9 @@
 
 <body>
 	<h1>夸克</h1>
-	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv'], 'main')">游戏</button>
-	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv'], 'achievements')">成就</button>
-	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv'], 'archiveDiv')">读档/存档</button>
+	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv', 'changelogDiv'], 'main')">游戏</button>
+	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv', 'changelogDiv'], 'achievements')">成就</button>
+	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv', 'changelogDiv'], 'archiveDiv')">读档/存档</button>
 	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv', 'changelogDiv'], 'changelogDiv')">更新日志</button>
 	<div id="main" class="shown">
 	</div>
@@ -30,6 +30,10 @@
 	</div>
 	<div id="changelogDiv" class="hidden">
 		<h2>更新日志</h2>
+		<h3>v2.1.1</h3>
+		<ul>
+			<li>修复一些 bug。</li>
+		</ul>
 		<h3>v2.1.0</h3>
 		<ul>
 			<li>添加 "最大化这个维度的所有夸克获取器" 按钮。</li>
