@@ -29,18 +29,17 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), showCurrent
 	giscus.crossorigin = "anonymous";
 	giscus.async = true;
 	document.body.appendChild(giscus);
-	let header = document.createElement("div"), footer = document.createElement("div"), headerBlanks = document.createElement("div"), footerBlanks = document.createElement("div");
+	let header = document.createElement("div"), footer = document.createElement("div"), headerBlanks = document.createElement("div");
 	header.id = "header";
 	footer.id = "footer";
 	document.body.insertBefore(headerBlanks, document.body.firstChild);
 	document.body.insertBefore(header, document.body.firstChild);
-	document.body.appendChild(footerBlanks);
 	document.body.appendChild(footer);
 	header.innerHTML = `
 		<p>
 			<a href="/${document.URL.split("/")[3]}/index.html">${document.URL.split("/")[3] == "en-us" ? "Main Page" : "主页"}</a>
 			<a href="/${document.URL.split("/")[3]}/changelog.html">${document.URL.split("/")[3] == "en-us" ? "Changelog" : "更新日志"}</a>
-			<a id="lightSwitch" href="javascript:switchLight()">🌙</a>
+			<a id="lightSwitch" href="javascript:switchLight()">🌞</a>
 			<span id="currentDateTime">${document.URL.split("/")[3] == "en-us" ? "Loading" : "加载中"}...</span>
 		</p>
 		<p>
@@ -56,16 +55,14 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), showCurrent
 	`;
 	headerBlanks.style.width = header.offsetWidth + "px";
 	headerBlanks.style.height = header.offsetHeight + "px";
-	footerBlanks.style.width = footer.offsetWidth + "px";
-	footerBlanks.style.height = footer.offsetHeight + "px";
 	if (cookie_operator.get("lightMode") === undefined) {
-		cookie_operator.set("lightMode", "dark");
+		cookie_operator.set("lightMode", "light");
 	}
 	else {
-		if (cookie_operator.get("lightMode") === "light") {
-			document.getElementById("lightSwitch").innerHTML = "🌞";
-			document.body.style.backgroundColor = "white";
-			document.body.style.color = "black";
+		if (cookie_operator.get("lightMode") === "dark") {
+			document.getElementById("lightSwitch").innerHTML = "🌙";
+			document.body.style.backgroundColor = "black";
+			document.body.style.color = "white";
 		}
 	}
 	console.log(`Welcome to chenyuan33.github.io!

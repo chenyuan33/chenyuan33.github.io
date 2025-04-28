@@ -1,22 +1,30 @@
 body {
-	background-color: black;
-	color: white;
+	background-color: white;
+	color: black;
 }
 
 div#header, div#footer {
 	background-color: cyan;
 	color: black;
-	position: fixed;
 	right: 0px;
 	left: 0px;
 }
 
 div#header {
 	top: 0px;
+	position: fixed;
 }
 
 div#footer {
 	bottom: 0px;
+}
+
+a {
+	color: cyan;
+}
+
+div#header a, div#footer a {
+	color: blue;
 }
 
 a#lightSwitch {
