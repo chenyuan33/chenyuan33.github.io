@@ -26,3 +26,11 @@ a {
 a#lightSwitch {
 	text-decoration: none;
 }
+
+span#languageSwitch {
+	display: none;
+}
+
+span#languageSwitchStarter:hover span#languageSwitch {
+	display: block;
+}

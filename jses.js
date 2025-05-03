@@ -41,11 +41,14 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), showCurrent
 			<a href="/${document.URL.split("/")[3]}/changelog.html">${document.URL.split("/")[3] == "en-us" ? "Changelog" : "更新日志"}</a>
 			<a id="lightSwitch" href="javascript:switchLight()">🌞</a>
 			<span id="currentDateTime">${document.URL.split("/")[3] == "en-us" ? "Loading" : "加载中"}...</span>
-		</p>
-		<p>
-			${document.URL.split("/")[3] == "en-us" ? "Languages: " : "语言: "}
-			<a href="/en-us/${document.URL.split("/").slice(4).join("/")}">English</a>
-			<a href="/zh-cn/${document.URL.split("/").slice(4).join("/")}">简体中文</a>
+			<span id="languageSwitchStarter">
+				${document.URL.split("/")[3] == "en-us" ? "English" : "简体中文"}
+				<span id="languageSwitch">
+					${document.URL.split("/")[3] == "en-us" ? "Languages: " : "语言: "}
+					<a href="/en-us/${document.URL.split("/").slice(4).join("/")}">English</a>
+					<a href="/zh-cn/${document.URL.split("/").slice(4).join("/")}">简体中文</a>
+				</span>
+			</span>
 		</p>
 	`;
 	showCurrentDateTime();
