@@ -12,6 +12,10 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), showCurrent
 	let mathjax = document.createElement("script");
 	mathjax.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
 	document.head.appendChild(mathjax);
+	let fontawesome = document.createElement("link");
+	fontawesome.href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css";
+	fontawesome.rel = "stylesheet";
+	document.head.appendChild(fontawesome);
 	let giscus = document.createElement("script");
 	giscus.src = "https://giscus.app/client.js";
 	giscus.dataset.repo = "chenyuan33/chenyuan33.github.io";
@@ -43,16 +47,19 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), showCurrent
 			<span id="currentDateTime">${document.URL.split("/")[3] == "en-us" ? "Loading" : "加载中"}...</span>
 			<span id="languageSwitchStarter">
 				${document.URL.split("/")[3] == "en-us" ? "English" : "简体中文"}
+				<i id="languageSwitchIcon" class="fa-solid fa-caret-left"></i>
 				<span id="languageSwitch">
-					${document.URL.split("/")[3] == "en-us" ? "Languages: " : "语言: "}
-					<a href="/en-us/${document.URL.split("/").slice(4).join("/")}">English</a>
-					<a href="/zh-cn/${document.URL.split("/").slice(4).join("/")}">简体中文</a>
+					<br /><a class="languageSwitchChosen" href="/en-us/${document.URL.split("/").slice(4).join("/")}">English</a>
+					<br /><a class="languageSwitchChosen" href="/zh-cn/${document.URL.split("/").slice(4).join("/")}">简体中文</a>
 				</span>
 			</span>
 		</p>
 	`;
 	showCurrentDateTime();
 	setInterval(showCurrentDateTime, 1000);
+	document.getElementById("languageSwitch").style.left = document.getElementById("languageSwitchStarter").offsetLeft + "px";
+	document.getElementById("languageSwitchStarter").onmouseover = () => document.getElementById("languageSwitchIcon").classList.add("fa-rotate-270");
+	document.getElementById("languageSwitchStarter").onmouseout = () => document.getElementById("languageSwitchIcon").classList.remove("fa-rotate-270");
 	footer.innerHTML = `
 		<p>© Copyright 2024-${new Date().getFullYear()} @<a href="https://github.com/chenyuan33">chenyuan33</a>, All rights reserved.</p>
 	`;

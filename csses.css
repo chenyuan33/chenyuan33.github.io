@@ -21,16 +21,18 @@ div#footer {
 
 a {
 	color: blue;
-}
-
-a#lightSwitch {
 	text-decoration: none;
 }
 
 span#languageSwitch {
 	display: none;
+	position: absolute;
 }
 
 span#languageSwitchStarter:hover span#languageSwitch {
-	display: block;
+	display: inline;
+}
+
+a.languageSwitchChosen {
+	background-color: cyan;
 }
