@@ -24,6 +24,11 @@ a {
 	text-decoration: none;
 }
 
+a:hover {
+	color: red;
+	text-decoration: underline;
+}
+
 span#languageSwitch {
 	display: none;
 	position: absolute;
@@ -35,4 +40,5 @@ span#languageSwitchStarter:hover span#languageSwitch {
 
 a.languageSwitchChosen {
 	background-color: cyan;
+	display: inline-block;
 }

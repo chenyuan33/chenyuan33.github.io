@@ -49,8 +49,8 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), showCurrent
 				${document.URL.split("/")[3] == "en-us" ? "English" : "简体中文"}
 				<i id="languageSwitchIcon" class="fa-solid fa-caret-left"></i>
 				<span id="languageSwitch">
-					<br /><a class="languageSwitchChosen" href="/en-us/${document.URL.split("/").slice(4).join("/")}">English</a>
-					<br /><a class="languageSwitchChosen" href="/zh-cn/${document.URL.split("/").slice(4).join("/")}">简体中文</a>
+					<br />&nbsp;<a class="languageSwitchChosen" href="/en-us/${document.URL.split("/").slice(4).join("/")}">English</a>&nbsp;
+					<br />&nbsp;<a class="languageSwitchChosen" href="/zh-cn/${document.URL.split("/").slice(4).join("/")}">简体中文</a>&nbsp;
 				</span>
 			</span>
 		</p>
@@ -58,6 +58,10 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), showCurrent
 	showCurrentDateTime();
 	setInterval(showCurrentDateTime, 1000);
 	document.getElementById("languageSwitch").style.left = document.getElementById("languageSwitchStarter").offsetLeft + "px";
+	let languageSwitchWidth = Math.max(document.getElementById("languageSwitch").offsetWidth, document.getElementById("languageSwitchStarter").offsetWidth) + 12 + "px";
+	for (let element of document.getElementsByClassName("languageSwitchChosen")) {
+		element.style.width = languageSwitchWidth;
+	};
 	document.getElementById("languageSwitchStarter").onmouseover = () => document.getElementById("languageSwitchIcon").classList.add("fa-rotate-270");
 	document.getElementById("languageSwitchStarter").onmouseout = () => document.getElementById("languageSwitchIcon").classList.remove("fa-rotate-270");
 	footer.innerHTML = `
