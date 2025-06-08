@@ -12,12 +12,21 @@
 <body>
 	<h1>Welcome to chenyuan33.github.io!</h1>
 	<p><a href="https://github.com/chenyuan33">My GitHub Profile</a></p>
+	<p><a href="https://github.com/chenyuan33/chenyuan33.github.io">GitHub Repository</a> (<span id="forks-count">[Loading]</span> forks and <span id="stars-count">[Loading]</span> stars)</p>
 	<p><a href="/en-us/blog/index.html">My Blog</a></p>
 	<p><a href="/en-us/tool/index.html">Online Tools</a></p>
 	<p><a href="/en-us/game/index.html">Online Games</a></p>
 	<p><a href="/en-us/links.html">Links</a></p>
 	<p><a href="/en-us/faqs.html">FAQs</a></p>
 	<script>scripts()</script>
+	<script>
+		fetch('https://api.github.com/repos/chenyuan33/chenyuan33.github.io')
+			.then(response => response.json())
+			.then(data => {
+				document.getElementById("forks-count").innerHTML = data.forks_count;
+				document.getElementById("stars-count").innerHTML = data.stargazers_count;
+			});
+	</script>
 </body>
 
 </html>
