@@ -1,0 +1,47 @@
+.hidden {
+	display: none;
+}
+
+.shown {
+	display: block;
+	border-style: solid;
+	margin: 10px;
+	padding: 10px;
+}
+
+.achievement-getted {
+	border-style: solid;
+	margin: 10px;
+	padding: 10px;
+	background-color: green;
+}
+
+.achievement-ungetted {
+	border-style: solid;
+	margin: 10px;
+	padding: 10px;
+	background-color: red;
+}
+
+.achievement-desc {
+	font-style: italic;
+	color: gray;
+}
+
+#hadAchievements {
+	display: none;
+	border-style: solid;
+	margin: 10px;
+	padding: 10px;
+	background-color: yellow;
+	color: black;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.about-quark-points {
+	font-size: 50%;
+	color: gray;
+	font-style: italic;
+}

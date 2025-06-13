@@ -33,6 +33,9 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), showCurrent
 	giscus.crossorigin = "anonymous";
 	giscus.async = true;
 	document.body.appendChild(giscus);
+	let bignumber = document.createElement("script");
+	bignumber.src = "/bignumber.js";
+	document.head.appendChild(bignumber);
 	let header = document.createElement("div"), footer = document.createElement("div"), headerBlanks = document.createElement("div");
 	header.id = "header";
 	footer.id = "footer";
