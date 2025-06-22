@@ -23,7 +23,7 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), showCurrent
 	giscus.dataset.category = "Announcements";
 	giscus.dataset.categoryId = "DIC_kwDOLpttzc4CgluD";
 	giscus.dataset.mapping = "pathname";
-	giscus.dataset.strict = "0";
+	giscus.dataset.strict = "1";
 	giscus.dataset.reactionsEnabled = "1";
 	giscus.dataset.emitMetadata = "0";
 	giscus.dataset.inputPosition = "bottom";
