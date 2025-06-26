@@ -9,6 +9,14 @@
 	<script src="/jses.js"></script>
 	<script>
 		function register() {
+			if (!document.getElementById("username").value) {
+				alert("用户名不能为空");
+				return;
+			}
+			if (!document.getElementById("password").value) {
+				alert("密码不能为空");
+				return;
+			}
 			document.getElementById("register-btn").disabled = true;
 			fetch("https://chenyuan3.loophole.site/users/register", {
 				method: "POST",
@@ -36,6 +44,11 @@
 				cookie_operator.set("auth", data.auth);
 				window.location.href = "/";
 			});
+		}
+		document.onkeydown = function(e) {
+			if (e.keyCode == 13) {
+				register();
+			}
 		}
 	</script>
 </head>
