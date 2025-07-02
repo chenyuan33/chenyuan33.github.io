@@ -25,6 +25,9 @@
 
 			let problemScore = (problem1 * 2 + problem2 * 3 + problem3 * 5 + problem4 * 6 + problem5 * 9 + problem6 * 10 + problem7 * 15) / 10000;
 			let articleScore = (goodArticles * 0.75 + solution * 0.25) / articles;
+			if (articles == 0) {
+				articleScore = 0;
+			}
 			let ratingScore = rating / 2000;
 			let discussScore = discusses / 50;
 			let ccfScore = ccf / 100;
