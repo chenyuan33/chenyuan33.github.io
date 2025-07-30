@@ -16,6 +16,11 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), showCurrent
 	fontawesome.href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css";
 	fontawesome.rel = "stylesheet";
 	document.head.appendChild(fontawesome);
+	let favicon = document.createElement("link");//<link rel="icon" type="image/png" href="path/to/favicon.png">
+	favicon.href = "/favicon.png";
+	favicon.rel = "icon";
+	favicon.type = "image/png";
+	document.head.appendChild(favicon);
 	let giscus = document.createElement("script");
 	giscus.src = "https://giscus.app/client.js";
 	giscus.dataset.repo = "chenyuan33/chenyuan33.github.io";
