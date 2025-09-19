@@ -57,7 +57,7 @@ var flush = ['all'], funcs = {
 	},
 	get_quark: (dimension, level) => {
 		document.getElementById(`quarkButton${dimension.toString()}-${level.toString()}`).disabled = true;
-		if (dimension = player.quark.length - 1 && dimension < 1e5) {
+		if (dimension == player.quark.length - 1 && dimension < 1e5) {
 			player.quark.push([new BigNumber(0)]);
 			player.quark_points.push(new BigNumber(0));
 		}
@@ -77,11 +77,11 @@ var flush = ['all'], funcs = {
 	get_quark_max: (dimension, level) => {
 		document.getElementById(`quarkButtonMax${dimension}-${level}`).disabled = true;
 		if (dimension == player.quark.length - 1 && dimension < 1e5) {
-			player.quark.push([0]);
-			player.quark_points.push(0);
+			player.quark.push([new BigNumber(0)]);
+			player.quark_points.push(new BigNumber(0));
 		}
 		if (level == player.quark[dimension].length - 1 && level < 1e5) {
-			player.quark[dimension].push([0, 0]);
+			player.quark[dimension].push([new BigNumber(0), new BigNumber(0)]);
 		}
 		while (player.quark[dimension][0].gt(player.quark[dimension][0].minus((new BigNumber(2)).pow(player.quark[dimension][level][1]).times((new BigNumber(10)).pow(new BigNumber(level))).times((new BigNumber(20)).pow(new BigNumber(dimension)))))) {
 			player.quark[dimension][0] = player.quark[dimension][0].minus((new BigNumber(2)).pow(player.quark[dimension][level][1]).times((new BigNumber(10)).pow(new BigNumber(level))).times((new BigNumber(20)).pow(new BigNumber(dimension))));
@@ -93,8 +93,8 @@ var flush = ['all'], funcs = {
 	get_quark_max_dimension: dimension => {
 		document.getElementById(`quarkButtonMaxDimension${dimension}`).disabled = true;
 		if (dimension == player.quark.length - 1) {
-			player.quark.push([0]);
-			player.quark_points.push(0);
+			player.quark.push([new BigNumber(0)]);
+			player.quark_points.push(new BigNumber(0));
 		}
 		for (let i = 1; i < player.quark[dimension].length; i++) {
 			while (player.quark[dimension][0].gt(player.quark[dimension][0].minus((new BigNumber(2)).pow(player.quark[dimension][i][1]).times((new BigNumber(10)).pow(new BigNumber(i))).times((new BigNumber(20)).pow(new BigNumber(dimension)))))) {
@@ -238,12 +238,12 @@ var flush = ['all'], funcs = {
 	quark_dimension_4: {
 		title: "第四维度！",
 		desc: "获取一个拥有维度 4 的夸克。",
-		check: () => player.quark.length > 4 && player.quark[4][0][0].gt(new BigNumber(0))
+		check: () => player.quark.length > 4 && player.quark[4][0].gt(new BigNumber(0))
 	},
 	the_end: {
 		title: "结束了",
 		desc: "获取一个拥有维度 10 的夸克。",
-		check: () => player.quark.length > 10 && player.quark[10][0][0].gt(new BigNumber(0))
+		check: () => player.quark.length > 10 && player.quark[10][0].gt(new BigNumber(0))
 	}
 }, player = {};
 function mainloop() {
@@ -367,14 +367,18 @@ function mainloop() {
 				while (player.quark_points.length < i + 2) {
 					player.quark_points.push(new BigNumber(0));
 				}
+				let factor = player.quark_points[i].plus(new BigNumber(1));
+				if (i + 1 < player.quark.length) {
+					factor = factor.plus(player.quark[i + 1][0]);
+				}
 				if (i == 0) {
-					player.quark[i][0] = player.quark[i][0].plus(player.quark[i][1][0].times(player.quark_points[i].plus(new BigNumber(1)).plus(player.quark[i + 1][0])));
+					player.quark[i][0] = player.quark[i][0].plus(player.quark[i][1][0].times(factor));
 				}
 				else {
-					player.quark_points[i - 1] = player.quark_points[i - 1].plus(player.quark[i][1][0].times(player.quark_points[i].plus(new BigNumber(1)).plus(player.quark[i + 1][0])));
+					player.quark_points[i - 1] = player.quark_points[i - 1].plus(player.quark[i][1][0].times(factor));
 				}
 				for (let j = 1; j < player.quark[i].length - 1; j++) {
-					player.quark[i][j][0] = player.quark[i][j][0].plus(player.quark[i][j + 1][0].times(player.quark_points[i].plus(new BigNumber(1)).plus(player.quark[i + 1][0])));
+					player.quark[i][j][0] = player.quark[i][j][0].plus(player.quark[i][j + 1][0].times(factor));
 				}
 			}
 		}
