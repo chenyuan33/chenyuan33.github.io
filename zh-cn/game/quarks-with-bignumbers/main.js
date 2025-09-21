@@ -147,8 +147,14 @@ var flush = ['all'], funcs = {
 }, achievements = undefined, player = {};
 function mainloop() {
 	document.getElementById("hadAchievements").innerHTML = "加载中，请稍后...";
-	while (BigNumber === undefined) {
-		sleep(100);
+	while (true) {
+		try {
+			BigNumber;
+			break;
+		}
+		catch (e) {
+			sleep(100);
+		}
 	}
 	document.getElementById("hadAchievements").style.display = "none";
 	achievements = {
