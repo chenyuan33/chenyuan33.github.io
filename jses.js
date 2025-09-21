@@ -108,6 +108,15 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), showCurrent
 		document.body.style.backgroundColor = "black";
 		document.body.style.color = "white";
 	}
+}, mdtohtml = md => {
+	return md
+		.replace(/^(.*?)\n$/igm, "<p>$1</p>")
+		.replace(/^# (.*?)$/igm, "<h1>$1</h1>")
+		.replace(/^## (.*?)$/igm, "<h2>$1</h2>")
+		.replace(/^### (.*?)$/igm, "<h3>$1</h3>")
+		.replace(/^#### (.*?)$/igm, "<h4>$1</h4>")
+		.replace(/^##### (.*?)$/igm, "<h5>$1</h5>")
+		.replace(/^###### (.*?)$/igm, "<h6>$1</h6>");
 };
 function sha256(s) {
 	const chrsz = 8

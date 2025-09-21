@@ -247,6 +247,11 @@ var flush = ['all'], funcs = {
 	}
 }, player = {};
 function mainloop() {
+	document.getElementById("hadAchievements").innerHTML = "加载中，请稍后...";
+	while (BigNumber === undefined) {
+		sleep(100);
+	}
+	document.getElementById("hadAchievements").style.display = "none";
 	if (localStorage.game_quarks === undefined) {
 		funcs.do_hard_reset();
 	}
