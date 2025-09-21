@@ -144,114 +144,115 @@ var flush = ['all'], funcs = {
 		player.unlock_dimension = true;
 		flush.push('quark');
 	}
-}, achievements = {
-	first_quark: {
-		title: "第一步",
-		desc: "获得第一个夸克。",
-		check: () => player.quark[0][0].gt(new BigNumber(0))
-	},
-	quark_getter: {
-		title: "速度！",
-		desc: "获得一个夸克获取器。",
-		check: () => player.quark[0].length > 1 && player.quark[0][1][0].gt(new BigNumber(0))
-	},
-	quark_getter_2nd: {
-		title: "加速度！",
-		desc: "用获取器获取获取器！（达成条件：获取一个夸克获取器 #2）",
-		check: () => player.quark[0].length > 2 && player.quark[0][2][0].gt(new BigNumber(0))
-	},
-	quark_getter_3rd: {
-		title: "加加速度！",
-		desc: "用获取器获取的获取器获取获取器！（达成条件：获取一个夸克获取器 #3）",
-		check: () => player.quark[0].length > 3 && player.quark[0][3][0].gt(new BigNumber(0))
-	},
-	quark_getter_4th: {
-		title: "加加加速度！",
-		desc: "用获取器获取的获取器获取可以获取获取器的获取器！（达成条件：获取一个夸克获取器 #4）",
-		check: () => player.quark[0].length > 4 && player.quark[0][4][0].gt(new BigNumber(0))
-	},
-	quark_1e10: {
-		title: "好多夸克！",
-		desc: `获得 ${funcs.TeXstr(1e10)} 夸克。`,
-		check: () => player.quark[0][0].gt(new BigNumber(1e10))
-	},
-	quark_1e15: {
-		title: "更多夸克！",
-		desc: `获得 ${funcs.TeXstr(1e15)} 夸克。`,
-		check: () => player.quark[0][0].gt(new BigNumber(1e15))
-	},
-	quark_1e20: {
-		title: "超多夸克！",
-		desc: `获得 ${funcs.TeXstr(1e20)} 夸克。`,
-		check: () => player.quark[0][0].gt(new BigNumber(1e20))
-	},
-	quark_1e25: {
-		title: "这是什么？",
-		desc: `获得 ${funcs.TeXstr(1e25)} 夸克。`,
-		check: () => player.quark[0][0].gt(new BigNumber(1e25))
-	},
-	quark_dimension_1: {
-		title: "另一维度！",
-		desc: "获得一个拥有维度 1 的夸克。",
-		check: () => player.quark.length > 1 && player.quark[1][0].gt(new BigNumber(0))
-	},
-	quark_dimension_1_getted_2: {
-		title: "重头再来一遍！",
-		desc: "拥有两个维度 1 的夸克。",
-		check: () => player.quark.length > 1 && player.quark[1][0].gt(new BigNumber(1))
-	},
-	quark_dimension_1_getter: {
-		title: "速度提升之另一种方式：夸克点数",
-		desc: "获得一个维度 1 的夸克获取器。",
-		check: () => player.quark.length > 1 && player.quark[1].length > 1 && player.quark[1][1][0].gt(new BigNumber(0))
-	},
-	quark_dimension_1_getter_2nd: {
-		title: "加速度之夸克点数",
-		desc: "获得一个维度 1 的二阶夸克获取器。",
-		check: () => player.quark.length > 1 && player.quark[1].length > 2 && player.quark[1][2][0].gt(new BigNumber(0))
-	},
-	quark_dimension_1_getter_3rd: {
-		title: "夸克点数与加加速度",
-		desc: `让夸克点数指数增长！（达成条件：获取一个维度 1 的三阶夸克获取器）`,
-		check: () => player.quark.length > 1 && player.quark[1].length > 3 && player.quark[1][3][0].gt(new BigNumber(0))
-	},
-	quark_dimension_1_getter_4th: {
-		title: "这也不难呀",
-		desc: "获取一个维度 1 的四阶夸克获取器。",
-		check: () => player.quark.length > 1 && player.quark[1].length > 4 && player.quark[1][4][0].gt(new BigNumber(0))
-	},
-	quark_dimension_2: {
-		title: "第二维度！",
-		desc: "获取一个拥有维度 2 的夸克。",
-		check: () => player.quark.length > 2 && player.quark[2][0].gt(new BigNumber(0))
-	},
-	quark_dimension_2_getter_4th: {
-		title: "太简单了",
-		desc: "获取一个维度 2 的四阶夸克获取器。",
-		check: () => player.quark.length > 2 && player.quark[1].length > 4 && player.quark[2][4][0].gt(new BigNumber(0))
-	},
-	quark_dimension_3: {
-		title: "第三维度！",
-		desc: "获取一个拥有维度 3 的夸克。",
-		check: () => player.quark.length > 3 && player.quark[3][0].gt(new BigNumber(0))
-	},
-	quark_dimension_4: {
-		title: "第四维度！",
-		desc: "获取一个拥有维度 4 的夸克。",
-		check: () => player.quark.length > 4 && player.quark[4][0].gt(new BigNumber(0))
-	},
-	the_end: {
-		title: "结束了",
-		desc: "获取一个拥有维度 10 的夸克。",
-		check: () => player.quark.length > 10 && player.quark[10][0].gt(new BigNumber(0))
-	}
-}, player = {};
+}, achievements = undefined, player = {};
 function mainloop() {
 	document.getElementById("hadAchievements").innerHTML = "加载中，请稍后...";
 	while (BigNumber === undefined) {
 		sleep(100);
 	}
 	document.getElementById("hadAchievements").style.display = "none";
+	achievements = {
+		first_quark: {
+			title: "第一步",
+			desc: "获得第一个夸克。",
+			check: () => player.quark[0][0].gt(new BigNumber(0))
+		},
+		quark_getter: {
+			title: "速度！",
+			desc: "获得一个夸克获取器。",
+			check: () => player.quark[0].length > 1 && player.quark[0][1][0].gt(new BigNumber(0))
+		},
+		quark_getter_2nd: {
+			title: "加速度！",
+			desc: "用获取器获取获取器！（达成条件：获取一个夸克获取器 #2）",
+			check: () => player.quark[0].length > 2 && player.quark[0][2][0].gt(new BigNumber(0))
+		},
+		quark_getter_3rd: {
+			title: "加加速度！",
+			desc: "用获取器获取的获取器获取获取器！（达成条件：获取一个夸克获取器 #3）",
+			check: () => player.quark[0].length > 3 && player.quark[0][3][0].gt(new BigNumber(0))
+		},
+		quark_getter_4th: {
+			title: "加加加速度！",
+			desc: "用获取器获取的获取器获取可以获取获取器的获取器！（达成条件：获取一个夸克获取器 #4）",
+			check: () => player.quark[0].length > 4 && player.quark[0][4][0].gt(new BigNumber(0))
+		},
+		quark_1e10: {
+			title: "好多夸克！",
+			desc: `获得 ${funcs.TeXstr(1e10)} 夸克。`,
+			check: () => player.quark[0][0].gt(new BigNumber(1e10))
+		},
+		quark_1e15: {
+			title: "更多夸克！",
+			desc: `获得 ${funcs.TeXstr(1e15)} 夸克。`,
+			check: () => player.quark[0][0].gt(new BigNumber(1e15))
+		},
+		quark_1e20: {
+			title: "超多夸克！",
+			desc: `获得 ${funcs.TeXstr(1e20)} 夸克。`,
+			check: () => player.quark[0][0].gt(new BigNumber(1e20))
+		},
+		quark_1e25: {
+			title: "这是什么？",
+			desc: `获得 ${funcs.TeXstr(1e25)} 夸克。`,
+			check: () => player.quark[0][0].gt(new BigNumber(1e25))
+		},
+		quark_dimension_1: {
+			title: "另一维度！",
+			desc: "获得一个拥有维度 1 的夸克。",
+			check: () => player.quark.length > 1 && player.quark[1][0].gt(new BigNumber(0))
+		},
+		quark_dimension_1_getted_2: {
+			title: "重头再来一遍！",
+			desc: "拥有两个维度 1 的夸克。",
+			check: () => player.quark.length > 1 && player.quark[1][0].gt(new BigNumber(1))
+		},
+		quark_dimension_1_getter: {
+			title: "速度提升之另一种方式：夸克点数",
+			desc: "获得一个维度 1 的夸克获取器。",
+			check: () => player.quark.length > 1 && player.quark[1].length > 1 && player.quark[1][1][0].gt(new BigNumber(0))
+		},
+		quark_dimension_1_getter_2nd: {
+			title: "加速度之夸克点数",
+			desc: "获得一个维度 1 的二阶夸克获取器。",
+			check: () => player.quark.length > 1 && player.quark[1].length > 2 && player.quark[1][2][0].gt(new BigNumber(0))
+		},
+		quark_dimension_1_getter_3rd: {
+			title: "夸克点数与加加速度",
+			desc: `让夸克点数指数增长！（达成条件：获取一个维度 1 的三阶夸克获取器）`,
+			check: () => player.quark.length > 1 && player.quark[1].length > 3 && player.quark[1][3][0].gt(new BigNumber(0))
+		},
+		quark_dimension_1_getter_4th: {
+			title: "这也不难呀",
+			desc: "获取一个维度 1 的四阶夸克获取器。",
+			check: () => player.quark.length > 1 && player.quark[1].length > 4 && player.quark[1][4][0].gt(new BigNumber(0))
+		},
+		quark_dimension_2: {
+			title: "第二维度！",
+			desc: "获取一个拥有维度 2 的夸克。",
+			check: () => player.quark.length > 2 && player.quark[2][0].gt(new BigNumber(0))
+		},
+		quark_dimension_2_getter_4th: {
+			title: "太简单了",
+			desc: "获取一个维度 2 的四阶夸克获取器。",
+			check: () => player.quark.length > 2 && player.quark[1].length > 4 && player.quark[2][4][0].gt(new BigNumber(0))
+		},
+		quark_dimension_3: {
+			title: "第三维度！",
+			desc: "获取一个拥有维度 3 的夸克。",
+			check: () => player.quark.length > 3 && player.quark[3][0].gt(new BigNumber(0))
+		},
+		quark_dimension_4: {
+			title: "第四维度！",
+			desc: "获取一个拥有维度 4 的夸克。",
+			check: () => player.quark.length > 4 && player.quark[4][0].gt(new BigNumber(0))
+		},
+		the_end: {
+			title: "结束了",
+			desc: "获取一个拥有维度 10 的夸克。",
+			check: () => player.quark.length > 10 && player.quark[10][0].gt(new BigNumber(0))
+		}
+	};
 	if (localStorage.game_quarks === undefined) {
 		funcs.do_hard_reset();
 	}
