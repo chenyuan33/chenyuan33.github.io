@@ -1,14 +1,4 @@
-let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), showCurrentDateTime = () => {
-	const now = new Date();
-	const year = now.getFullYear();
-	const month = String(now.getMonth() + 1).padStart(2, '0');
-	const day = String(now.getDate()).padStart(2, '0');
-	const hours = String(now.getHours()).padStart(2, '0');
-	const minutes = String(now.getMinutes()).padStart(2, '0');
-	const seconds = String(now.getSeconds()).padStart(2, '0');
-	const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-	document.getElementById('currentDateTime').textContent = formattedDateTime;
-}, scripts = () => {
+let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = () => {
 	let mathjax = document.createElement("script");
 	mathjax.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
 	document.head.appendChild(mathjax);
@@ -41,82 +31,77 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), showCurrent
 	let bignumber = document.createElement("script");
 	bignumber.src = "/bignumber.js";
 	document.head.appendChild(bignumber);
-	let header = document.createElement("div"), footer = document.createElement("div"), headerBlanks = document.createElement("div");
-	header.id = "header";
-	footer.id = "footer";
-	document.body.insertBefore(headerBlanks, document.body.firstChild);
-	document.body.insertBefore(header, document.body.firstChild);
-	document.body.appendChild(footer);
-	header.innerHTML = `
-		<p>
-			<a href="/${document.URL.split("/")[3]}/index.html">${document.URL.split("/")[3] == "en-us" ? "Main Page" : "主页"}</a>
-			<a href="/${document.URL.split("/")[3]}/changelog.html">${document.URL.split("/")[3] == "en-us" ? "Changelog" : "更新日志"}</a>
-			<a id="lightSwitch" href="javascript:switchLight()">🌞</a>
-			<span id="currentDateTime">${document.URL.split("/")[3] == "en-us" ? "Loading" : "加载中"}...</span>
-			<span id="languageSwitchStarter">
-				${document.URL.split("/")[3] == "en-us" ? "English" : "简体中文"}
-				<i id="languageSwitchIcon" class="fa-solid fa-caret-left"></i>
-				<span id="languageSwitch">
-					<br />&nbsp;<a class="languageSwitchChosen" href="/en-us/${document.URL.split("/").slice(4).join("/")}">English</a>&nbsp;
-					<br />&nbsp;<a class="languageSwitchChosen" href="/zh-cn/${document.URL.split("/").slice(4).join("/")}">简体中文</a>&nbsp;
-				</span>
-			</span>
-		</p>
+	document.body.innerHTML = `
+		<div id="sidebar"><div id="sidebarContent">
+			<p><a href="/${document.URL.split("/")[3]}/index.html">
+				<i class="fa-solid fa-house"></i>
+				<span class="sidebarTitle">${document.URL.split("/")[3] == "en-us" ? "Main Page" : "主页"}</span>
+			</a></p>
+			<p><a href="/${document.URL.split("/")[3]}/links.html">
+				<i class="fa-solid fa-link"></i>
+				<span class="sidebarTitle">${document.URL.split("/")[3] == "en-us" ? "Links About My Friends" : "友情链接"}</span>
+			</a></p>
+			<p><a href="/${document.URL.split("/")[3]}/changelog.html">
+				<i class="fa-solid fa-clock-rotate-left"></i>
+				<span class="sidebarTitle">${document.URL.split("/")[3] == "en-us" ? "Changelog" : "更新日志"}</span>
+			</a></p>
+			<h3>
+				<i class="fa-solid fa-language"></i>
+				<span class="sidebarTitle">${document.URL.split("/")[3] == "en-us" ? "Switch Language" : "切换语言"}</span>
+			</h3>
+			<p><a href="/en-us/${document.URL.split("/").slice(4).join("/")}">
+				<i class="fa-solid fa-toggle-${document.URL.split("/")[3] == "en-us" ? "on" : "off"}"></i>
+				<span class="sidebarTitle">English</span>
+			</a></p>
+			<p><a href="/zh-cn/${document.URL.split("/").slice(4).join("/")}">
+				<i class="fa-solid fa-toggle-${document.URL.split("/")[3] == "zh-cn" ? "on" : "off"}"></i>
+				<span class="sidebarTitle">简体中文</span>
+			</a></p>
+			<h3>
+				<i class="fa-solid fa-compass"></i>
+				<span class="sidebarTitle">${document.URL.split("/")[3] == "en-us" ? "Features" : "功能"}</span>
+			</h3>
+			<p><a href="javascript:switchLight()">
+				<i id="lightSwitchIcon" class="fa-solid fa-sun"></i>
+				<span class="sidebarTitle">${document.URL.split("/")[3] == "en-us" ? "Switch Light <br /> /Dark Mode" : "切换浅色 <br /> /深色模式"}</span>
+			</a></p>
+			<p>
+				<i class="fa-solid fa-clock"></i>
+				<span class="sidebarTitle" id="currentDateTime">${document.URL.split("/")[3] == "en-us" ? "Loading" : "加载中"}...</span>
+			</p>
+		</div></div>
+		<div id="content">${document.body.innerHTML}</div>
 	`;
-	showCurrentDateTime();
-	setInterval(showCurrentDateTime, 1000);
-	document.getElementById("languageSwitch").style.left = document.getElementById("languageSwitchStarter").offsetLeft + "px";
-	let languageSwitchWidth = Math.max(document.getElementById("languageSwitch").offsetWidth, document.getElementById("languageSwitchStarter").offsetWidth) + 12 + "px";
-	for (let element of document.getElementsByClassName("languageSwitchChosen")) {
-		element.style.width = languageSwitchWidth;
-	};
-	document.getElementById("languageSwitchStarter").onmouseover = () => document.getElementById("languageSwitchIcon").classList.add("fa-rotate-270");
-	document.getElementById("languageSwitchStarter").onmouseout = () => document.getElementById("languageSwitchIcon").classList.remove("fa-rotate-270");
+	setInterval(() => {
+		const now = new Date();
+		const year = now.getFullYear();
+		const month = String(now.getMonth() + 1).padStart(2, '0');
+		const day = String(now.getDate()).padStart(2, '0');
+		const hours = String(now.getHours()).padStart(2, '0');
+		const minutes = String(now.getMinutes()).padStart(2, '0');
+		const seconds = String(now.getSeconds()).padStart(2, '0');
+		document.getElementById('currentDateTime').innerHTML = `${year}/${month}/${day} <br /> ${hours}:${minutes}:${seconds}`;
+	}, 50);
 	footer.innerHTML = `
-		<p>© Copyright 2024-${new Date().getFullYear()} @<a href="https://github.com/chenyuan33">chenyuan33</a>, All rights reserved.</p>
+		<p></p>
 	`;
-	headerBlanks.style.width = header.offsetWidth + "px";
-	headerBlanks.style.height = header.offsetHeight + "px";
-	if (cookie_operator.get("lightMode") === undefined) {
-		cookie_operator.set("lightMode", "light");
-	}
-	else {
-		if (cookie_operator.get("lightMode") === "dark") {
-			document.getElementById("lightSwitch").innerHTML = "🌙";
-			document.body.style.backgroundColor = "black";
-			document.body.style.color = "white";
-		}
-	}
+	switchLight();
+	switchLight();
 	console.log(`Welcome to chenyuan33.github.io!
 © Copyright 2024 @chenyuan33, All rights reserved.`);
-}, cookie_operator = {
-	get: name => {
-		let key_value = document.cookie.split("; ").find(str => str.startsWith(name + "="));
-		return key_value === undefined ? undefined : key_value.split("=")[1];
-	},
-	set: (name, value) => document.cookie = name + "=" + value + "; expires=" + new Date(Date.now() + 60 * 60 * 24 * 180).toUTCString() + "; path=/"
 }, switchLight = () => {
-	if (cookie_operator.get("lightMode") === "dark") {
-		cookie_operator.set("lightMode", "light");
-		document.getElementById("lightSwitch").innerHTML = "🌞";
-		document.body.style.backgroundColor = "white";
-		document.body.style.color = "black";
+	if (localStorage.getItem("lightMode") === "dark") {
+		localStorage.lightMode = "light";
+		document.getElementById("lightSwitchIcon").classList = "fa-solid fa-sun";
+		document.getElementById("content").style.backgroundColor = "white";
+		document.getElementById("content").style.color = "black";
 	}
 	else {
-		cookie_operator.set("lightMode", "dark");
-		document.getElementById("lightSwitch").innerHTML = "🌙";
-		document.body.style.backgroundColor = "black";
-		document.body.style.color = "white";
+		localStorage.lightMode = "dark";
+		document.getElementById("lightSwitchIcon").classList = "fa-solid fa-moon";
+		document.getElementById("content").style.backgroundColor = "black";
+		document.getElementById("content").style.color = "white";
 	}
-}, mdtohtml = md => {
-	return md
-		.replace(/^(.*?)\n$/igm, "<p>$1</p>")
-		.replace(/^# (.*?)$/igm, "<h1>$1</h1>")
-		.replace(/^## (.*?)$/igm, "<h2>$1</h2>")
-		.replace(/^### (.*?)$/igm, "<h3>$1</h3>")
-		.replace(/^#### (.*?)$/igm, "<h4>$1</h4>")
-		.replace(/^##### (.*?)$/igm, "<h5>$1</h5>")
-		.replace(/^###### (.*?)$/igm, "<h6>$1</h6>");
 };
 function sha256(s) {
 	const chrsz = 8

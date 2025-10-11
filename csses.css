@@ -1,22 +1,44 @@
-body {
+#sidebar {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 50px;
+	background-color: cyan;
+	z-index: 2;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+#sidebar:hover {
+	width: 130px;
+}
+
+#sidebarContent {
+	position: relative;
+	left: 10px;
+}
+
+.sidebarTitle {
+	display: none;
+	position: absolute;
+	left: 30px;
+	align-self: center;
+}
+
+#sidebar:hover .sidebarTitle {
+	display: inline;
+}
+
+#content {
+	position: absolute;
+	left: 70px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
 	background-color: white;
 	color: black;
-}
-
-div#header, div#footer {
-	background-color: cyan;
-	color: black;
-	right: 0px;
-	left: 0px;
-}
-
-div#header {
-	top: 0px;
-	position: fixed;
-}
-
-div#footer {
-	bottom: 0px;
+	z-index: 1;
 }
 
 a {
@@ -27,18 +49,4 @@ a {
 a:hover {
 	color: red;
 	text-decoration: underline;
-}
-
-span#languageSwitch {
-	display: none;
-	position: absolute;
-}
-
-span#languageSwitchStarter:hover span#languageSwitch {
-	display: inline;
-}
-
-a.languageSwitchChosen {
-	background-color: cyan;
-	display: inline-block;
 }
