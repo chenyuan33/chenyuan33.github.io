@@ -33,21 +33,26 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = (
 	document.head.appendChild(bignumber);
 	document.body.innerHTML = `
 		<div id="sidebar"><div id="sidebarContent">
+			<h3>
+				<i class="fa-solid fa-location-dot"></i>
+				<span class="sidebarTitle">${document.URL.split("/")[3] == "en-us" ? "Navigation" : "导航"}</span>
+			</h3>
 			<p><a href="/${document.URL.split("/")[3]}/index.html">
 				<i class="fa-solid fa-house"></i>
 				<span class="sidebarTitle">${document.URL.split("/")[3] == "en-us" ? "Main Page" : "主页"}</span>
 			</a></p>
 			<p><a href="/${document.URL.split("/")[3]}/links.html">
 				<i class="fa-solid fa-link"></i>
-				<span class="sidebarTitle">${document.URL.split("/")[3] == "en-us" ? "Links About My Friends" : "友情链接"}</span>
+				<span class="sidebarTitle">${document.URL.split("/")[3] == "en-us" ? "Related Links" : "友情链接"}</span>
 			</a></p>
 			<p><a href="/${document.URL.split("/")[3]}/changelog.html">
 				<i class="fa-solid fa-clock-rotate-left"></i>
 				<span class="sidebarTitle">${document.URL.split("/")[3] == "en-us" ? "Changelog" : "更新日志"}</span>
 			</a></p>
+			<hr>
 			<h3>
 				<i class="fa-solid fa-language"></i>
-				<span class="sidebarTitle">${document.URL.split("/")[3] == "en-us" ? "Switch Language" : "切换语言"}</span>
+				<span class="sidebarTitle">${document.URL.split("/")[3] == "en-us" ? "Languages" : "切换语言"}</span>
 			</h3>
 			<p><a href="/en-us/${document.URL.split("/").slice(4).join("/")}">
 				<i class="fa-solid fa-toggle-${document.URL.split("/")[3] == "en-us" ? "on" : "off"}"></i>
@@ -57,13 +62,14 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = (
 				<i class="fa-solid fa-toggle-${document.URL.split("/")[3] == "zh-cn" ? "on" : "off"}"></i>
 				<span class="sidebarTitle">简体中文</span>
 			</a></p>
+			<hr>
 			<h3>
 				<i class="fa-solid fa-compass"></i>
 				<span class="sidebarTitle">${document.URL.split("/")[3] == "en-us" ? "Features" : "功能"}</span>
 			</h3>
 			<p><a href="javascript:switchLight()">
 				<i id="lightSwitchIcon" class="fa-solid fa-sun"></i>
-				<span class="sidebarTitle">${document.URL.split("/")[3] == "en-us" ? "Switch Light <br /> /Dark Mode" : "切换浅色 <br /> /深色模式"}</span>
+				<span class="sidebarTitle">${document.URL.split("/")[3] == "en-us" ? "Toggle Theme" : "切换主题"}</span>
 			</a></p>
 			<p>
 				<i class="fa-solid fa-clock"></i>
