@@ -49,17 +49,21 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = (
 				<i class="fa-solid fa-clock-rotate-left"></i>
 				<span class="sidebarTitle">${document.URL.split("/")[3] == "en-us" ? "Changelog" : "更新日志"}</span>
 			</a></p>
+			<p><a href="/${document.URL.split("/")[3]}/faqs.html">
+				<i class="fa-solid fa-question-circle"></i>
+				<span class="sidebarTitle">${document.URL.split("/")[3] == "en-us" ? "FAQs" : "常见问题"}</span>
+			</a></p>
 			<hr>
 			<h3>
 				<i class="fa-solid fa-language"></i>
 				<span class="sidebarTitle">${document.URL.split("/")[3] == "en-us" ? "Languages" : "切换语言"}</span>
 			</h3>
-			<p><a href="/en-us/${document.URL.split("/").slice(4).join("/")}">
-				<i class="fa-solid fa-toggle-${document.URL.split("/")[3] == "en-us" ? "on" : "off"}"></i>
+			<p ${document.URL.split("/")[3] == "en-us" ? "class='sidebarCurrentChoice'" : ""}><a href="/en-us/${document.URL.split("/").slice(4).join("/")}">
+				<i class="fa-solid fa-${document.URL.split("/")[3] == "en-us" ? "check-circle" : "circle"}"></i>
 				<span class="sidebarTitle">English</span>
 			</a></p>
-			<p><a href="/zh-cn/${document.URL.split("/").slice(4).join("/")}">
-				<i class="fa-solid fa-toggle-${document.URL.split("/")[3] == "zh-cn" ? "on" : "off"}"></i>
+			<p ${document.URL.split("/")[3] == "zh-cn" ? "class='sidebarCurrentChoice'" : ""}><a href="/zh-cn/${document.URL.split("/").slice(4).join("/")}">
+				<i class="fa-solid fa-${document.URL.split("/")[3] == "zh-cn" ? "check-circle" : "circle"}"></i>
 				<span class="sidebarTitle">简体中文</span>
 			</a></p>
 			<hr>
@@ -88,9 +92,6 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = (
 		const seconds = String(now.getSeconds()).padStart(2, '0');
 		document.getElementById('currentDateTime').innerHTML = `${year}/${month}/${day} <br /> ${hours}:${minutes}:${seconds}`;
 	}, 50);
-	footer.innerHTML = `
-		<p></p>
-	`;
 	switchLight();
 	switchLight();
 	console.log(`Welcome to chenyuan33.github.io!
