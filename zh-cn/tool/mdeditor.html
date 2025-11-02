@@ -9,63 +9,107 @@
 	<script src="/jses.js"></script>
 	<script src="/md.js"></script>
 	<style>
-		.mdeditor {
+		.mdeditor-table {
+			border-style: solid;
+		}
+
+		.mdeditor-table td {
 			border-style: solid;
 		}
 
 		.mdeditor-input {
-			border-style: none;
 			resize: none;
 			height: 300px;
 			width: 200px;
 			overflow: auto;
-			border-style: solid;
+			border-style: none;
 		}
 
 		.mdeditor-output {
 			height: 300px;
 			width: 200px;
 			overflow: auto;
+		}
+
+		.mdeditor-buttondiv {
+			width: 400px;
+		}
+
+		.mdeditor-button, .mdeditor-close-about-button {
+			border: none;
+			background-color: white;
+		}
+
+		.mdeditor-button:hover, .mdeditor-close-about-button:hover {
+			cursor: pointer;
+		}
+
+		.mdeditor-about {
+			display: none;
+			position: absolute;
+			left: 20%;
+			right: 20%;
+			top: 20%;
+			bottom: 20%;
+			background-color: white;
 			border-style: solid;
+			border-radius: 10px;
+			overflow: auto;
+			padding: 10px;
+		}
+
+		.mdeditor-close-about-button {
+			position: absolute;
+			left: 90%;
+			top: 10%;
 		}
 	</style>
 </head>
 
 <body>
 	<h1>Markdown 编辑器</h1>
-	<table class="mdeditor">
-		<tr>
-			<td>
-				<textarea class="mdeditor-input" id="mdeditor-input1"></textarea>
-			</td>
-			<td>
-				<div class="mdeditor-output" id="mdeditor-output1"></div>
-			</td>
-		</tr>
-	</table>
-	<h2>说明</h2>
-	<p>上面的编辑器中，左边是输入的 Markdown 文本，右边是渲染后的 HTML 代码。输入文本时，右边的 HTML 代码会实时更新。</p>
-	<p>未来将会支持的功能有：</p>
-	<ul>
-		<li>保存草稿</li>
-		<li>导入导出 Markdown 文件</li>
-		<li>导出 HTML 文件</li>
-		<li>支持更多 Markdown 语法</li>
-		<li>同步滚动（可自设是否开启）</li>
-		<li>可自设是否实时渲染（关闭后将会出现一个按钮，点击按钮后才会渲染）</li>
-		<li>一行用于辅助的按钮行（按钮按下后会在输入框内增加对应的东西，如 H1 会产生一级标题）</li>
-		<li>自定义 Markdown 语法</li>
-		<li>自定义编辑器的大小、全屏编辑器</li>
-		<li>国际化/添加对应英文版页面</li>
-		<li>让编辑器进入你的网站（如果你愿意的话）</li>
-	</ul>
+	<div class="mdeditor">
+		<table class="mdeditor-table">
+			<tr>
+				<td colspan="2">
+					<div class="mdeditor-buttondiv">
+						<button class="mdeditor-button" onclick="document.getElementById('mdeditor-about1').style.display='block'"><i class="fa-solid fa-question-circle"></i></button>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<textarea class="mdeditor-input" id="mdeditor-input1"></textarea>
+				</td>
+				<td>
+					<div class="mdeditor-output" id="mdeditor-output1"></div>
+				</td>
+			</tr>
+		</table>
+		<div class="mdeditor-about" id="mdeditor-about1">
+			<button class="mdeditor-close-about-button" onclick="document.getElementById('mdeditor-about1').style.display='none'"><i class="fa-solid fa-circle-xmark"></i></button>
+			<h2>关于</h2>
+			<p>上面的编辑器中，左边是输入的 Markdown 文本，右边是渲染后的 HTML 代码。输入文本时，右边的 HTML 代码会实时更新。所有 Markdown 到 HTML 的转换和显示均在本地进行，无需担心数据泄露的问题。</p>
+			<p>未来将会支持的功能有：</p>
+			<ul>
+				<li>支持更多 Markdown 语法</li>
+				<li>同步滚动（可自设是否开启）</li>
+				<li>用于辅助的按钮行：
+					<ul>
+						<li>功能类：保存草稿、导入导出 Markdown、导出 HTML、自设是否开启同步滚动、自设是否实时渲染</li>
+						<li>内容类：按钮按下后会在输入框内增加对应的东西，如 H1 会产生一级标题</li>
+					</ul>
+				</li>
+				<li>自定义 Markdown 语法</li>
+				<li>自定义编辑器的大小、全屏编辑器</li>
+				<li>国际化/添加对应英文版页面</li>
+				<li>让编辑器进入你的网站（如果你愿意的话）</li>
+			</ul>
+		</div>
+	</div>
 	<script>scripts()</script>
 	<script>
-		let cnt = 0;
-		document.getElementById("mdeditor-input1").addEventListener("input", () => {
-			cnt++;
-			document.getElementById("mdeditor-output1").innerHTML = mdtohtml(document.getElementById("mdeditor-input1").value);
-		});
+		document.getElementById("mdeditor-input1").addEventListener("input", () => document.getElementById("mdeditor-output1").innerHTML = mdtohtml(document.getElementById("mdeditor-input1").value));
 	</script>
 </body>
 
