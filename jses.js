@@ -21,8 +21,8 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = (
 	giscus.dataset.strict = "1";
 	giscus.dataset.reactionsEnabled = "1";
 	giscus.dataset.emitMetadata = "0";
-	giscus.dataset.inputPosition = "bottom";
-	giscus.dataset.theme = "light";
+	giscus.dataset.inputPosition = "top";
+	giscus.dataset.theme = "preferred_color_scheme";
 	giscus.dataset.lang = "en";
 	giscus.dataset.loading = "lazy";
 	giscus.crossorigin = "anonymous";

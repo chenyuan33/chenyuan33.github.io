@@ -4,34 +4,44 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>cy3's site</title>
+	<title>主页 - cy3's site</title>
 	<link rel="stylesheet" type="text/css" href="/csses.css" />
 	<script src="/jses.js"></script>
 </head>
 
 <body>
 	<h1>欢迎来到 cy3's site！</h1>
-	<p><a href="https://github.com/chenyuan33">我在 GitHub 上的个人主页</a></p>
-	<p>
-		<a href="https://github.com/chenyuan33/chenyuan33.github.io">GitHub 仓库</a>
-		<img src="https://img.shields.io/github/watchers/chenyuan33/chenyuan33.github.io.svg?style=social&label=Watch" alt="watchers-svg" />
-		<img src="https://img.shields.io/github/stars/chenyuan33/chenyuan33.github.io.svg?style=social&label=Stars" alt="stars-svg" />
-		(<span id="forks-count">[加载中]</span> forks 和 <span id="stars-count">[加载中]</span> stars)
-	</p>
-	<p><a href="/zh-cn/blog/index.html">我的博客</a></p>
-	<p><a href="/zh-cn/tool/index.html">在线工具</a></p>
-	<p><a href="/zh-cn/game/index.html">在线小游戏</a></p>
-	<p><a href="/zh-cn/links.html">友情链接</a></p>
-	<p><a href="/zh-cn/faqs.html">常见问题</a></p>
+	<div class="block-item">
+		<h2>关于本站所有者</h2>
+		<p><a href="https://github.com/chenyuan33">他的主页</a></p>
+		<p>
+			<img alt="GitHub followers" src="https://img.shields.io/github/followers/chenyuan33"><br />
+			<img alt="GitHub User's stars" src="https://img.shields.io/github/stars/chenyuan33"><br />
+		</p>
+	</div>
+	<br />
+	<div class="block-item">
+		<h2>关于本站</h2>
+		<p><a href="https://github.com/chenyuan33/chenyuan33.github.io">本站在 GitHub 上开源</a></p>
+		<p>
+			<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/chenyuan33/chenyuan33.github.io" /><br />
+			<img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/t/chenyuan33/chenyuan33.github.io" /><br />
+			<img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/w/chenyuan33/chenyuan33.github.io" /><br />
+			<img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/chenyuan33/chenyuan33.github.io" /><br />
+			<img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/y/chenyuan33/chenyuan33.github.io" /><br />
+			<img alt="GitHub Created At" src="https://img.shields.io/github/created-at/chenyuan33/chenyuan33.github.io" /><br />
+			<img alt="GitHub contributors" src="https://img.shields.io/github/contributors/chenyuan33/chenyuan33.github.io" /><br />
+			<img alt="GitHub License" src="https://img.shields.io/github/license/chenyuan33/chenyuan33.github.io"><br />
+			<img alt="GitHub language count" src="https://img.shields.io/github/languages/count/chenyuan33/chenyuan33.github.io" /><br />
+			<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/chenyuan33/chenyuan33.github.io" /><br />
+			<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/chenyuan33/chenyuan33.github.io" /><br />
+			<img alt="GitHub forks" src="https://img.shields.io/github/forks/chenyuan33/chenyuan33.github.io" /><br />
+			<img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/chenyuan33/chenyuan33.github.io"><br />
+			<img alt="GitHub watchers" src="https://img.shields.io/github/watchers/chenyuan33/chenyuan33.github.io"><br />
+		</p>
+	</div>
+	<p><a href="/zh-cn/blog/index.html">我的博客</a> || <a href="/zh-cn/tool/index.html">在线工具</a> || <a href="/zh-cn/game/index.html">在线小游戏</a></p>
 	<script>scripts()</script>
-	<script>
-		fetch('https://api.github.com/repos/chenyuan33/chenyuan33.github.io')
-			.then(response => response.json())
-			.then(data => {
-				document.getElementById("forks-count").innerHTML = data.forks_count;
-				document.getElementById("stars-count").innerHTML = data.stargazers_count;
-			});
-	</script>
 </body>
 
 </html>
