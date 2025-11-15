@@ -210,7 +210,7 @@ abc</code></pre><br>（换行前无空格）</td>
 					<td class="mdeditor-about-supporting-unsupported"></td>
 				</tr>
 				<tr>
-					<td><pre><code>ABC\
+					<td><pre><code>ABC\\
 abc</code></pre><br>（换行前无空格）</td>
 					<td class="mdeditor-about-supporting-unsupported"></td>
 					<td class="mdeditor-about-supporting-supported"></td>
