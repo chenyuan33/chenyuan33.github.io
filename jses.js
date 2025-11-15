@@ -28,9 +28,6 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = (
 	giscus.crossorigin = "anonymous";
 	giscus.async = true;
 	document.body.appendChild(giscus);
-	let bignumber = document.createElement("script");
-	bignumber.src = "/bignumber.js";
-	document.head.appendChild(bignumber);
 	document.body.innerHTML = `
 		<div id="sidebar"><div id="sidebarContent">
 			<h3>

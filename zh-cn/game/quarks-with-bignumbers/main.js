@@ -1,4 +1,4 @@
-var flush = ['all'], funcs = {
+var flush = ['all'], paused = false, cooling = true, funcs = {
 	get_current_archive: () => {
 		document.getElementById('archive').value = btoa(JSON.stringify(player));
 	},
@@ -56,7 +56,7 @@ var flush = ['all'], funcs = {
 		}
 	},
 	get_quark: (dimension, level) => {
-		document.getElementById(`quarkButton${dimension.toString()}-${level.toString()}`).disabled = true;
+		cooling = true;
 		if (dimension == player.quark.length - 1 && dimension < 1e5) {
 			player.quark.push([new BigNumber(0)]);
 			player.quark_points.push(new BigNumber(0));
@@ -65,17 +65,17 @@ var flush = ['all'], funcs = {
 			player.quark[dimension].push([new BigNumber(0), new BigNumber(0)]);
 		}
 		if (!level) {
-			player.quark[dimension][0].plus(new BigNumber(1));
+			player.quark[dimension][0] = player.quark[dimension][0].plus(new BigNumber(1));
 			flush.push('quark');
 			return;
 		}
 		player.quark[dimension][0] = player.quark[dimension][0].minus((new BigNumber(2)).pow(player.quark[dimension][level][1]).times((new BigNumber(10)).pow(new BigNumber(level))).times((new BigNumber(20)).pow(new BigNumber(dimension))));
-		player.quark[dimension][level][0].plus(1);
-		player.quark[dimension][level][1].plus(1);
+		player.quark[dimension][level][0] = player.quark[dimension][level][0].plus(1);
+		player.quark[dimension][level][1] = player.quark[dimension][level][1].plus(1);
 		flush.push('quark');
 	},
 	get_quark_max: (dimension, level) => {
-		document.getElementById(`quarkButtonMax${dimension}-${level}`).disabled = true;
+		cooling = true;
 		if (dimension == player.quark.length - 1 && dimension < 1e5) {
 			player.quark.push([new BigNumber(0)]);
 			player.quark_points.push(new BigNumber(0));
@@ -85,13 +85,13 @@ var flush = ['all'], funcs = {
 		}
 		while (player.quark[dimension][0].gt(player.quark[dimension][0].minus((new BigNumber(2)).pow(player.quark[dimension][level][1]).times((new BigNumber(10)).pow(new BigNumber(level))).times((new BigNumber(20)).pow(new BigNumber(dimension)))))) {
 			player.quark[dimension][0] = player.quark[dimension][0].minus((new BigNumber(2)).pow(player.quark[dimension][level][1]).times((new BigNumber(10)).pow(new BigNumber(level))).times((new BigNumber(20)).pow(new BigNumber(dimension))));
-			player.quark[dimension][level][0].plus(1);
-			player.quark[dimension][level][1].plus(1);
+			player.quark[dimension][level][0] = player.quark[dimension][level][0].plus(1);
+			player.quark[dimension][level][1] = player.quark[dimension][level][1].plus(1);
 		}
 		flush.push('quark');
 	},
 	get_quark_max_dimension: dimension => {
-		document.getElementById(`quarkButtonMaxDimension${dimension}`).disabled = true;
+		cooling = true;
 		if (dimension == player.quark.length - 1) {
 			player.quark.push([new BigNumber(0)]);
 			player.quark_points.push(new BigNumber(0));
@@ -103,14 +103,14 @@ var flush = ['all'], funcs = {
 					player.quark_points.push(new BigNumber(0));
 				}
 				player.quark[dimension][0] = player.quark[dimension][0].minus((new BigNumber(2)).pow(player.quark[dimension][i][1]).times((new BigNumber(10)).pow(new BigNumber(i))).times((new BigNumber(20)).pow(new BigNumber(dimension))));
-				player.quark[dimension][i][0].plus(1);
-				player.quark[dimension][i][1].plus(1);
+				player.quark[dimension][level][0] = player.quark[dimension][i][0].plus(1);
+				player.quark[dimension][level][1] = player.quark[dimension][i][1].plus(1);
 			}
 		}
 		flush.push('quark');
 	},
 	get_quark_max_all: () => {
-		document.getElementById("quarkButtonMaxAll").disabled = true;
+		cooling = true;
 		for (let i = 0; i < player.quark.length; i++) {
 			for (let j = 1; j < player.quark[i].length; j++) {
 				while (player.quark[i][0].gt(player.quark[i][0].minus((new BigNumber(2)).pow(player.quark[i][j][1]).times((new BigNumber(10)).pow(new BigNumber(j))).times((new BigNumber(20)).pow(new BigNumber(i)))))) {
@@ -123,15 +123,15 @@ var flush = ['all'], funcs = {
 						player.quark_points.push(new BigNumber(0));
 					}
 					player.quark[i][0] = player.quark[i][0].minus((new BigNumber(2)).pow(player.quark[i][j][1]).times((new BigNumber(10)).pow(new BigNumber(j))).times((new BigNumber(20)).pow(new BigNumber(i))));
-					player.quark[i][j][0].plus(1);
-					player.quark[i][j][1].plus(1);
+					player.quark[i][j][0] = player.quark[i][j][0].plus(1);
+					player.quark[i][j][1] = player.quark[i][j][1].plus(1);
 				}
 			}
 		}
 		flush.push('quark');
 	},
 	convert_quark: dimension => {
-		document.getElementById(`convertQuarkButton${dimension}`).disabled = true;
+		cooling = true;
 		if (dimension == player.quark.length - 1 && dimension < 1e5) {
 			player.quark.push([new BigNumber(0)]);
 			player.quark_points.push(new BigNumber(0));
@@ -143,19 +143,13 @@ var flush = ['all'], funcs = {
 		player.quark[dimension] = [new BigNumber(0)];
 		player.unlock_dimension = true;
 		flush.push('quark');
+	},
+	pause: () => {
+		paused = !paused;
+		cooling = true;
+		flush.push('all');
 	}
-}, achievements = undefined, player = {};
-function mainloop() {
-	document.getElementById("hadAchievements").innerHTML = "加载中，请稍后...";
-	while (true) {
-		try {
-			BigNumber;
-			break;
-		}
-		catch (e) {
-			sleep(100);
-		}
-	}
+}, achievements = undefined, player = {}, mainloop = () => {
 	document.getElementById("hadAchievements").style.display = "none";
 	achievements = {
 		first_quark: {
@@ -185,22 +179,22 @@ function mainloop() {
 		},
 		quark_1e10: {
 			title: "好多夸克！",
-			desc: `获得 ${funcs.TeXstr(1e10)} 夸克。`,
+			desc: `获得 1e10 夸克。`,
 			check: () => player.quark[0][0].gt(new BigNumber(1e10))
 		},
 		quark_1e15: {
 			title: "更多夸克！",
-			desc: `获得 ${funcs.TeXstr(1e15)} 夸克。`,
+			desc: `获得 1e15 夸克。`,
 			check: () => player.quark[0][0].gt(new BigNumber(1e15))
 		},
 		quark_1e20: {
 			title: "超多夸克！",
-			desc: `获得 ${funcs.TeXstr(1e20)} 夸克。`,
+			desc: `获得 1e20 夸克。`,
 			check: () => player.quark[0][0].gt(new BigNumber(1e20))
 		},
 		quark_1e25: {
 			title: "这是什么？",
-			desc: `获得 ${funcs.TeXstr(1e25)} 夸克。`,
+			desc: `获得 1e25 夸克。`,
 			check: () => player.quark[0][0].gt(new BigNumber(1e25))
 		},
 		quark_dimension_1: {
@@ -259,11 +253,21 @@ function mainloop() {
 			check: () => player.quark.length > 10 && player.quark[10][0].gt(new BigNumber(0))
 		}
 	};
-	if (localStorage.game_quarks === undefined) {
+	if (localStorage.game_quarks_snapshot === undefined) {
 		funcs.do_hard_reset();
 	}
 	else {
-		player = JSON.parse(atob(localStorage.game_quarks));
+		player = JSON.parse(atob(localStorage.game_quarks_snapshot));
+		for (let i = 0; i < player.quark.length; i++) {
+			player.quark[i][0] = new BigNumber(player.quark[i][0]);
+			for (let j = 1; j < player.quark[i].length; j++) {
+				player.quark[i][j][0] = new BigNumber(player.quark[i][j][0]);
+				player.quark[i][j][1] = new BigNumber(player.quark[i][j][1]);
+			}
+		}
+		for (let i = 0; i < player.quark_points.length; i++) {
+			player.quark_points[i] = new BigNumber(player.quark_points[i]);
+		}
 	}
 	setInterval(() => {
 		while (flush.length > 0) {
@@ -290,8 +294,12 @@ function mainloop() {
 				case 'quark': {
 					let str = `
 						<button onclick='funcs.hard_reset()'>硬重置</button>
-						<button onclick='funcs.get_quark_max_all()' id='quarkButtonMaxAll'>最大化所有夸克获取器</button>
+						<button onclick='funcs.pause()'>${paused ? "继续" : "暂停"}</button>
+						<button onclick='funcs.get_quark_max_all()' id='quarkButtonMaxAll' ${paused ? "disabled" : ""}>最大化所有夸克获取器</button>
 					`;
+					if (paused) {
+						str += `<p>您已暂停游戏。点击上面的“继续”按钮结束暂停。</p>`;
+					}
 					if (player.unlock_dimension) {
 						str += "<p>";
 						for (let i = 0; i < player.quark.length; i++) {
@@ -307,21 +315,21 @@ function mainloop() {
 							<div id='quarkDimensionDiv${i}' class='${document.getElementById("quarkDimensionDiv" + i) === null && i == 0 || document.getElementById("quarkDimensionDiv" + i) !== null && document.getElementById("quarkDimensionDiv" + i).className === "shown" ? "shown" : "hidden"}'>
 								<h2>你${player.unlock_dimension ? `在维度 ${i} ` : ""}有 ${funcs.TeXstr(player.quark[i][0])} 夸克。</h2>
 								<p>
-									${i == 0 ? "<button onclick='funcs.get_quark(" + i + ", 0)' id='quarkButton" + i + "-0'>获取一个</button>" : ""}
-									<button onclick="funcs.get_quark_max_dimension(${i})" id="quarkButtonMaxDimension${i}">最大化这个维度的所有夸克获取器</button>
+									${i == 0 ? "<button onclick='funcs.get_quark(" + i + ", 0)' id='quarkButton" + i + "-0'" + (cooling ? "disabled" : "") + ">获取一个</button>" : ""}
+									<button onclick="funcs.get_quark_max_dimension(${i})" id="quarkButtonMaxDimension${i}" ${cooling ? "disabled" : ""}>最大化这个维度的所有夸克获取器</button>
 									${player.unlock_dimension ? `
 										<button
 											onclick="funcs.convert_quark(${i})"
 											id="convertQuarkButton${i}"
-											${player.quark[i][0].idiv((new BigNumber(10)).pow(((new BigNumber(i)).plus(3)).times(10))) < 1 ? "disabled" : ""}
+											${cooling || player.quark[i][0].idiv((new BigNumber(10)).pow(((new BigNumber(i)).plus(3)).times(10))) < 1 ? "disabled" : ""}
 										>
 											清空这一维度并转换出下一维度 ${funcs.TeXstr(player.quark[i][0].idiv((new BigNumber(10)).pow(((new BigNumber(i)).plus(3)).times(10))))} 夸克
 										</button>
-									` : (player.quark[0][0].ge(new BigNumber(1e25)) ? `
+									` : (player.quark[0][0].gte(new BigNumber(1e25)) ? `
 										<button
 											onclick="funcs.convert_quark(${i})"
 											id="convertQuarkButton${i}"
-											${player.quark[0][0].ge(new BigNumber(1e30)) ? "" : "disabled"}
+											${cooling || player.quark[0][0].lt(new BigNumber(1e30)) ? "disabled" : ""}
 										>达到 1e30 夸克后解锁</button>
 									` : "")}
 								</p>
@@ -339,25 +347,31 @@ function mainloop() {
 									</tr>
 						`;
 						for (let j = 1; j < player.quark[i].length; j++) {
-							str += `
+							if (cooling || (new BigNumber(2)).pow(player.quark[i][j][1]).times((new BigNumber(10)).pow(j)).times((new BigNumber(20)).pow(i)).gt(player.quark[i][0])) {
+								str += `
 									<tr>
 										<td>#${funcs.TeXstr(j)}</td>
 										<td>${funcs.TeXstr(player.quark[i][j][0])}</td>
 										<td>${funcs.TeXstr(player.quark[i][j][1])}</td>
-										<td><button
-											onclick="funcs.get_quark(${i}, ${j})"
-											id="quarkButton${i}-${j}"
-											${(new BigNumber(2)).pow(player.quark[i][j][1]).times((new BigNumber(10)).pow(j)).times((new BigNumber(20)).pow(i)).ge(player.quark[i][0]) ? "" : "disabled"}
-										>
+										<td id="quarkButton${i}-${j}" class="disabledButtonInTable">
 											花费 ${funcs.TeXstr((new BigNumber(2)).pow(player.quark[i][j][1]).times((new BigNumber(10)).pow(j)).times((new BigNumber(20)).pow(i)))} 夸克获得一个
-										</button></td>
-										<td><button
-											onclick="funcs.get_quark_max(${i}, ${j})"
-											id="quarkButtonMax${i}-${j}"
-											${(new BigNumber(2)).pow(player.quark[i][j][1]).times((new BigNumber(10)).pow(j)).times((new BigNumber(20)).pow(i)).ge(player.quark[i][0]) ? "" : "disabled"}
-										>获取最大</button></td>
+										</td>
+										<td id="quarkButtonMax${i}-${j}" class="disabledButtonInTable">获取最大</td>
 									</tr>
-							`;
+								`;
+							} else {
+								str += `
+									<tr>
+										<td>#${funcs.TeXstr(j)}</td>
+										<td>${funcs.TeXstr(player.quark[i][j][0])}</td>
+										<td>${funcs.TeXstr(player.quark[i][j][1])}</td>
+										<td onclick="funcs.get_quark(${i}, ${j})" id="quarkButton${i}-${j}" class="buttonInTable">
+											花费 ${funcs.TeXstr((new BigNumber(2)).pow(player.quark[i][j][1]).times((new BigNumber(10)).pow(j)).times((new BigNumber(20)).pow(i)))} 夸克获得一个
+										</td>
+										<td onclick="funcs.get_quark_max(${i}, ${j})" id="quarkButtonMax${i}-${j}" class="buttonInTable">获取最大</td>
+									</tr>
+								`;
+							}
 						}
 						str += `
 								</table>
@@ -371,9 +385,15 @@ function mainloop() {
 					break;
 			}
 			flush.shift();
+			if (!paused && cooling) {
+				cooling = false;
+			}
 		}
 	}, 50);
 	setInterval(() => {
+		if (paused) {
+			return;
+		}
 		for (let i = 0; i < player.quark.length; i++) {
 			if (player.quark[i].length > 1 && player.quark[i][1][0].gt(new BigNumber(0))) {
 				while (player.quark_points.length < i + 2) {

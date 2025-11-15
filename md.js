@@ -80,7 +80,7 @@ let mdtohtml = (md) => {
 		}
 		html += `<p>${line}</p>`;
 	});
-	return html.replace(/<p><\/p>/igm, "");
+	return html.replace(/<p>\s*<\/p>/igm, "");
 }
 let createMdEditor = (id, lang) => {
 	if (typeof lang === 'string' && ['zh', 'zh-cn'].find(x => x == lang.toLowerCase()) !== undefined) {
@@ -118,7 +118,7 @@ let createMdEditor = (id, lang) => {
 			}</p>
 			<p>${lang == "zh-cn" ? "未来将会支持的功能有：" : "Future supported features include:"}</p>
 			<ul>
-				<li>${lang == "zh-cn" ? "支持更多 Markdown 语法" : "Support for more Markdown syntax"}</li>
+				<li>${lang == "zh-cn" ? "支持更多 Markdown 语法（以下有一个正在编写的缺少国际化的表格，展示目前支持哪些语法）" : "Support for more Markdown syntax (Below is a table currently being developed that lacks i18n, showing which syntaxes are currently supported)"}</li>
 				<li>${lang == "zh-cn" ? "同步滚动（可自设是否开启）" : "Synchronous scrolling (can be customized to enable or disable)"}</li>
 				<li>${lang == "zh-cn" ? "右边显示未渲染的 HTML 源代码（可自设是否开启）" : "The right side displays the unrendered HTML source code (can be toggled on or off)"}</li>
 				<li>${lang == "zh-cn" ? "用于辅助的按钮行：" : "Auxiliary button row:"}
@@ -131,21 +131,178 @@ let createMdEditor = (id, lang) => {
 				<li>${lang == "zh-cn" ? "自定义编辑器的大小、全屏编辑器" : "Custom Editor Size, Full-Screen Editor"}</li>
 				<li>${lang == "zh-cn" ? "让编辑器进入你的网站（如果你愿意的话）（暂未编写文档）" : "Let the editor access your website (if you choose to) (Documentation not yet written)"}</li>
 			</ul>
+			<h3>Markdown 语法一览表（未完/缺少 i18n）</h3>
+			<p>This form is incomplete and lacks i18n.</p>
+			<p>不支持表示暂不支持。如果是可选项那么支持后会添加一个按钮确认是否启用。“是否默认启用”这一栏仅可选项有意义。</p>
+			<table>
+				<tr>
+					<th>Markdown 语法源码</th>
+					<th>HTML 源码</th>
+					<th>HTML 预览</th>
+					<th>是否支持</th>
+					<th>是否为可选项</th>
+					<th>（支持后）是否默认启用</th>
+				</tr>
+				<tr>
+					<td><pre><code># H1-content
+## H2-content
+### H3-content
+#### H4-content
+##### H5-content
+###### H6-content</code></pre></td>
+					<td rowspan="2"><pre><code>&lt;h1&gt;H1-content&lt;/h1&gt;
+&lt;h2&gt;H2-content&lt;/h2&gt;
+&lt;h3&gt;H3-content&lt;/h3&gt;
+&lt;h4&gt;H4-content&lt;/h4&gt;
+&lt;h5&gt;H5-content&lt;/h5&gt;
+&lt;h6&gt;H6-content&lt;/h6&gt;</code></pre></td>
+					<td rowspan="2">
+						<h1>H1-content</h1>
+						<h2>H2-content</h2>
+						<h3>H3-content</h3>
+						<h4>H4-content</h4>
+						<h5>H5-content</h5>
+						<h6>H6-content</h6>
+					</td>
+					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="mdeditor-about-supporting-unsupported"></td>
+					<td class="mdeditor-about-supporting-supported"></td>
+				</tr>
+				<tr>
+					<td><pre><code>#H1-content
+##H2-content
+###H3-content
+####H4-content
+#####H5-content
+######H6-content</code></pre></td>
+					<td class="mdeditor-about-supporting-unsupported"></td>
+					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="mdeditor-about-supporting-unsupported"></td>
+				</tr>
+				<tr>
+					<td><pre><code>text-content1
+
+text-content2</code></pre></td>
+					<td><pre><code>&lt;p&gt;text-content1&lt;/p&gt;
+&lt;p&gt;text-content2&lt;/p&gt;</code></pre></code>
+					<td>
+						<p>text-content1</p>
+						<p>text-content2</p>
+					</td>
+					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="mdeditor-about-supporting-unsupported"></td>
+					<td class="mdeditor-about-supporting-supported"></td>
+				</tr>
+				<tr>
+					<td><pre><code>ABC  `+`
+abc</code></pre>（换行前空两格）</td>
+					<td rowspan="3"><pre><code>&lt;p&gt;ABC&lt;br&gt;abc&lt;/p&gt;</code></pre></td>
+					<td rowspan="3"><p>ABC<br>abc</p></td>
+					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="mdeditor-about-supporting-unsupported"></td>
+					<td class="mdeditor-about-supporting-supported"></td>
+				</tr>
+				<tr>
+					<td><pre><code>ABC
+abc</code></pre><br>（换行前无空格）</td>
+					<td class="mdeditor-about-supporting-unsupported"></td>
+					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="mdeditor-about-supporting-unsupported"></td>
+				</tr>
+				<tr>
+					<td><pre><code>ABC\
+abc</code></pre><br>（换行前无空格）</td>
+					<td class="mdeditor-about-supporting-unsupported"></td>
+					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="mdeditor-about-supporting-unsupported"></td>
+				</tr>
+				<tr>
+					<td><pre><code>text **text**</code></pre>
+					<td rowspan="2"><pre><code>&lt;p&gt;text &lt;strong&gt;text&lt;/strong&gt;&lt;/p&gt;</code></pre></td>
+					<td rowspan="2"><p>text <strong>text</strong></p></td>
+					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="mdeditor-about-supporting-unsupported"></td>
+					<td class="mdeditor-about-supporting-supported"></td>
+				</tr>
+				<tr>
+					<td><pre><code>text __text__</code></pre>
+					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="mdeditor-about-supporting-unsupported"></td>
+					<td class="mdeditor-about-supporting-supported"></td>
+				</tr>
+				<tr>
+					<td><pre><code>text**text**</code></pre>
+					<td rowspan="2"><pre><code>&lt;p&gt;text&lt;strong&gt;text&lt;/strong&gt;&lt;/p&gt;</code></pre></td>
+					<td rowspan="2"><p>text<strong>text</strong></p></td>
+					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="mdeditor-about-supporting-unsupported"></td>
+					<td class="mdeditor-about-supporting-supported"></td>
+				</tr>
+				<tr>
+					<td><pre><code>text__text__</code></pre>
+					<td class="mdeditor-about-supporting-unsupported"></td>
+					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="mdeditor-about-supporting-unsupported"></td>
+				</tr>
+				<tr>
+					<td><pre><code>text *text*</code></pre>
+					<td rowspan="2"><pre><code>&lt;p&gt;text &lt;em&gt;text&lt;/em&gt;&lt;/p&gt;</code></pre></td>
+					<td rowspan="2"><p>text <em>text</em></p></td>
+					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="mdeditor-about-supporting-unsupported"></td>
+					<td class="mdeditor-about-supporting-supported"></td>
+				</tr>
+				<tr>
+					<td><pre><code>text _text_</code></pre>
+					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="mdeditor-about-supporting-unsupported"></td>
+					<td class="mdeditor-about-supporting-supported"></td>
+				</tr>
+				<tr>
+					<td><pre><code>text*text*</code></pre>
+					<td rowspan="2"><pre><code>&lt;p&gt;text&lt;em&gt;text&lt;/em&gt;&lt;/p&gt;</code></pre></td>
+					<td rowspan="2"><p>text<em>text</em></p></td>
+					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="mdeditor-about-supporting-unsupported"></td>
+					<td class="mdeditor-about-supporting-supported"></td>
+				</tr>
+				<tr>
+					<td><pre><code>text_text_</code></pre>
+					<td class="mdeditor-about-supporting-unsupported"></td>
+					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="mdeditor-about-supporting-unsupported"></td>
+				</tr>
+				<tr>
+					<td><pre><code>&gt; text
+&gt;
+&gt; **bold**
+&gt;
+&gt; &gt; inner</code></pre></td>
+					<td><pre><code>&lt;blockquote&gt;
+	&lt;p&gt;text&lt;/p&gt;
+	&lt;p&gt;&lt;strong&gt;bold&lt;/strong&gt;&lt;/p&gt;
+	&lt;blockquote&gt;&lt;p&gt;inner&lt;/p&gt;&lt;/blockquote&gt;
+&lt;/blockquote&gt;</pre></code></td>
+					<td>
+						<blockquote>
+							<p>text</p>
+							<p><strong>bold</strong></p>
+							<blockquote><p>inner</p></blockquote>
+						</blockquote>
+					</td>
+					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="mdeditor-about-supporting-unsupported"></td>
+					<td class="mdeditor-about-supporting-supported"></td>
+			</table>
 		</div>
 	`;
+	Array.from(curMdEditor.getElementsByClassName('mdeditor-about-supporting-supported')).forEach(x => x.innerHTML = '<i class="fa-solid fa-check"></i> 是');
+	Array.from(curMdEditor.getElementsByClassName('mdeditor-about-supporting-unsupported')).forEach(x => x.innerHTML = '<i class="fa-solid fa-xmark"></i> 否');
 	document.body.appendChild(curMdEditor);
 	window.addEventListener('load', () => document.getElementById(`mdeditor-input${id}`).addEventListener("input", () => document.getElementById(`mdeditor-output${id}`).innerHTML = mdtohtml(document.getElementById(`mdeditor-input${id}`).value)));
 }
 let mdEditorStyle = document.createElement('style');
 mdEditorStyle.innerHTML = `
-	.mdeditor-table {
-		border-style: solid;
-	}
-
-	.mdeditor-table td {
-		border-style: solid;
-	}
-
 	.mdeditor-input {
 		resize: none;
 		height: 300px;
@@ -191,6 +348,18 @@ mdEditorStyle.innerHTML = `
 		position: absolute;
 		left: 90%;
 		top: 10%;
+	}
+
+	.mdeditor-about-supporting-supported {
+		text-align: center;
+		color: white;
+		background-color: green;
+	}
+
+	.mdeditor-about-supporting-unsupported {
+		text-align: center;
+		color: white;
+		background-color: red;
 	}
 `;
 document.head.appendChild(mdEditorStyle);

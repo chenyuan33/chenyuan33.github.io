@@ -87,5 +87,10 @@ blockquote {
 	background-color: lightgray;
 	display: inline-block;
 	padding: 10px;
+	border: 5px solid;
 	border-radius: 10px;
+}
+
+table, th, td {
+	border: solid black;
 }
