@@ -19,7 +19,20 @@ var flush = ['all'], paused = false, cooling = true, funcs = {
 		});
 		document.getElementById(shown).className = "shown";
 	},
-	TeXstr: num => num.toString(),
+	TeXstr: num => {
+		let ret = "";
+		if (num.s == -1) {
+			ret += "-";
+			num = num.times(new BigNumber(-1));
+		}
+		if (num.lt(new BigNumber(1000))) {
+			ret += num.toString();
+		} else {
+			let exp = num.e;
+			ret += num.div(new BigNumber(10).pow(new BigNumber(num.e))).precision(3).toString() + "e" + funcs.TeXstr(new BigNumber(num.e));
+		}
+		return ret;
+	},
 	do_hard_reset: () => {
 		player = {
 			achievements: {
@@ -75,18 +88,8 @@ var flush = ['all'], paused = false, cooling = true, funcs = {
 		flush.push('quark');
 	},
 	get_quark_max: (dimension, level) => {
-		cooling = true;
-		if (dimension == player.quark.length - 1 && dimension < 1e5) {
-			player.quark.push([new BigNumber(0)]);
-			player.quark_points.push(new BigNumber(0));
-		}
-		if (level == player.quark[dimension].length - 1 && level < 1e5) {
-			player.quark[dimension].push([new BigNumber(0), new BigNumber(0)]);
-		}
-		while (player.quark[dimension][0].gt(player.quark[dimension][0].minus((new BigNumber(2)).pow(player.quark[dimension][level][1]).times((new BigNumber(10)).pow(new BigNumber(level))).times((new BigNumber(20)).pow(new BigNumber(dimension)))))) {
-			player.quark[dimension][0] = player.quark[dimension][0].minus((new BigNumber(2)).pow(player.quark[dimension][level][1]).times((new BigNumber(10)).pow(new BigNumber(level))).times((new BigNumber(20)).pow(new BigNumber(dimension))));
-			player.quark[dimension][level][0] = player.quark[dimension][level][0].plus(1);
-			player.quark[dimension][level][1] = player.quark[dimension][level][1].plus(1);
+		while (player.quark[dimension][0].gte(player.quark[dimension][0].minus((new BigNumber(2)).pow(player.quark[dimension][level][1]).times((new BigNumber(10)).pow(new BigNumber(level))).times((new BigNumber(20)).pow(new BigNumber(dimension)))))) {
+			funcs.get_quark(dimension, level);
 		}
 		flush.push('quark');
 	},
@@ -350,7 +353,7 @@ var flush = ['all'], paused = false, cooling = true, funcs = {
 							if (cooling || (new BigNumber(2)).pow(player.quark[i][j][1]).times((new BigNumber(10)).pow(j)).times((new BigNumber(20)).pow(i)).gt(player.quark[i][0])) {
 								str += `
 									<tr>
-										<td>#${funcs.TeXstr(j)}</td>
+										<td>#${funcs.TeXstr(new BigNumber(j))}</td>
 										<td>${funcs.TeXstr(player.quark[i][j][0])}</td>
 										<td>${funcs.TeXstr(player.quark[i][j][1])}</td>
 										<td id="quarkButton${i}-${j}" class="disabledButtonInTable">
@@ -362,7 +365,7 @@ var flush = ['all'], paused = false, cooling = true, funcs = {
 							} else {
 								str += `
 									<tr>
-										<td>#${funcs.TeXstr(j)}</td>
+										<td>#${funcs.TeXstr(new BigNumber(j))}</td>
 										<td>${funcs.TeXstr(player.quark[i][j][0])}</td>
 										<td>${funcs.TeXstr(player.quark[i][j][1])}</td>
 										<td onclick="funcs.get_quark(${i}, ${j})" id="quarkButton${i}-${j}" class="buttonInTable">
