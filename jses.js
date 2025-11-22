@@ -6,28 +6,11 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = (
 	fontawesome.href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css";
 	fontawesome.rel = "stylesheet";
 	document.head.appendChild(fontawesome);
-	let favicon = document.createElement("link");//<link rel="icon" type="image/png" href="path/to/favicon.png">
+	let favicon = document.createElement("link");
 	favicon.href = "/favicon.png";
 	favicon.rel = "icon";
 	favicon.type = "image/png";
 	document.head.appendChild(favicon);
-	let giscus = document.createElement("script");
-	giscus.src = "https://giscus.app/client.js";
-	giscus.dataset.repo = "chenyuan33/chenyuan33.github.io";
-	giscus.dataset.repoId = "R_kgDOLpttzQ";
-	giscus.dataset.category = "Announcements";
-	giscus.dataset.categoryId = "DIC_kwDOLpttzc4CgluD";
-	giscus.dataset.mapping = "pathname";
-	giscus.dataset.strict = "1";
-	giscus.dataset.reactionsEnabled = "1";
-	giscus.dataset.emitMetadata = "0";
-	giscus.dataset.inputPosition = "top";
-	giscus.dataset.theme = "preferred_color_scheme";
-	giscus.dataset.lang = "en";
-	giscus.dataset.loading = "lazy";
-	giscus.crossorigin = "anonymous";
-	giscus.async = true;
-	document.body.appendChild(giscus);
 	document.body.innerHTML = `
 		<div id="sidebar"><div id="sidebarContent">
 			<h3>
@@ -77,7 +60,7 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = (
 				<span class="sidebarTitle" id="currentDateTime">${document.URL.split("/")[3] == "en-us" ? "Loading" : "加载中"}...</span>
 			</p>
 		</div></div>
-		<div id="content">${document.body.innerHTML}</div>
+		${document.body.innerHTML}
 	`;
 	setInterval(() => {
 		const now = new Date();
@@ -91,20 +74,35 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = (
 	}, 50);
 	switchLight();
 	switchLight();
-	console.log(`Welcome to chenyuan33.github.io!
-© Copyright 2024 @chenyuan33, All rights reserved.`);
+	let giscus = document.createElement("script");
+	giscus.src = "https://giscus.app/client.js";
+	giscus.dataset.repo = "chenyuan33/chenyuan33.github.io";
+	giscus.dataset.repoId = "R_kgDOLpttzQ";
+	giscus.dataset.category = "Announcements";
+	giscus.dataset.categoryId = "DIC_kwDOLpttzc4CgluD";
+	giscus.dataset.mapping = "pathname";
+	giscus.dataset.strict = "1";
+	giscus.dataset.reactionsEnabled = "1";
+	giscus.dataset.emitMetadata = "0";
+	giscus.dataset.inputPosition = "top";
+	giscus.dataset.theme = "preferred_color_scheme";
+	giscus.dataset.lang = "en";
+	giscus.dataset.loading = "lazy";
+	giscus.crossorigin = "anonymous";
+	giscus.async = true;
+	document.body.appendChild(giscus);
 }, switchLight = () => {
 	if (localStorage.getItem("lightMode") === "dark") {
 		localStorage.lightMode = "light";
 		document.getElementById("lightSwitchIcon").classList = "fa-solid fa-sun";
-		document.getElementById("content").style.backgroundColor = "white";
-		document.getElementById("content").style.color = "black";
+		document.body.style.backgroundColor = "white";
+		document.body.style.color = "black";
 	}
 	else {
 		localStorage.lightMode = "dark";
 		document.getElementById("lightSwitchIcon").classList = "fa-solid fa-moon";
-		document.getElementById("content").style.backgroundColor = "black";
-		document.getElementById("content").style.color = "white";
+		document.body.style.backgroundColor = "black";
+		document.body.style.color = "white";
 	}
 };
 function sha256(s) {
