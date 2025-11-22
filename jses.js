@@ -104,6 +104,11 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = (
 		document.body.style.backgroundColor = "black";
 		document.body.style.color = "white";
 	}
+}, randomShuffle = arr => {
+	for (let i = arr.length - 1; i > 0; i--) {
+		let j = Math.floor(Math.random() * (i + 1));
+		[arr[i], arr[j]] = [arr[j], arr[i]];
+	}
 };
 function sha256(s) {
 	const chrsz = 8

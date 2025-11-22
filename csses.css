@@ -9,7 +9,7 @@
 	overflow-x: hidden;
 	overflow-y: auto;
 	white-space: nowrap;
-	transition: width 1s;
+	transition: width 0.5s;
 }
 
 #sidebar:hover {
