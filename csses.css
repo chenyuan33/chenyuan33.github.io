@@ -8,6 +8,8 @@
 	z-index: 2;
 	overflow-x: hidden;
 	overflow-y: auto;
+	white-space: nowrap;
+	transition: width 1s;
 }
 
 #sidebar:hover {
