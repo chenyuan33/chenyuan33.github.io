@@ -64,7 +64,7 @@ a {
 	text-decoration: none;
 }
 
-a:hover {
+a:hover, #sidebar a:hover {
 	color: red;
 	text-decoration: underline;
 }
