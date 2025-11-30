@@ -11,8 +11,13 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = (
 	favicon.rel = "icon";
 	favicon.type = "image/png";
 	document.head.appendChild(favicon);
-	document.body.innerHTML = `
-		<div id="sidebar"><div id="sidebarContent">
+	let volatileStyles = document.createElement('style');
+	volatileStyles.id = 'volatileStyles';
+	document.head.appendChild(volatileStyles);
+	let sidebar = document.createElement('div');
+	sidebar.id = 'sidebar';
+	sidebar.innerHTML = `
+		<div id="sidebarContent">
 			<h3>
 				<i class="fa-solid fa-location-dot"></i>
 				<span class="sidebarTitle">${document.URL.split("/")[3] == "en-us" ? "Navigation" : "导航"}</span>
@@ -59,9 +64,9 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = (
 				<i class="fa-solid fa-clock"></i>
 				<span class="sidebarTitle" id="currentDateTime">${document.URL.split("/")[3] == "en-us" ? "Loading" : "加载中"}...</span>
 			</p>
-		</div></div>
-		${document.body.innerHTML}
+		</div>
 	`;
+	document.body.firstChild.before(sidebar);
 	setInterval(() => {
 		const now = new Date();
 		const year = now.getFullYear();
@@ -95,14 +100,40 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = (
 	if (localStorage.getItem("lightMode") === "dark") {
 		localStorage.lightMode = "light";
 		document.getElementById("lightSwitchIcon").classList = "fa-solid fa-sun";
-		document.body.style.backgroundColor = "white";
-		document.body.style.color = "black";
+		volatileStyles.innerHTML = `
+			body, textarea {
+				color: black;
+				background-color: white;
+			}
+
+			blockquote {
+				background-color: #f9f9f9;
+				border-left: 5px solid #ccc;
+			}
+
+			a, .buttonInTable {
+				color: blue;
+			}
+		`;
 	}
 	else {
 		localStorage.lightMode = "dark";
 		document.getElementById("lightSwitchIcon").classList = "fa-solid fa-moon";
-		document.body.style.backgroundColor = "black";
-		document.body.style.color = "white";
+		volatileStyles.innerHTML = `
+			body, textarea {
+				color: white;
+				background-color: black;
+			}
+
+			blockquote {
+				background-color: gray;
+				border-left: 5px solid #ccc;
+			}
+
+			a, .buttonInTable {
+				color: cyan;
+			}
+		`;
 	}
 }, randomShuffle = arr => {
 	for (let i = arr.length - 1; i > 0; i--) {

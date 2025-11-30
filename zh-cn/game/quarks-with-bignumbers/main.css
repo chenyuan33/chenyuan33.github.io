@@ -9,22 +9,6 @@
 	padding: 10px;
 }
 
-.buttonInTable {
-	color: blue;
-}
-
-.buttonInTable:hover {
-	cursor: pointer;
-}
-
-.disabledButtonInTable {
-	color: darkgray;
-}
-
-.disabledButtonInTable:hover {
-	cursor: not-allowed;
-}
-
 .achievement-getted {
 	border-style: solid;
 	margin: 10px;
