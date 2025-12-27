@@ -8,7 +8,12 @@ document.writeln(`
 	<style id="volatileStyles"></style>
 `);
 if (localStorage.getItem('lang') === null) {
-	localStorage.lang = 'en-us';
+	if (navigator.language == "zh" || navigator.language == "zh-CN") {
+		localStorage.lang = 'zh-cn';
+	}
+	else {
+		localStorage.lang = 'en-us';
+	}
 }
 let i18n = undefined, bothBasicAndI18nAreLoaded = 0;
 let loading = () => {
