@@ -104,3 +104,15 @@ table, th, td {
 .disabledButtonInTable:hover {
 	cursor: not-allowed;
 }
+
+.supported {
+	text-align: center;
+	color: white;
+	background-color: green;
+}
+
+.unsupported {
+	text-align: center;
+	color: white;
+	background-color: red;
+}

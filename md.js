@@ -164,9 +164,9 @@ let createMdEditor = (id, lang) => {
 						<h5>H5-content</h5>
 						<h6>H6-content</h6>
 					</td>
-					<td class="mdeditor-about-supporting-supported"></td>
-					<td class="mdeditor-about-supporting-unsupported"></td>
-					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="supported"></td>
+					<td class="unsupported"></td>
+					<td class="supported"></td>
 				</tr>
 				<tr>
 					<td><pre><code>#H1-content
@@ -175,9 +175,9 @@ let createMdEditor = (id, lang) => {
 ####H4-content
 #####H5-content
 ######H6-content</code></pre></td>
-					<td class="mdeditor-about-supporting-unsupported"></td>
-					<td class="mdeditor-about-supporting-supported"></td>
-					<td class="mdeditor-about-supporting-unsupported"></td>
+					<td class="unsupported"></td>
+					<td class="supported"></td>
+					<td class="unsupported"></td>
 				</tr>
 				<tr>
 					<td><pre><code>text-content1
@@ -189,88 +189,88 @@ text-content2</code></pre></td>
 						<p>text-content1</p>
 						<p>text-content2</p>
 					</td>
-					<td class="mdeditor-about-supporting-supported"></td>
-					<td class="mdeditor-about-supporting-unsupported"></td>
-					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="supported"></td>
+					<td class="unsupported"></td>
+					<td class="supported"></td>
 				</tr>
 				<tr>
 					<td><pre><code>ABC  `+`
 abc</code></pre>（换行前空两格）</td>
 					<td rowspan="3"><pre><code>&lt;p&gt;ABC&lt;br&gt;abc&lt;/p&gt;</code></pre></td>
 					<td rowspan="3"><p>ABC<br>abc</p></td>
-					<td class="mdeditor-about-supporting-supported"></td>
-					<td class="mdeditor-about-supporting-unsupported"></td>
-					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="supported"></td>
+					<td class="unsupported"></td>
+					<td class="supported"></td>
 				</tr>
 				<tr>
 					<td><pre><code>ABC
 abc</code></pre><br>（换行前无空格）</td>
-					<td class="mdeditor-about-supporting-unsupported"></td>
-					<td class="mdeditor-about-supporting-supported"></td>
-					<td class="mdeditor-about-supporting-unsupported"></td>
+					<td class="unsupported"></td>
+					<td class="supported"></td>
+					<td class="unsupported"></td>
 				</tr>
 				<tr>
 					<td><pre><code>ABC\\
 abc</code></pre><br>（换行前无空格）</td>
-					<td class="mdeditor-about-supporting-unsupported"></td>
-					<td class="mdeditor-about-supporting-supported"></td>
-					<td class="mdeditor-about-supporting-unsupported"></td>
+					<td class="unsupported"></td>
+					<td class="supported"></td>
+					<td class="unsupported"></td>
 				</tr>
 				<tr>
 					<td><pre><code>text **text**</code></pre>
 					<td rowspan="2"><pre><code>&lt;p&gt;text &lt;strong&gt;text&lt;/strong&gt;&lt;/p&gt;</code></pre></td>
 					<td rowspan="2"><p>text <strong>text</strong></p></td>
-					<td class="mdeditor-about-supporting-supported"></td>
-					<td class="mdeditor-about-supporting-unsupported"></td>
-					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="supported"></td>
+					<td class="unsupported"></td>
+					<td class="supported"></td>
 				</tr>
 				<tr>
 					<td><pre><code>text __text__</code></pre>
-					<td class="mdeditor-about-supporting-supported"></td>
-					<td class="mdeditor-about-supporting-unsupported"></td>
-					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="supported"></td>
+					<td class="unsupported"></td>
+					<td class="supported"></td>
 				</tr>
 				<tr>
 					<td><pre><code>text**text**</code></pre>
 					<td rowspan="2"><pre><code>&lt;p&gt;text&lt;strong&gt;text&lt;/strong&gt;&lt;/p&gt;</code></pre></td>
 					<td rowspan="2"><p>text<strong>text</strong></p></td>
-					<td class="mdeditor-about-supporting-supported"></td>
-					<td class="mdeditor-about-supporting-unsupported"></td>
-					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="supported"></td>
+					<td class="unsupported"></td>
+					<td class="supported"></td>
 				</tr>
 				<tr>
 					<td><pre><code>text__text__</code></pre>
-					<td class="mdeditor-about-supporting-unsupported"></td>
-					<td class="mdeditor-about-supporting-supported"></td>
-					<td class="mdeditor-about-supporting-unsupported"></td>
+					<td class="unsupported"></td>
+					<td class="supported"></td>
+					<td class="unsupported"></td>
 				</tr>
 				<tr>
 					<td><pre><code>text *text*</code></pre>
 					<td rowspan="2"><pre><code>&lt;p&gt;text &lt;em&gt;text&lt;/em&gt;&lt;/p&gt;</code></pre></td>
 					<td rowspan="2"><p>text <em>text</em></p></td>
-					<td class="mdeditor-about-supporting-supported"></td>
-					<td class="mdeditor-about-supporting-unsupported"></td>
-					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="supported"></td>
+					<td class="unsupported"></td>
+					<td class="supported"></td>
 				</tr>
 				<tr>
 					<td><pre><code>text _text_</code></pre>
-					<td class="mdeditor-about-supporting-supported"></td>
-					<td class="mdeditor-about-supporting-unsupported"></td>
-					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="supported"></td>
+					<td class="unsupported"></td>
+					<td class="supported"></td>
 				</tr>
 				<tr>
 					<td><pre><code>text*text*</code></pre>
 					<td rowspan="2"><pre><code>&lt;p&gt;text&lt;em&gt;text&lt;/em&gt;&lt;/p&gt;</code></pre></td>
 					<td rowspan="2"><p>text<em>text</em></p></td>
-					<td class="mdeditor-about-supporting-supported"></td>
-					<td class="mdeditor-about-supporting-unsupported"></td>
-					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="supported"></td>
+					<td class="unsupported"></td>
+					<td class="supported"></td>
 				</tr>
 				<tr>
 					<td><pre><code>text_text_</code></pre>
-					<td class="mdeditor-about-supporting-unsupported"></td>
-					<td class="mdeditor-about-supporting-supported"></td>
-					<td class="mdeditor-about-supporting-unsupported"></td>
+					<td class="unsupported"></td>
+					<td class="supported"></td>
+					<td class="unsupported"></td>
 				</tr>
 				<tr>
 					<td><pre><code>&gt; text
@@ -290,14 +290,12 @@ abc</code></pre><br>（换行前无空格）</td>
 							<blockquote><p>inner</p></blockquote>
 						</blockquote>
 					</td>
-					<td class="mdeditor-about-supporting-supported"></td>
-					<td class="mdeditor-about-supporting-unsupported"></td>
-					<td class="mdeditor-about-supporting-supported"></td>
+					<td class="supported"></td>
+					<td class="unsupported"></td>
+					<td class="supported"></td>
 			</table>
 		</div>
 	`;
-	Array.from(curMdEditor.getElementsByClassName('mdeditor-about-supporting-supported')).forEach(x => x.innerHTML = '<i class="fa-solid fa-check"></i> 是');
-	Array.from(curMdEditor.getElementsByClassName('mdeditor-about-supporting-unsupported')).forEach(x => x.innerHTML = '<i class="fa-solid fa-xmark"></i> 否');
 	document.body.appendChild(curMdEditor);
 	window.addEventListener('load', () => document.getElementById(`mdeditor-input${id}`).addEventListener("input", () => document.getElementById(`mdeditor-output${id}`).innerHTML = mdtohtml(document.getElementById(`mdeditor-input${id}`).value)));
 }
@@ -348,18 +346,6 @@ mdEditorStyle.innerHTML = `
 		position: absolute;
 		left: 90%;
 		top: 10%;
-	}
-
-	.mdeditor-about-supporting-supported {
-		text-align: center;
-		color: white;
-		background-color: green;
-	}
-
-	.mdeditor-about-supporting-unsupported {
-		text-align: center;
-		color: white;
-		background-color: red;
 	}
 `;
 document.head.appendChild(mdEditorStyle);

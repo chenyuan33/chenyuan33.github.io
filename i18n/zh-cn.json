@@ -1,0 +1,28 @@
+{
+	"langName": "zh-cn",
+	"htmlLangName": "zh-CN",
+	"NameOfEachLang": {
+		"en-us": "English",
+		"zh-cn": "简体中文"
+	},
+	"sidebar": {
+		"navigation": "导航",
+		"mainPage": "主页",
+		"relatedLinks": "友情链接",
+		"changelog": "更新日志",
+		"faqs": "常见问题",
+		"languageChoice": "切换语言",
+		"features": "功能",
+		"toggleTheme": "切换主题",
+		"loading": "加载中"
+	},
+	"siteName": "cy3's site",
+	"supporting": {
+		"yes": "支持",
+		"no": "不支持"
+	},
+	"blogList": {
+		"name": "博客列表",
+		"empty": "暂无。"
+	}
+}

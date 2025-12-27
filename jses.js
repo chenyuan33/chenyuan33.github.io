@@ -96,6 +96,17 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = (
 	giscus.crossorigin = "anonymous";
 	giscus.async = true;
 	document.body.appendChild(giscus);
+	let s = '', u = '';
+	if (document.URL.split("/")[3] == "en-us") {
+		s = 'Supported';
+		u = 'Unsupported';
+	}
+	else {
+		s = '支持';
+		u = '不支持';
+	}
+	Array.from(document.getElementsByClassName('supported')).forEach(x => x.innerHTML = '<i class="fa-solid fa-check"></i> ' + s);
+	Array.from(document.getElementsByClassName('unsupported')).forEach(x => x.innerHTML = '<i class="fa-solid fa-xmark"></i> ' + u);
 }, switchLight = () => {
 	if (localStorage.getItem("lightMode") === "dark") {
 		localStorage.lightMode = "light";

@@ -1,0 +1,28 @@
+{
+	"langName": "en-us",
+	"htmlLangName": "en",
+	"NameOfEachLang": {
+		"en-us": "English",
+		"zh-cn": "简体中文"
+	},
+	"sidebar": {
+		"navigation": "Navigation",
+		"mainPage": "Main Page",
+		"relatedLinks": "Related Links",
+		"changelog": "Changelog",
+		"faqs": "FAQs",
+		"languageChoice": "Languages",
+		"features": "Features",
+		"toggleTheme": "Toggle Theme",
+		"loading": "Loading"
+	},
+	"siteName": "cy3's site",
+	"supporting": {
+		"yes": "Supported",
+		"no": "Unsupported"
+	},
+	"blogList": {
+		"name": "Blog List",
+		"empty": "None at present."
+	}
+}
