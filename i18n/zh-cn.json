@@ -14,12 +14,22 @@
 		"languageChoice": "切换语言",
 		"features": "功能",
 		"toggleTheme": "切换主题",
+		"goBack": "上一页",
 		"loading": "加载中"
 	},
 	"siteName": "cy3's site",
 	"supporting": {
 		"yes": "支持",
 		"no": "不支持"
+	},
+	"notFoundPage": {
+		"title": "404 页面未找到",
+		"tips": "页面走丢了！",
+		"tips2": "如果你认为这是 bug，请<a href=\"https://github.com/chenyuan33/chenyuan33.github.io/issues/new?template=zh_cn_bug_report.md\">报告 bug</a>。",
+		"links": {
+			"mainPage": "前往主页",
+			"goBack": "返回上一页"
+		}
 	},
 	"blogList": {
 		"name": "博客列表",

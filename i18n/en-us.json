@@ -14,12 +14,22 @@
 		"languageChoice": "Languages",
 		"features": "Features",
 		"toggleTheme": "Toggle Theme",
+		"goBack": "Go Back",
 		"loading": "Loading"
 	},
 	"siteName": "cy3's site",
 	"supporting": {
 		"yes": "Supported",
 		"no": "Unsupported"
+	},
+	"notFoundPage": {
+		"title": "404 Page Not Found",
+		"tips": "Page is lost!",
+		"tips2": "If you believe this is a bug, please <a href=\"https://github.com/chenyuan33/chenyuan33.github.io/issues/new?template=en_us_bug_report.md\">report the bug</a>.",
+		"links": {
+			"mainPage": "Go to Main Page",
+			"goBack": "Go Back to Previous Page"
+		}
 	},
 	"blogList": {
 		"name": "Blog List",

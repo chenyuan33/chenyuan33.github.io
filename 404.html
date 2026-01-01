@@ -1,21 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>404 Page Jumper - cy3's site</title>
+	<script src="/helper.js"></script>
+	<title class="wait-for-i18n" data-i18n="notFoundPage.title"></title>
 </head>
 
 <body>
-	<script>
-		if (navigator.language == "zh" || navigator.language == "zh-CN") {
-			location.href = "/zh-cn/404.html";
-		}
-		else {
-			location.href = "/en-us/404.html";
-		}
-	</script>
+	<h1 class="wait-for-i18n" data-i18n="notFoundPage.tips"></h1>
+	<p class="wait-for-i18n" data-i18n="notFoundPage.tips2"></p>
+	<p>
+		<a href="/index.html" class="wait-for-i18n" data-i18n="notFoundPage.links.mainPage"></a><br />
+		<a href="javascript:history.back()" class="wait-for-i18n" data-i18n="notFoundPage.links.goBack"></a>
+	</p>
 </body>
 
 </html>
