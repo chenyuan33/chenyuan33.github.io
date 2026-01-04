@@ -22,17 +22,65 @@
 		"yes": "Supported",
 		"no": "Unsupported"
 	},
+	"tableHead-key-value": "<th>Key</th><th>Value</th>",
 	"notFoundPage": {
 		"title": "404 Page Not Found",
 		"tips": "Page is lost!",
-		"tips2": "If you believe this is a bug, please <a href=\"https://github.com/chenyuan33/chenyuan33.github.io/issues/new?template=en_us_bug_report.md\">report the bug</a>.",
+		"tips2": "If you believe this is a bug, please <a href='https://github.com/chenyuan33/chenyuan33.github.io/issues/new?template=en_us_bug_report.md'>report the bug</a>.",
 		"links": {
 			"mainPage": "Go to Main Page",
 			"goBack": "Go Back to Previous Page"
 		}
 	},
-	"blogList": {
-		"name": "Blog List",
-		"empty": "None at present."
+	"blog": {
+		"list": {
+			"name": "Blog List",
+			"empty": "None at present."
+		}
+	},
+	"tool": {
+		"luoguUserScoreCalc": {
+			"title": "[Repost] Luogu User Score Calculator",
+			"name": "[Repost] <a href='https://www.luogu.com.cn/'>Luogu</a> User Score Calculator",
+			"desc": "Original author: @<a href='https://www.luogu.com/user/1717150'>Aurelia_Veil</a>'s <a href='https://www.luogu.com/paste/c7raykd1'>Cloud Clipboard</a>, reposted with permission. Scores are for reference only. Calculation rules can be found in the original clipboard.",
+			"input": {
+				"title": "Input",
+				"problem": {
+					"title": "Problems Count"
+				},
+				"article": {
+					"title": "Articles Count",
+					"good-articles": "Approved Articles",
+					"solution": "Approved Solutions",
+					"articles": "Total Articles"
+				},
+				"other": {
+					"title": "Other Information",
+					"rating": "Contest Rating",
+					"discusses": "Valid Discussion Posts",
+					"ccf": "Achievement Points In GuZhi"
+				}
+			},
+			"output": {
+				"title": "Output",
+				"calc": "Calculate",
+				"problemScore": "Practice Score",
+				"articleScore": "Article Score",
+				"ratingScore": "Contest Score",
+				"discussScore": "Academic Activity",
+				"ccfScore": "Achievement Score",
+				"totalScore": "Total Score",
+				"ratingLevel": "Rating"
+			},
+			"probDifficulty": {
+				"p1": "Red",
+				"p2": "Orange",
+				"p3": "Yellow",
+				"p4": "Green",
+				"p5": "Blue",
+				"p6": "Purple",
+				"p7": "Black"
+			}
+		}
 	}
 }

@@ -7,12 +7,17 @@ document.writeln(`
 	<link rel="icon" type="image/png" href="/favicon.png" />
 	<style id="volatileStyles"></style>
 `);
+let langList = ['en-us', 'zh-cn'];
 if (localStorage.getItem('lang') === null) {
-	if (navigator.language == "zh" || navigator.language == "zh-CN") {
-		localStorage.lang = 'zh-cn';
+	let flag = true;
+	for (let i = 1; i < langList.length; i++) {
+		if (navigator.language.toLowerCase() == langList[i] || navigator.language.toLowerCase() == langList[i].split('-')[0]) {
+			localStorage.lang = langList[i];
+			flag = false;
+		}
 	}
-	else {
-		localStorage.lang = 'en-us';
+	if (flag) {
+		localStorage.lang = langList[0];
 	}
 }
 let i18n = undefined, bothBasicAndI18nAreLoaded = 0;
@@ -59,7 +64,7 @@ let loading = () => {
 				${
 					(() => {
 						let ret = '';
-						['en-us', 'zh-cn'].forEach(totLang => ret += `
+						langList.forEach(totLang => ret += `
 							<p ${i18n.langName === totLang ? "class='sidebarCurrentChoice'" : ''}><a href="javascript:modifyLang('${totLang}')">
 								<i class="fa-solid fa-${i18n.langName == totLang ? "check-circle" : "circle"}"></i>
 								<span class="sidebarTitle">${i18n.NameOfEachLang[totLang]}</span>

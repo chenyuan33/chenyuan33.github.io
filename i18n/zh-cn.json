@@ -22,6 +22,7 @@
 		"yes": "支持",
 		"no": "不支持"
 	},
+	"tableHead-key-value": "<th>项目</th><th>内容</th>",
 	"notFoundPage": {
 		"title": "404 页面未找到",
 		"tips": "页面走丢了！",
@@ -31,8 +32,55 @@
 			"goBack": "返回上一页"
 		}
 	},
-	"blogList": {
-		"name": "博客列表",
-		"empty": "暂无。"
+	"blog": {
+		"list": {
+			"name": "博客列表",
+			"empty": "暂无。"
+		}
+	},
+	"tool": {
+		"luoguUserScoreCalc": {
+			"title": "[转载] 洛谷用户分数计算器",
+			"name": "[转载] <a href='https://www.luogu.com.cn/'>洛谷</a>用户分数计算器",
+			"desc": "原作者：@<a href='https://www.luogu.com/user/1717150'>Aurelia_Veil</a> 的<a href='https://www.luogu.com/paste/c7raykd1'>云剪贴板</a>，转载时已经过原作者许可。分数仅供参考，分数计算规则可参考原剪贴板。",
+			"input": {
+				"title": "输入",
+				"problem": {
+					"title": "做题数量"
+				},
+				"article": {
+					"title": "文章数量",
+					"good-articles": "过审文章数量",
+					"solution": "过审题解数量",
+					"articles": "总文章数量"
+				},
+				"other": {
+					"title": "其他信息",
+					"rating": "比赛等级分",
+					"discusses": "有效发帖数量",
+					"ccf": "咕值-获得成就分数"
+				}
+			},
+			"output": {
+				"title": "输出",
+				"calc": "计算",
+				"problemScore": "练习分数",
+				"articleScore": "文章分数",
+				"ratingScore": "比赛分数",
+				"discussScore": "学术活跃",
+				"ccfScore": "成就分数",
+				"totalScore": "综合分数",
+				"ratingLevel": "评级"
+			},
+			"probDifficulty": {
+				"p1": "入门",
+				"p2": "普及-",
+				"p3": "普及/提高-",
+				"p4": "普及+/提高",
+				"p5": "提高+/省选-",
+				"p6": "省选/NOI-",
+				"p7": "NOI/NOI+/CTSC"
+			}
+		}
 	}
 }
