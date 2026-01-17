@@ -82,10 +82,6 @@ let loading = () => {
 					<i id="lightSwitchIcon" class="fa-solid fa-sun"></i>
 					<span class="sidebarTitle">${i18n.sidebar.toggleTheme}</span>
 				</a></p>
-				<p><a href="javascript:history.back()">
-					<i class="fa-solid fa-arrow-left"></i>
-					<span class="sidebarTitle">${i18n.sidebar.goBack}</span>
-				</a></p>
 				<p>
 					<i class="fa-solid fa-clock"></i>
 					<span class="sidebarTitle" id="currentDateTime">${i18n.sidebar.loading}...</span>
@@ -143,6 +139,10 @@ let loading = () => {
 			a, .buttonInTable {
 				color: blue;
 			}
+
+			pre, code:not(pre code) {
+				background-color: lightgray;
+			}
 		`;
 	}
 	else {
@@ -161,6 +161,10 @@ let loading = () => {
 
 			a, .buttonInTable {
 				color: cyan;
+			}
+
+			pre, code:not(pre code) {
+				background-color: darkgray;
 			}
 		`;
 	}

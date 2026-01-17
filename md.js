@@ -5,13 +5,73 @@ let mdtohtml = (md) => {
 		if (line == "") {
 			return;
 		}
-		if (line.match(/^>[\s\S]*/igm)) {
-			let x = line.split(/^>/igm);
-			line = mdtohtml(x[0]);
-			x = x.slice(1);
-			line += `<blockquote>${mdtohtml(x.join(''))}</blockquote>`;
-			html += line;
-			return;
+		let x = line.split(/^(`{3,})(.*?)?\n([\s\S]*?)^(\1)/m), curlang = 'plain';
+		line = "";
+		for (let i = 0; i < x.length; i++) {
+			if (i % 5 == 0) {
+				if (x[i].match(/^\s*>[\s\S]*/igm)) {
+					let y = x[i].split(/^\s*>/igm);
+					x[i] = mdtohtml(y[0]);
+					y = y.slice(1);
+					html += x[i] + `<blockquote>${mdtohtml(y.join(''))}</blockquote>`;
+					continue;
+				}
+				if (x[i].match(/^[ \t]*\d+\. /igm)) {
+					let z = x[i].split(/^[ \t]*\d+\. /igm);
+					let cur = mdtohtml(z[0]) + `<ol start=${z[1].split('.')[0]}>`;
+					for (let i = 1; i < z.length; i++) {
+						let y = mdtohtml(z[i]);
+						if (y.startsWith('<p>') && y.endsWith('</p>')) {
+							y = y.substring(3, y.length - 4);
+						}
+						cur += `<li>${y}</li>`;
+					}
+					html += cur + '</ol>';
+					continue;
+				}
+				if (x[i].match(/^[ \t]*[-+*] /igm)) {
+					let z = x[i].split(/^[ \t]*[-+*] /igm);
+					let cur = mdtohtml(z[0]) + `<ul>`;
+					for (let i = 1; i < z.length; i++) {
+						let y = mdtohtml(z[i]);
+						if (y.startsWith('<p>') && y.endsWith('</p>')) {
+							y = y.substring(3, y.length - 4);
+						}
+						cur += `<li>${y}</li>`;
+					}
+					html += cur + '</ul>';
+					continue;
+				}
+				line += x[i]
+					.replace(/^# (.*?)$/igm, "</p><h1>$1</h1><p>")
+					.replace(/^## (.*?)$/igm, "</p><h2>$1</h2><p>")
+					.replace(/^### (.*?)$/igm, "</p><h3>$1</h3><p>")
+					.replace(/^#### (.*?)$/igm, "</p><h4>$1</h4><p>")
+					.replace(/^##### (.*?)$/igm, "</p><h5>$1</h5><p>")
+					.replace(/^###### (.*?)$/igm, "</p><h6>$1</h6><p>")
+					.replace(/\x20\x20\n/igm, "<br />")
+					.replace(/\*\*\*([\s\S]*?)\*\*\*/igm, "<strong><em>$1</em></strong>")
+					.replace(/\*\*([\s\S]*?)\*\*/igm, "<strong>$1</strong>")
+					.replace(/\*([\s\S]*?)\*/igm, "<em>$1</em>")
+					.replace(/\b___([\s\S]*?)___\b/igm, "<strong><em>$1</em></strong>")
+					.replace(/\b__([\s\S]*?)__\b/igm, "<strong>$1</strong>")
+					.replace(/\b_([\s\S]*?)_\b/igm, "<em>$1</em>")
+					.replace(/`(.+?)`/igm, "<code>$1</code>");
+			} else if (i % 5 == 1) {
+				line += "<pre><code>";
+			} else if (i % 5 == 2) {
+				if (x[i] === undefined) {
+					x[i] = '';
+				}
+				curlang = x[i].trim();
+			} else if (i % 5 == 3) {
+				line += x[i]
+					.replace(/^\n+|\n+$/g, '')
+					.replace(/</g, '&lt;')
+					.replace(/>/g, '&gt;');
+			} else if (i % 5 == 4) {
+				line += "</code></pre>";
+			}
 		}
 		if (line.startsWith('\t') || line.startsWith('    ')) {
 			let x = line.split('\n'), i = 0;
@@ -25,59 +85,6 @@ let mdtohtml = (md) => {
 			}
 			line += "</code></pre>" + mdtohtml(x.slice(i));
 		}
-		if (line.match(/^[ \t]*\d+\. /igm)) {
-			let x = line.split(/^[ \t]*\d+\. /igm);
-			line = mdtohtml(x[0]) + `<ol start=${x[1].split('.')[0]}>`;
-			for (let i = 1; i < x.length; i++) {
-				let y = mdtohtml(x[i]);
-				if (y.startsWith('<p>') && y.endsWith('</p>')) {
-					y = y.substring(3, y.length - 4);
-				}
-				line += `<li>${y}</li>`;
-			}
-			html += line + '</ol>';
-			return;
-		}
-		if (line.match(/^[ \t]*[-+*] /igm)) {
-			let x = line.split(/^[ \t]*[-+*] /igm);
-			line = mdtohtml(x[0]) + `<ul>`;
-			for (let i = 1; i < x.length; i++) {
-				let y = mdtohtml(x[i]);
-				if (y.startsWith('<p>') && y.endsWith('</p>')) {
-					y = y.substring(3, y.length - 4);
-				}
-				line += `<li>${y}</li>`;
-			}
-			html += line + '</ul>';
-			return;
-		}
-		line = line
-			.replace(/^# (.*?)$/igm, "</p><h1>$1</h1><p>")
-			.replace(/^## (.*?)$/igm, "</p><h2>$1</h2><p>")
-			.replace(/^### (.*?)$/igm, "</p><h3>$1</h3><p>")
-			.replace(/^#### (.*?)$/igm, "</p><h4>$1</h4><p>")
-			.replace(/^##### (.*?)$/igm, "</p><h5>$1</h5><p>")
-			.replace(/^###### (.*?)$/igm, "</p><h6>$1</h6><p>");
-		let x = line.split(/(`+)(.*?)(\1)/);
-		line = "";
-		for (let i = 0; i < x.length; i++) {
-			if (i % 4 == 0) {
-				line += x[i]
-					.replace(/\x20\x20\n/igm, "<br />")
-					.replace(/\*\*\*([\s\S]*?)\*\*\*/igm, "<strong><em>$1</em></strong>")
-					.replace(/\*\*([\s\S]*?)\*\*/igm, "<strong>$1</strong>")
-					.replace(/\*([\s\S]*?)\*/igm, "<em>$1</em>")
-					.replace(/\b___([\s\S]*?)___\b/igm, "<strong><em>$1</em></strong>")
-					.replace(/\b__([\s\S]*?)__\b/igm, "<strong>$1</strong>")
-					.replace(/\b_([\s\S]*?)_\b/igm, "<em>$1</em>");
-			} else if (i % 4 == 1) {
-				line += "<code>";
-			} else if (i % 4 == 2) {
-				line += x[i];
-			} else if (i % 4 == 3) {
-				line += "</code>";
-			}
-		}
 		html += `<p>${line}</p>`;
 	});
 	return html.replace(/<p>\s*<\/p>/igm, "");
@@ -89,6 +96,261 @@ let createMdEditor = (id, lang) => {
 	else {
 		lang = 'en-us';
 	}
+	const i18n = {
+		"en-us": {
+			about: mdtohtml(`
+				## About
+				In the editor above, the left pane displays your Markdown text input, while the right pane shows the rendered HTML code. As you type, the HTML code on the right updates in real time. All Markdown-to-HTML conversion and display occurs locally, eliminating concerns about data leakage.
+			`),
+			futureSupportedFeatures: mdtohtml(`
+				## Future supported features
+				- Support for more Markdown syntax
+				- Optional markdown syntax:
+					- Title: Display works fine even without a space between the \`#\` and the content
+					- Line breaks: Use [\`\\\` + line break] or [direct line break] to create line breaks
+					- Bold/Italic: Whether to render when using underline with no spaces on either side of the underline
+					- Code Block: Syntax Highlighting
+				- Synchronous scrolling (can be customized to enable or disable)
+				- The right side displays the unrendered HTML source code (can be toggled on or off)
+				- Auxiliary button row:
+					- Functionality: Save Drafts (cached), Auto-Save (cached, configurable), Import Markdown, Export/Copy Markdown/HTML, Customize Synchronized Scrolling, Customize Real-Time Rendering
+					- Content-based: Pressing the button adds the corresponding element to the input field. For example, H1 generates a level-1 heading.
+				- Syntax Highlighting
+				- Custom Editor Size, Full-Screen Editor
+				- Let the editor access your website (if you choose to) (Documentation not yet written)
+			`)
+		},
+		"zh-cn": {
+			about: mdtohtml(`
+				## 关于
+				上面的编辑器中，左边是输入的 Markdown 文本，右边是渲染后的 HTML 代码。输入文本时，右边的 HTML 代码会实时更新。所有 Markdown 到 HTML 的转换和显示均在本地进行，无需担心数据泄露的问题。
+			`),
+			futureSupportedFeatures: mdtohtml(`
+				## 未来将会支持的功能
+				- 支持更多 Markdown 语法
+				- 可选的 Markdown 语法：
+					- 标题：如果 \`#\` 和内容之间没有空格也可以正常显示
+					- 换行：使用【\`\\\`+换行】或【直接换行】进行换行
+					- 粗体/斜体：使用下划线并且下划线两边均无空格时是否渲染
+					- 代码块：语法高亮
+				- 同步滚动（可自设是否开启）
+				- 右边显示未渲染的 HTML 源代码（可自设是否开启）
+				- 用于辅助的按钮行：
+					- 功能类：保存草稿（缓存）、自动保存（缓存，可设置是否开启）、导入 Markdown、导出/复制 Markdown/HTML、自设是否开启同步滚动、自设是否实时渲染
+					- 内容类：按钮按下后会在输入框内增加对应的东西，如 H1 会产生一级标题
+				- 语法高亮
+				- 自定义编辑器的大小、全屏编辑器
+				- 让编辑器进入你的网站（如果你愿意的话）（暂未编写文档）
+			`),
+			markdownSyntax: `
+				<h2>已支持的 Markdown 语法</h2>
+				<table>
+					<tr>
+						<th>类型</th>
+						<th>Markdown</th>
+						<th>HTML</th>
+						<th>预览</th>
+						<th>注意</th>
+					</tr>
+					${(() => {
+						let str = '';
+						[
+							{
+								type: '标题',
+								md:
+									'# H1-content\n' +
+									'## H2-content\n' +
+									'### H3-content\n' +
+									'#### H4-content\n' +
+									'##### H5-content\n' +
+									'###### H6-content',
+								notice: '默认情况下 <code>#</code> 和内容之间要有空格'
+							},
+							{
+								type: '段落',
+								md:
+									'text-content1\n' +
+									'\n' +
+									'text-content2',
+								notice: '两个换行才能达成换行的效果'
+							},
+							{
+								type: '换行',
+								md:
+									'text-content1  \n' +
+									'text-content2',
+								notice: '前一行行末有两个空格'
+							},
+							{
+								type: '粗体',
+								md:
+									'**bold1**\n' +
+									'__bold2__',
+								notice: '如果使用下划线（<code>_</code>），那么需要空格才能渲染'
+							},
+							{
+								type: '斜体',
+								md:
+									'*bold1*\n' +
+									'_bold2_',
+								notice: '如果使用下划线（<code>_</code>），那么需要空格才能渲染'
+							},
+							{
+								type: '引用',
+								md:
+									'> text\n' +
+									'>\n' +
+									'> > inner\n' +
+									'> >\n' +
+									'> > **bold**',
+								notice: '可以嵌套其它语法'
+							},
+							{
+								type: '无序列表',
+								md:
+									'+ text\n' +
+									'+ text\n' +
+									'\n' +
+									'- text\n' +
+									'- text\n' +
+									'\n' +
+									'* text\n' +
+									'* text\n' +
+									'\n' +
+									'- text\n' +
+									'- text\n' +
+									'  - inner\n' +
+									'  - inner\n',
+								notice: '有 bug'
+							},
+							{
+								type: '有序列表',
+								md:
+									'1. text\n' +
+									'2. text\n' +
+									'\n' +
+									'1. text\n' +
+									'1. text\n' +
+									'\n' +
+									'2. text\n' +
+									'3. text\n' +
+									'\n' +
+									'1. text\n' +
+									'2. text\n' +
+									'   1. inner\n' +
+									'   2. inner\n',
+								notice: '有 bug'
+							},
+							{
+								type: '代码块',
+								md:
+									'`inline code`\n' +
+									'\n' +
+									'    outline code line1\n' +
+									'    outline code line2\n' +
+									'\n' +
+									'```\n' +
+									'another outline code line1\n' +
+									'another outline code line2\n' +
+									'```\n' +
+									'``` cpp\n' +
+									'#include <iostream>\n' +
+									'using namespace std;\n' +
+									'int main()\n' +
+									'{\n' +
+									'    int a, b;\n' +
+									'    cin >> a >> b;\n' +
+									'    cout << a + b;\n' +
+									'    return 0;\n' +
+									'}\n' +
+									'```\n' +
+									'\n' +
+									'```` markdown\n' +
+									'``` py\n' +
+									"print('Hello, world!')\n" +
+									'```\n' +
+									'````',
+								notice: '有 bug'
+							}
+						].forEach(ele => str += `
+								<tr>
+									<th>${ele.type}</th>
+									<td><pre><code>${ele.md}</code></pre></td>
+									<td><pre><code>${(html => {
+										const container = document.createElement('div');
+										container.innerHTML = html.trim();
+										function formatNode(node, indent = '') {
+											let result = '';
+											if (node.nodeType === Node.TEXT_NODE) {
+												const text = node.textContent.trim();
+												if (text) {
+													result += indent + text + '\n';
+												}
+											}
+											else if (node.nodeType === Node.ELEMENT_NODE) {
+												const tagName = node.tagName.toLowerCase();
+												const children = Array.from(node.childNodes);
+												result += indent + '<' + tagName;
+												Array.from(node.attributes).forEach(attr => result += ` ${attr.name}="${attr.value}"`);
+												if (children.length === 0) {
+													result += ' />\n';
+												}
+												else if (children.length === 1 && children[0].nodeType === Node.TEXT_NODE) {
+													const content = children[0].textContent.trim();
+													result += '>' + content + `</${tagName}>\n`;
+												}
+												else {
+													result += '>\n';
+													children.forEach(child => result += formatNode(child, indent + '    '));
+													result += `${indent}</${tagName}>\n`;
+												}
+											}
+											return result;
+										}
+										let result = '';
+										container.childNodes.forEach(ele => result += formatNode(ele).trim() + '\n');
+										return result;
+									})(mdtohtml(ele.md))
+										.replaceAll('<', '&lt;')
+										.replaceAll('>', '&gt;')
+										.replaceAll(/(&lt;.*?&gt;)(&lt;.*?&gt;)/g, '$1\n$2')
+									}</code></pre></td>
+									<td>${mdtohtml(ele.md)}</td>
+									<td>${ele.notice}</td>
+								</tr>
+							`);
+						return str;
+					})()}
+				</table>
+			`
+		}
+	}[lang];
+	let features = [
+		{
+			name: 'about',
+			fa: 'question-circle',
+			title: {
+				'en-us': 'About',
+				'zh-cn': '关于'
+			}
+		},
+		{
+			name: 'futureSupportedFeatures',
+			fa: 'flask',
+			title: {
+				'en-us': 'Future supported features',
+				'zh-cn': '未来将会支持的功能'
+			}
+		},
+		{
+			name: 'markdownSyntax',
+			fa: 'code',
+			title: {
+				'en-us': 'Markdown Syntax (Only Supported in Chinese version yet)',
+				'zh-cn': 'Markdown 语法'
+			}
+		}
+	];
 	curMdEditor = document.createElement('div');
 	curMdEditor.classList.add("mdeditor");
 	curMdEditor.innerHTML = `
@@ -96,7 +358,20 @@ let createMdEditor = (id, lang) => {
 			<tr>
 				<td colspan="2">
 					<div class="mdeditor-buttondiv">
-						<button class="mdeditor-button" onclick="document.getElementById('mdeditor-about${id}').style.display='block'"><i class="fa-solid fa-question-circle"></i></button>
+						${(() => {
+							let str = '';
+							features.forEach(ele => str += `
+								<button
+									id="mdeditor-button-${ele.name}${id}"
+									class="mdeditor-button"
+									onclick="document.getElementById('mdeditor-${ele.name}${id}').style.display='block'"
+								>
+									<i class="fa-solid fa-${ele.fa}"></i>
+									<div class="mdeditor-button-name" id="mdeditor-button-name-${ele.name}${id}">${ele.title[lang]}</div>
+								</button>
+							`);
+							return str;
+						})()}
 					</div>
 				</td>
 			</tr>
@@ -109,192 +384,28 @@ let createMdEditor = (id, lang) => {
 				</td>
 			</tr>
 		</table>
-		<div class="mdeditor-about" id="mdeditor-about${id}">
-			<button class="mdeditor-close-about-button" onclick="document.getElementById('mdeditor-about${id}').style.display='none'"><i class="fa-solid fa-circle-xmark"></i></button>
-			<h2>${lang == "zh-cn" ? "关于" : "About"}</h2>
-			<p>${lang == "zh-cn"
-				? "上面的编辑器中，左边是输入的 Markdown 文本，右边是渲染后的 HTML 代码。输入文本时，右边的 HTML 代码会实时更新。所有 Markdown 到 HTML 的转换和显示均在本地进行，无需担心数据泄露的问题。"
-				: "In the editor above, the left pane displays your Markdown text input, while the right pane shows the rendered HTML code. As you type, the HTML code on the right updates in real time. All Markdown-to-HTML conversion and display occurs locally, eliminating concerns about data leakage."
-			}</p>
-			<p>${lang == "zh-cn" ? "未来将会支持的功能有：" : "Future supported features include:"}</p>
-			<ul>
-				<li>${lang == "zh-cn" ? "支持更多 Markdown 语法（以下有一个正在编写的缺少国际化的表格，展示目前支持哪些语法）" : "Support for more Markdown syntax (Below is a table currently being developed that lacks i18n, showing which syntaxes are currently supported)"}</li>
-				<li>${lang == "zh-cn" ? "同步滚动（可自设是否开启）" : "Synchronous scrolling (can be customized to enable or disable)"}</li>
-				<li>${lang == "zh-cn" ? "右边显示未渲染的 HTML 源代码（可自设是否开启）" : "The right side displays the unrendered HTML source code (can be toggled on or off)"}</li>
-				<li>${lang == "zh-cn" ? "用于辅助的按钮行：" : "Auxiliary button row:"}
-					<ul>
-						<li>${lang == "zh-cn" ? "功能类：保存草稿（缓存）、自动保存（缓存，可设置是否开启）、导入 Markdown、导出/复制 Markdown/HTML、自设是否开启同步滚动、自设是否实时渲染" : "Functionality: Save Drafts (cached), Auto-Save (cached, configurable), Import Markdown, Export/Copy Markdown/HTML, Customize Synchronized Scrolling, Customize Real-Time Rendering"}</li>
-						<li>${lang == "zh-cn" ? "内容类：按钮按下后会在输入框内增加对应的东西，如 H1 会产生一级标题" : "Content-based: Pressing the button adds the corresponding element to the input field. For example, H1 generates a level-1 heading."}</li>
-					</ul>
-				</li>
-				<li>${lang == "zh-cn" ? "自定义 Markdown 语法" : "Custom Markdown Syntax"}</li>
-				<li>${lang == "zh-cn" ? "自定义编辑器的大小、全屏编辑器" : "Custom Editor Size, Full-Screen Editor"}</li>
-				<li>${lang == "zh-cn" ? "让编辑器进入你的网站（如果你愿意的话）（暂未编写文档）" : "Let the editor access your website (if you choose to) (Documentation not yet written)"}</li>
-			</ul>
-			<h3>Markdown 语法一览表（未完/缺少 i18n）</h3>
-			<p>This form is incomplete and lacks i18n.</p>
-			<p>不支持表示暂不支持。如果是可选项那么支持后会添加一个按钮确认是否启用。“是否默认启用”这一栏仅可选项有意义。</p>
-			<table>
-				<tr>
-					<th>Markdown 语法源码</th>
-					<th>HTML 源码</th>
-					<th>HTML 预览</th>
-					<th>是否支持</th>
-					<th>是否为可选项</th>
-					<th>（支持后）是否默认启用</th>
-				</tr>
-				<tr>
-					<td><pre><code># H1-content
-## H2-content
-### H3-content
-#### H4-content
-##### H5-content
-###### H6-content</code></pre></td>
-					<td rowspan="2"><pre><code>&lt;h1&gt;H1-content&lt;/h1&gt;
-&lt;h2&gt;H2-content&lt;/h2&gt;
-&lt;h3&gt;H3-content&lt;/h3&gt;
-&lt;h4&gt;H4-content&lt;/h4&gt;
-&lt;h5&gt;H5-content&lt;/h5&gt;
-&lt;h6&gt;H6-content&lt;/h6&gt;</code></pre></td>
-					<td rowspan="2">
-						<h1>H1-content</h1>
-						<h2>H2-content</h2>
-						<h3>H3-content</h3>
-						<h4>H4-content</h4>
-						<h5>H5-content</h5>
-						<h6>H6-content</h6>
-					</td>
-					<td class="supported"></td>
-					<td class="unsupported"></td>
-					<td class="supported"></td>
-				</tr>
-				<tr>
-					<td><pre><code>#H1-content
-##H2-content
-###H3-content
-####H4-content
-#####H5-content
-######H6-content</code></pre></td>
-					<td class="unsupported"></td>
-					<td class="supported"></td>
-					<td class="unsupported"></td>
-				</tr>
-				<tr>
-					<td><pre><code>text-content1
-
-text-content2</code></pre></td>
-					<td><pre><code>&lt;p&gt;text-content1&lt;/p&gt;
-&lt;p&gt;text-content2&lt;/p&gt;</code></pre></code>
-					<td>
-						<p>text-content1</p>
-						<p>text-content2</p>
-					</td>
-					<td class="supported"></td>
-					<td class="unsupported"></td>
-					<td class="supported"></td>
-				</tr>
-				<tr>
-					<td><pre><code>ABC  `+`
-abc</code></pre>（换行前空两格）</td>
-					<td rowspan="3"><pre><code>&lt;p&gt;ABC&lt;br&gt;abc&lt;/p&gt;</code></pre></td>
-					<td rowspan="3"><p>ABC<br>abc</p></td>
-					<td class="supported"></td>
-					<td class="unsupported"></td>
-					<td class="supported"></td>
-				</tr>
-				<tr>
-					<td><pre><code>ABC
-abc</code></pre><br>（换行前无空格）</td>
-					<td class="unsupported"></td>
-					<td class="supported"></td>
-					<td class="unsupported"></td>
-				</tr>
-				<tr>
-					<td><pre><code>ABC\\
-abc</code></pre><br>（换行前无空格）</td>
-					<td class="unsupported"></td>
-					<td class="supported"></td>
-					<td class="unsupported"></td>
-				</tr>
-				<tr>
-					<td><pre><code>text **text**</code></pre>
-					<td rowspan="2"><pre><code>&lt;p&gt;text &lt;strong&gt;text&lt;/strong&gt;&lt;/p&gt;</code></pre></td>
-					<td rowspan="2"><p>text <strong>text</strong></p></td>
-					<td class="supported"></td>
-					<td class="unsupported"></td>
-					<td class="supported"></td>
-				</tr>
-				<tr>
-					<td><pre><code>text __text__</code></pre>
-					<td class="supported"></td>
-					<td class="unsupported"></td>
-					<td class="supported"></td>
-				</tr>
-				<tr>
-					<td><pre><code>text**text**</code></pre>
-					<td rowspan="2"><pre><code>&lt;p&gt;text&lt;strong&gt;text&lt;/strong&gt;&lt;/p&gt;</code></pre></td>
-					<td rowspan="2"><p>text<strong>text</strong></p></td>
-					<td class="supported"></td>
-					<td class="unsupported"></td>
-					<td class="supported"></td>
-				</tr>
-				<tr>
-					<td><pre><code>text__text__</code></pre>
-					<td class="unsupported"></td>
-					<td class="supported"></td>
-					<td class="unsupported"></td>
-				</tr>
-				<tr>
-					<td><pre><code>text *text*</code></pre>
-					<td rowspan="2"><pre><code>&lt;p&gt;text &lt;em&gt;text&lt;/em&gt;&lt;/p&gt;</code></pre></td>
-					<td rowspan="2"><p>text <em>text</em></p></td>
-					<td class="supported"></td>
-					<td class="unsupported"></td>
-					<td class="supported"></td>
-				</tr>
-				<tr>
-					<td><pre><code>text _text_</code></pre>
-					<td class="supported"></td>
-					<td class="unsupported"></td>
-					<td class="supported"></td>
-				</tr>
-				<tr>
-					<td><pre><code>text*text*</code></pre>
-					<td rowspan="2"><pre><code>&lt;p&gt;text&lt;em&gt;text&lt;/em&gt;&lt;/p&gt;</code></pre></td>
-					<td rowspan="2"><p>text<em>text</em></p></td>
-					<td class="supported"></td>
-					<td class="unsupported"></td>
-					<td class="supported"></td>
-				</tr>
-				<tr>
-					<td><pre><code>text_text_</code></pre>
-					<td class="unsupported"></td>
-					<td class="supported"></td>
-					<td class="unsupported"></td>
-				</tr>
-				<tr>
-					<td><pre><code>&gt; text
-&gt;
-&gt; **bold**
-&gt;
-&gt; &gt; inner</code></pre></td>
-					<td><pre><code>&lt;blockquote&gt;
-	&lt;p&gt;text&lt;/p&gt;
-	&lt;p&gt;&lt;strong&gt;bold&lt;/strong&gt;&lt;/p&gt;
-	&lt;blockquote&gt;&lt;p&gt;inner&lt;/p&gt;&lt;/blockquote&gt;
-&lt;/blockquote&gt;</pre></code></td>
-					<td>
-						<blockquote>
-							<p>text</p>
-							<p><strong>bold</strong></p>
-							<blockquote><p>inner</p></blockquote>
-						</blockquote>
-					</td>
-					<td class="supported"></td>
-					<td class="unsupported"></td>
-					<td class="supported"></td>
-			</table>
-		</div>
+		${(() => {
+			let str = '';
+			features.forEach(ele => str += `
+				<div class="mdeditor-doc" id="mdeditor-${ele.name}${id}">
+					<div class="mdeditor-doc-background" onclick="document.getElementById('mdeditor-${ele.name}${id}').style.display='none'"></div>
+					<div class="mdeditor-doc-content">
+						<button class="mdeditor-close-doc-button" onclick="document.getElementById('mdeditor-${ele.name}${id}').style.display='none'">
+							<i class="fa-solid fa-circle-xmark"></i>
+						</button>
+						${i18n[ele.name]}
+					</div>
+				</div>
+			`);
+			str += '<style>';
+			features.forEach(ele => str += `
+				#mdeditor-button-${ele.name}${id}:hover #mdeditor-button-name-${ele.name}${id} {
+					opacity: 1;
+				}
+			`);
+			str += '</style>';
+			return str;
+		})()}
 	`;
 	document.body.appendChild(curMdEditor);
 	window.addEventListener('load', () => document.getElementById(`mdeditor-input${id}`).addEventListener("input", () => document.getElementById(`mdeditor-output${id}`).innerHTML = mdtohtml(document.getElementById(`mdeditor-input${id}`).value)));
@@ -317,35 +428,85 @@ mdEditorStyle.innerHTML = `
 
 	.mdeditor-buttondiv {
 		width: 400px;
+		position: relative;
 	}
 
-	.mdeditor-button, .mdeditor-close-about-button {
+	.mdeditor-button {
+		position: relative;
+		color: inherit;
+	}
+
+	.mdeditor-button, .mdeditor-close-doc-button {
 		border: none;
-		background-color: white;
+		background-color: unset;
+		font: inherit;
 	}
 
-	.mdeditor-button:hover, .mdeditor-close-about-button:hover {
+	.mdeditor-button:hover, .mdeditor-close-doc-button:hover {
 		cursor: pointer;
 	}
 
-	.mdeditor-about {
-		display: none;
+	.mdeditor-button-name {
 		position: absolute;
-		left: 20%;
-		right: 20%;
-		top: 20%;
-		bottom: 20%;
+		top: -35px;
+		border: solid;
+		border-radius: 5px;
+		padding: 5px;
 		background-color: white;
-		border-style: solid;
+		left: 50%;
+		transform: translateX(-50%);
+		opacity: 0;
+		transition: opacity 0.2s ease;
+		pointer-events: none;
+		white-space: nowrap;
+	}
+
+	.mdeditor-button-name::after {
+		content: '';
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		transform: translateX(-50%);
+		border: 5px solid transparent;
+		border-top-color: rgba(0, 0, 0, 0.8);
+	}
+
+	.mdeditor-doc {
+		display: none;
+		position: fixed;
+		left: 10%;
+		right: 10%;
+		top: 10%;
+		bottom: 10%;
+	}
+
+	.mdeditor-doc-background {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background-color: black;
+		opacity: 50%;
+	}
+
+	.mdeditor-close-doc-button {
+		position: absolute;
+		right: 5%;
+		top: 5%;
+	}
+
+	.mdeditor-doc-content {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		border: solid;
 		border-radius: 10px;
 		overflow: auto;
 		padding: 10px;
-	}
-
-	.mdeditor-close-about-button {
-		position: absolute;
-		left: 90%;
-		top: 10%;
+		background-color: white;
 	}
 `;
 document.head.appendChild(mdEditorStyle);

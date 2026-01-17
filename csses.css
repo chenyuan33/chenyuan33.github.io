@@ -116,3 +116,8 @@ table, th, td {
 	color: white;
 	background-color: red;
 }
+
+pre, code:not(pre code) {
+	padding: 5px;
+	border-radius: 5px;
+}

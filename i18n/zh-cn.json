@@ -14,7 +14,6 @@
 		"languageChoice": "切换语言",
 		"features": "功能",
 		"toggleTheme": "切换主题",
-		"goBack": "上一页",
 		"loading": "加载中"
 	},
 	"siteName": "cy3's site",
@@ -81,6 +80,9 @@
 				"p6": "省选/NOI-",
 				"p7": "NOI/NOI+/CTSC"
 			}
+		},
+		"mdeditor": {
+			"title": "Markdown 编辑器"
 		}
 	}
 }

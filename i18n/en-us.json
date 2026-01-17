@@ -14,7 +14,6 @@
 		"languageChoice": "Languages",
 		"features": "Features",
 		"toggleTheme": "Toggle Theme",
-		"goBack": "Go Back",
 		"loading": "Loading"
 	},
 	"siteName": "cy3's site",
@@ -81,6 +80,9 @@
 				"p6": "Purple",
 				"p7": "Black"
 			}
+		},
+		"mdeditor": {
+			"title": "Markdown Editor"
 		}
 	}
 }
