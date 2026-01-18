@@ -5,49 +5,57 @@
 	<script src="/helper.js"></script>
 	<title class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.title"></title>
 	<style>
+		input {
+			font: inherit;
+			margin: 1px;
+		}
+
 		#probLabel1 {
 			color: #fe4c61;
 		}
+
 		#probLabel2 {
 			color: #f39c11;
 		}
+
 		#probLabel3 {
 			color: #ffc116;
 		}
+
 		#probLabel4 {
 			color: #52c41a;
 		}
+
 		#probLabel5 {
 			color: #3498db;
 		}
+
 		#probLabel6 {
 			color: #9d3dcf;
 		}
+
 		#probLabel7 {
 			color: #0e1d69;
 		}
 	</style>
 	<script>
 		function calc() {
-			let problem1 = parseInt(document.getElementById("problem1").value);
-			let problem2 = parseInt(document.getElementById("problem2").value);
-			let problem3 = parseInt(document.getElementById("problem3").value);
-			let problem4 = parseInt(document.getElementById("problem4").value);
-			let problem5 = parseInt(document.getElementById("problem5").value);
-			let problem6 = parseInt(document.getElementById("problem6").value);
-			let problem7 = parseInt(document.getElementById("problem7").value);
-			let goodArticles = parseInt(document.getElementById("good-articles").value);
-			let solution = parseInt(document.getElementById("solution").value);
-			let articles = parseInt(document.getElementById("articles").value);
-			let rating = parseInt(document.getElementById("rating").value);
-			let discusses = parseInt(document.getElementById("discusses").value);
-			let ccf = parseInt(document.getElementById("ccf").value);
+			let problem1 = Number(document.getElementById("problem1").value);
+			let problem2 = Number(document.getElementById("problem2").value);
+			let problem3 = Number(document.getElementById("problem3").value);
+			let problem4 = Number(document.getElementById("problem4").value);
+			let problem5 = Number(document.getElementById("problem5").value);
+			let problem6 = Number(document.getElementById("problem6").value);
+			let problem7 = Number(document.getElementById("problem7").value);
+			let goodArticles = Number(document.getElementById("good-articles").value);
+			let solution = Number(document.getElementById("solution").value);
+			let articles = Number(document.getElementById("articles").value);
+			let rating = Number(document.getElementById("rating").value);
+			let discusses = Number(document.getElementById("discusses").value);
+			let ccf = Number(document.getElementById("ccf").value);
 
 			let problemScore = (problem1 * 2 + problem2 * 3 + problem3 * 5 + problem4 * 6 + problem5 * 9 + problem6 * 10 + problem7 * 15) / 10000;
-			let articleScore = (goodArticles * 0.75 + solution * 0.25) / articles;
-			if (articles == 0) {
-				articleScore = 0;
-			}
+			let articleScore = articles ? (goodArticles * 0.75 + solution * 0.25) / articles : 0;
 			let ratingScore = rating / 2000;
 			let discussScore = discusses / 50;
 			let ccfScore = ccf / 100;
@@ -88,7 +96,7 @@
 				document.writeln(`
 					<tr>
 						<td><label for="prob${i}" id="probLabel${i}" class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.probDifficulty.p${i}"></label></td>
-						<td><input id="problem${i}" type="number" value="0"></input></td>
+						<td><input id="problem${i}" type="number" value="0" oninput="calc()" /></td>
 					</tr>
 				`);
 			}
@@ -108,7 +116,7 @@
 				document.writeln(`
 					<tr>
 						<td><label for="${ele}" class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.input.${name}.${ele}"></label></td>
-						<td><input id="${ele}" type="number" value="0"></input></td>
+						<td><input id="${ele}" type="number" value="0" oninput="calc()" /></td>
 					</tr>
 				`)
 			});
@@ -118,7 +126,6 @@
 		});
 	</script>
 	<h2 class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.output.title"></h2>
-	<button onclick="calc()" class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.output.calc"></button>
 	<table>
 		<tr class="wait-for-i18n" data-i18n="tableHead-key-value"></tr>
 		<script>
@@ -132,6 +139,9 @@
 			})
 		</script>
 	</table>
+	<script>
+		calc();
+	</script>
 </body>
 
 </html>

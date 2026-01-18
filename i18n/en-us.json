@@ -62,7 +62,6 @@
 			},
 			"output": {
 				"title": "Output",
-				"calc": "Calculate",
 				"problemScore": "Practice Score",
 				"articleScore": "Article Score",
 				"ratingScore": "Contest Score",
