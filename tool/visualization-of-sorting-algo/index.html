@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script src='/helper.js'></script>
+	<title class='wait-for-i18n' data-i18n='tool.visualizationOfSortingAlgo.title'></title>
+	<style>
+		#visu-box {
+			height: 100px;
+			background-color: black;
+			border: solid;
+		}
+
+		.element-of-visu {
+			display: inline-block;
+		}
+	</style>
+	<script src="/tool/visualization-of-sorting-algo/main.js"></script>
+</head>
+
+<body>
+	<h1 class='wait-for-i18n' data-i18n='tool.visualizationOfSortingAlgo.title'></h1>
+	<p class='wait-for-i18n' data-i18n='tool.visualizationOfSortingAlgo.refer'></p>
+	<div id='visu-box'></div>
+	<h2 class='wait-for-i18n' data-i18n='tool.visualizationOfSortingAlgo.recreate.title'></h2>
+	<label for='array-size' class='wait-for-i18n' data-i18n='tool.visualizationOfSortingAlgo.recreate.arraySize'></label>
+	<input type='number' id='array-size' value='20' min='1' oninput='checkArraySize()'>
+	<br>
+	<input type='checkbox' id='many-duplicated'>
+	<label for='many-duplicated' class='wait-for-i18n' data-i18n='tool.visualizationOfSortingAlgo.recreate.manyDuplicated'></label>
+	<br>
+	<button id='arrayRemaker1' onclick='makeRand()' class='wait-for-i18n' data-i18n='tool.visualizationOfSortingAlgo.recreate.makeRand'></button>
+	<button id='arrayRemaker2' onclick='makeInc()' class='wait-for-i18n' data-i18n='tool.visualizationOfSortingAlgo.recreate.makeInc'></button>
+	<button id='arrayRemaker3' onclick='makeDec()' class='wait-for-i18n' data-i18n='tool.visualizationOfSortingAlgo.recreate.makeDec'></button>
+	<script>
+		makeRand();
+	</script>
+	<h2 class='wait-for-i18n' data-i18n='tool.visualizationOfSortingAlgo.settings.title'></h2>
+	<label for='delay' class='wait-for-i18n' data-i18n='tool.visualizationOfSortingAlgo.settings.delay'></label>
+	<input type='number' id='delay' value='0' min='0'>
+	<br>
+	<button id='pause' onclick='pause()' class='wait-for-i18n' data-i18n='tool.visualizationOfSortingAlgo.settings.pause'></button>
+	<button onclick='stop()' class='wait-for-i18n' data-i18n='tool.visualizationOfSortingAlgo.settings.stop'></button>
+	<h2 class='wait-for-i18n' data-i18n='tool.visualizationOfSortingAlgo.sorting.title'></h2>
+	<script>
+		algoList.forEach(name => document.write(`<button onclick='run(${name})' class='sortingButton wait-for-i18n' data-i18n='tool.visualizationOfSortingAlgo.sorting.name.${name}'></button> `));
+	</script>
+	<br>
+	<label for='mergeSortWayCount' class='wait-for-i18n' data-i18n='tool.visualizationOfSortingAlgo.sorting.mergeSortWayCount'></label>
+	<input type='number' id='mergeSortWayCount' value='2' min='2' oninput='updateMergeSortName()'>
+</body>
+
+</html>

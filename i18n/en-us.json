@@ -7,7 +7,7 @@
 	},
 	"sidebar": {
 		"navigation": "Navigation",
-		"mainPage": "Main Page",
+		"homePage": "Home Page",
 		"relatedLinks": "Related Links",
 		"changelog": "Changelog",
 		"faqs": "FAQs",
@@ -27,17 +27,16 @@
 		"tips": "Page is lost!",
 		"tips2": "If you believe this is a bug, please <a href='https://github.com/chenyuan33/chenyuan33.github.io/issues/new?template=en_us_bug_report.md'>report the bug</a>.",
 		"links": {
-			"mainPage": "Go to Main Page",
+			"homePage": "Go to Home Page",
 			"goBack": "Go Back to Previous Page"
 		}
 	},
 	"blog": {
-		"list": {
-			"name": "Blog List",
-			"empty": "None at present."
-		}
+		"title": "Blog List",
+		"empty": "None at present."
 	},
 	"tool": {
+		"title": "Tool List",
 		"luoguUserScoreCalc": {
 			"title": "[Repost] Luogu User Score Calculator",
 			"name": "[Repost] <a href='https://www.luogu.com.cn/'>Luogu</a> User Score Calculator",
@@ -82,6 +81,45 @@
 		},
 		"mdeditor": {
 			"title": "Markdown Editor"
+		},
+		"visualizationOfSortingAlgo": {
+			"title": "Visualization of Sorting Algorithms",
+			"refer": "The algorithm flow can be referenced in <a href='https://www.luogu.com/article/n6pxq6h7'>this article</a>.",
+			"recreate": {
+				"title": "Recreate the Array",
+				"arraySize": "Array size (excessively large arrays may cause performance issues and prolonged visualization times):",
+				"manyDuplicated": "Does the created array contain a large number of duplicate elements?",
+				"makeRand": "Create a random array",
+				"makeInc": "Create an increased array",
+				"makeDec": "Create a decreased array"
+			},
+			"settings": {
+				"title": "Settings",
+				"delay": "Time interval between each frame (in milliseconds):",
+				"pause": "Pause",
+				"continue": "Continue",
+				"stop": "Stop"
+			},
+			"sorting": {
+				"title": "Sorting",
+				"name": {
+					"bubbleSort": "Bubble Sort",
+					"selectionSort": "Selection Sort",
+					"insertionSort": "Insertion Sort",
+					"gnomeSort": "Gnome Sort",
+					"cocktailSort": "Cocktail Sort",
+					"shellSort": "Shell Sort",
+					"heapSort": "Heap Sort",
+					"mergeSort": "<span id='mergeSortWayCountDisplay' style='display: none;'><span id='mergeSortWayCountDisplayNumber'></span>-way</span> Merge Sort",
+					"quickSort": "Quick Sort",
+					"bogoSort": "Bogo Sort",
+					"bogoBogoSort": "Bogo Bogo Sort",
+					"permutationSort": "Permutation Sort",
+					"slowSort": "Slow Sort",
+					"stoogeSort": "Stooge Sort"
+				},
+				"mergeSortWayCount": "Merge Sort Ways"
+			}
 		}
 	}
 }

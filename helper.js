@@ -1,11 +1,10 @@
 document.writeln(`
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" type="text/css" href="/csses.css" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-	<link rel="icon" type="image/png" href="/favicon.png" />
-	<style id="volatileStyles"></style>
+	<meta charset='UTF-8' />
+	<meta name='viewport' content='width=device-width, initial-scale=1' />
+	<link rel='stylesheet' type='text/css' href='/csses.css' />
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+	<script src='https://kit.fontawesome.com/49ad5e587e.js' crossorigin='anonymous'></script>
+	<link rel='icon' type='image/png' href='/favicon.png' />
 `);
 let langList = ['en-us', 'zh-cn'];
 if (localStorage.getItem('lang') === null) {
@@ -35,39 +34,39 @@ let loading = () => {
 		let sidebar = document.createElement('div');
 		sidebar.id = 'sidebar';
 		sidebar.innerHTML = `
-			<div id="sidebarContent">
+			<div id='sidebarContent'>
 				<h3>
-					<i class="fa-solid fa-location-dot"></i>
-					<span class="sidebarTitle">${i18n.sidebar.navigation}</span>
+					<i class='fa-solid fa-location-dot'></i>
+					<span class='sidebarTitle'>${i18n.sidebar.navigation}</span>
 				</h3>
-				<p><a href="/${i18n.langName}/index.html">
-					<i class="fa-solid fa-house"></i>
-					<span class="sidebarTitle">${i18n.sidebar.mainPage}</span>
+				<p><a href='/${i18n.langName}/index.html'>
+					<i class='fa-solid fa-house'></i>
+					<span class='sidebarTitle'>${i18n.sidebar.homePage}</span>
 				</a></p>
-				<p><a href="/${i18n.langName}/links.html">
-					<i class="fa-solid fa-link"></i>
-					<span class="sidebarTitle">${i18n.sidebar.relatedLinks}</span>
+				<p><a href='/${i18n.langName}/links.html'>
+					<i class='fa-solid fa-link'></i>
+					<span class='sidebarTitle'>${i18n.sidebar.relatedLinks}</span>
 				</a></p>
-				<p><a href="/${i18n.langName}/changelog.html">
-					<i class="fa-solid fa-clock-rotate-left"></i>
-					<span class="sidebarTitle">${i18n.sidebar.changelog}</span>
+				<p><a href='/${i18n.langName}/changelog.html'>
+					<i class='fa-solid fa-clock-rotate-left'></i>
+					<span class='sidebarTitle'>${i18n.sidebar.changelog}</span>
 				</a></p>
-				<p><a href="/${i18n.langName}/faqs.html">
-					<i class="fa-solid fa-question-circle"></i>
-					<span class="sidebarTitle">${i18n.sidebar.faqs}</span>
+				<p><a href='/${i18n.langName}/faqs.html'>
+					<i class='fa-solid fa-question-circle'></i>
+					<span class='sidebarTitle'>${i18n.sidebar.faqs}</span>
 				</a></p>
 				<hr>
 				<h3>
-					<i class="fa-solid fa-language"></i>
-					<span class="sidebarTitle">${i18n.sidebar.languageChoice}</span>
+					<i class='fa-solid fa-language'></i>
+					<span class='sidebarTitle'>${i18n.sidebar.languageChoice}</span>
 				</h3>
 				${
 					(() => {
 						let ret = '';
 						langList.forEach(totLang => ret += `
 							<p ${i18n.langName === totLang ? "class='sidebarCurrentChoice'" : ''}><a href="javascript:modifyLang('${totLang}')">
-								<i class="fa-solid fa-${i18n.langName == totLang ? "check-circle" : "circle"}"></i>
-								<span class="sidebarTitle">${i18n.NameOfEachLang[totLang]}</span>
+								<i class='fa-solid fa-${i18n.langName == totLang ? 'check-circle' : 'circle'}'></i>
+								<span class='sidebarTitle'>${i18n.NameOfEachLang[totLang]}</span>
 							</a></p>
 						`)
 						return ret;
@@ -75,16 +74,16 @@ let loading = () => {
 				}
 				<hr>
 				<h3>
-					<i class="fa-solid fa-compass"></i>
-					<span class="sidebarTitle">${i18n.sidebar.features}</span>
+					<i class='fa-solid fa-compass'></i>
+					<span class='sidebarTitle'>${i18n.sidebar.features}</span>
 				</h3>
-				<p><a href="javascript:switchLight()">
-					<i id="lightSwitchIcon" class="fa-solid fa-sun"></i>
-					<span class="sidebarTitle">${i18n.sidebar.toggleTheme}</span>
+				<p><a href='javascript:switchLight()'>
+					<i id='lightSwitchIcon' class='fa-solid fa-sun'></i>
+					<span class='sidebarTitle'>${i18n.sidebar.toggleTheme}</span>
 				</a></p>
 				<p>
-					<i class="fa-solid fa-clock"></i>
-					<span class="sidebarTitle" id="currentDateTime">${i18n.sidebar.loading}...</span>
+					<i class='fa-solid fa-clock'></i>
+					<span class='sidebarTitle' id='currentDateTime'>${i18n.sidebar.loading}...</span>
 				</p>
 			</div>
 		`;
@@ -101,72 +100,34 @@ let loading = () => {
 		}, 50);
 		switchLight();
 		switchLight();
-		let giscus = document.createElement("script");
-		giscus.src = "https://giscus.app/client.js";
-		giscus.dataset.repo = "chenyuan33/chenyuan33.github.io";
-		giscus.dataset.repoId = "R_kgDOLpttzQ";
-		giscus.dataset.category = "Announcements";
-		giscus.dataset.categoryId = "DIC_kwDOLpttzc4CgluD";
-		giscus.dataset.mapping = "pathname";
-		giscus.dataset.strict = "1";
-		giscus.dataset.reactionsEnabled = "1";
-		giscus.dataset.emitMetadata = "0";
-		giscus.dataset.inputPosition = "top";
-		giscus.dataset.theme = "preferred_color_scheme";
+		let giscus = document.createElement('script');
+		giscus.src = 'https://giscus.app/client.js';
+		giscus.dataset.repo = 'chenyuan33/chenyuan33.github.io';
+		giscus.dataset.repoId = 'R_kgDOLpttzQ';
+		giscus.dataset.category = 'Announcements';
+		giscus.dataset.categoryId = 'DIC_kwDOLpttzc4CgluD';
+		giscus.dataset.mapping = 'pathname';
+		giscus.dataset.strict = '1';
+		giscus.dataset.reactionsEnabled = '1';
+		giscus.dataset.emitMetadata = '0';
+		giscus.dataset.inputPosition = 'top';
+		giscus.dataset.theme = 'preferred_color_scheme';
 		giscus.dataset.lang = i18n.htmlLangName;
-		giscus.dataset.loading = "lazy";
-		giscus.crossorigin = "anonymous";
+		giscus.dataset.loading = 'lazy';
+		giscus.crossorigin = 'anonymous';
 		giscus.async = true;
 		document.body.appendChild(giscus);
-		Array.from(document.getElementsByClassName('supported')).forEach(x => x.innerHTML = '<i class="fa-solid fa-check"></i> ' + i18n.supporting.yes);
-		Array.from(document.getElementsByClassName('unsupported')).forEach(x => x.innerHTML = '<i class="fa-solid fa-xmark"></i> ' + i18n.supporting.no);
+		Array.from(document.getElementsByClassName('supported')).forEach(x => x.innerHTML = "<i class='fa-solid fa-check'></i> " + i18n.supporting.yes);
+		Array.from(document.getElementsByClassName('unsupported')).forEach(x => x.innerHTML = "<i class='fa-solid fa-xmark'></i> " + i18n.supporting.no);
 	}
 }, switchLight = () => {
-	if (localStorage.getItem("lightMode") === "dark") {
-		localStorage.lightMode = "light";
-		document.getElementById("lightSwitchIcon").classList = "fa-solid fa-sun";
-		volatileStyles.innerHTML = `
-			body, textarea {
-				color: black;
-				background-color: white;
-			}
-
-			blockquote {
-				background-color: #f9f9f9;
-				border-left: 5px solid #ccc;
-			}
-
-			a, .buttonInTable {
-				color: blue;
-			}
-
-			pre, code:not(pre code) {
-				background-color: lightgray;
-			}
-		`;
+	if (localStorage.getItem('lightMode') === 'dark') {
+		localStorage.lightMode = document.documentElement.style.colorScheme = 'light';
+		document.getElementById('lightSwitchIcon').classList = 'fa-solid fa-sun';
 	}
 	else {
-		localStorage.lightMode = "dark";
-		document.getElementById("lightSwitchIcon").classList = "fa-solid fa-moon";
-		volatileStyles.innerHTML = `
-			body, textarea {
-				color: white;
-				background-color: black;
-			}
-
-			blockquote {
-				background-color: gray;
-				border-left: 5px solid #ccc;
-			}
-
-			a, .buttonInTable {
-				color: cyan;
-			}
-
-			pre, code:not(pre code) {
-				background-color: darkgray;
-			}
-		`;
+		localStorage.lightMode = document.documentElement.style.colorScheme = 'dark';
+		document.getElementById('lightSwitchIcon').classList = 'fa-solid fa-moon';
 	}
 }, randomShuffle = arr => {
 	for (let i = arr.length - 1; i > 0; i--) {
@@ -190,3 +151,27 @@ fetch(`/i18n/${localStorage.lang}.json`)
 		'More information: ' + error
 	));
 window.addEventListener('load', loading);
+// https://browser-update.org/
+var $buoop = {
+	required: {
+		e:-6,
+		f:-6,
+		o:-6,
+		s:-6,
+		c:-6
+	},
+	insecure: true,
+	unsupported: true,
+	api: 2026.02
+}; 
+function $buo_f() {
+	var e = document.createElement("script"); 
+	e.src = "//browser-update.org/update.min.js"; 
+	document.body.appendChild(e);
+};
+try {
+	document.addEventListener("DOMContentLoaded", $buo_f, false);
+}
+catch(e) {
+	window.attachEvent("onload", $buo_f);
+}

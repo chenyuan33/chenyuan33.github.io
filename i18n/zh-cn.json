@@ -7,7 +7,7 @@
 	},
 	"sidebar": {
 		"navigation": "导航",
-		"mainPage": "主页",
+		"homePage": "首页",
 		"relatedLinks": "友情链接",
 		"changelog": "更新日志",
 		"faqs": "常见问题",
@@ -27,17 +27,16 @@
 		"tips": "页面走丢了！",
 		"tips2": "如果你认为这是 bug，请<a href=\"https://github.com/chenyuan33/chenyuan33.github.io/issues/new?template=zh_cn_bug_report.md\">报告 bug</a>。",
 		"links": {
-			"mainPage": "前往主页",
+			"homePage": "返回首页",
 			"goBack": "返回上一页"
 		}
 	},
 	"blog": {
-		"list": {
-			"name": "博客列表",
-			"empty": "暂无。"
-		}
+		"title": "博客列表",
+		"empty": "暂无。"
 	},
 	"tool": {
+		"title": "工具列表",
 		"luoguUserScoreCalc": {
 			"title": "[转载] 洛谷用户分数计算器",
 			"name": "[转载] <a href='https://www.luogu.com.cn/'>洛谷</a>用户分数计算器",
@@ -82,6 +81,45 @@
 		},
 		"mdeditor": {
 			"title": "Markdown 编辑器"
+		},
+		"visualizationOfSortingAlgo": {
+			"title": "排序算法可视化",
+			"refer": "算法流程可参考<a href='https://www.luogu.com.cn/article/n6pxq6h7'>这篇文章</a>。",
+			"recreate": {
+				"title": "重新创建数组",
+				"arraySize": "数组大小（过大会导致性能问题和可视化时间过长）：",
+				"manyDuplicated": "创建的数组中是否含有大量重复元素",
+				"makeRand": "创建随机数组",
+				"makeInc": "创建升序数组",
+				"makeDec": "创建降序数组"
+			},
+			"settings": {
+				"title": "设置",
+				"delay": "每一帧的时间间隔（单位：毫秒）：",
+				"pause": "暂停",
+				"continue": "继续",
+				"stop": "停止"
+			},
+			"sorting": {
+				"title": "排序",
+				"name": {
+					"bubbleSort": "冒泡排序",
+					"selectionSort": "选择排序",
+					"insertionSort": "插入排序",
+					"gnomeSort": "地精排序",
+					"cocktailSort": "鸡尾酒排序",
+					"shellSort": "希尔排序",
+					"heapSort": "堆排序",
+					"mergeSort": "<span id='mergeSortWayCountDisplay' style='display: none;'><span id='mergeSortWayCountDisplayNumber'></span> 路</span>归并排序",
+					"quickSort": "快速排序",
+					"bogoSort": "猴子排序",
+					"bogoBogoSort": "蠢猴排序",
+					"permutationSort": "全排列排序",
+					"slowSort": "慢速排序",
+					"stoogeSort": "臭皮匠排序"
+				},
+				"mergeSortWayCount": "归并排序路数"
+			}
 		}
 	}
 }

@@ -2,8 +2,8 @@
 <html>
 
 <head>
-	<script src="/helper.js"></script>
-	<title class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.title"></title>
+	<script src='/helper.js'></script>
+	<title class='wait-for-i18n' data-i18n='tool.luoguUserScoreCalc.title'></title>
 	<style>
 		input {
 			font: inherit;
@@ -40,19 +40,19 @@
 	</style>
 	<script>
 		function calc() {
-			let problem1 = Number(document.getElementById("problem1").value);
-			let problem2 = Number(document.getElementById("problem2").value);
-			let problem3 = Number(document.getElementById("problem3").value);
-			let problem4 = Number(document.getElementById("problem4").value);
-			let problem5 = Number(document.getElementById("problem5").value);
-			let problem6 = Number(document.getElementById("problem6").value);
-			let problem7 = Number(document.getElementById("problem7").value);
-			let goodArticles = Number(document.getElementById("good-articles").value);
-			let solution = Number(document.getElementById("solution").value);
-			let articles = Number(document.getElementById("articles").value);
-			let rating = Number(document.getElementById("rating").value);
-			let discusses = Number(document.getElementById("discusses").value);
-			let ccf = Number(document.getElementById("ccf").value);
+			let problem1 = Number(document.getElementById('problem1').value);
+			let problem2 = Number(document.getElementById('problem2').value);
+			let problem3 = Number(document.getElementById('problem3').value);
+			let problem4 = Number(document.getElementById('problem4').value);
+			let problem5 = Number(document.getElementById('problem5').value);
+			let problem6 = Number(document.getElementById('problem6').value);
+			let problem7 = Number(document.getElementById('problem7').value);
+			let goodArticles = Number(document.getElementById('good-articles').value);
+			let solution = Number(document.getElementById('solution').value);
+			let articles = Number(document.getElementById('articles').value);
+			let rating = Number(document.getElementById('rating').value);
+			let discusses = Number(document.getElementById('discusses').value);
+			let ccf = Number(document.getElementById('ccf').value);
 
 			let problemScore = (problem1 * 2 + problem2 * 3 + problem3 * 5 + problem4 * 6 + problem5 * 9 + problem6 * 10 + problem7 * 15) / 10000;
 			let articleScore = articles ? (goodArticles * 0.75 + solution * 0.25) / articles : 0;
@@ -60,7 +60,7 @@
 			let discussScore = discusses / 50;
 			let ccfScore = ccf / 100;
 			let totalScore = (problemScore * 0.7 + articleScore + ratingScore + discussScore * 0.3 + ccfScore * 2) / 5;
-			let ratingLevel = "";
+			let ratingLevel = '';
 			if (totalScore < 0.3) {
 				ratingLevel = "<span style='color:#bfbfbf'>Qualified</span>";
 			} else if (totalScore < 0.5) {
@@ -73,30 +73,30 @@
 				ratingLevel = "<span style='color:#fe4c61'>What's the fuck?</span>";
 			}
 
-			document.getElementById("problemScore").innerHTML = problemScore.toFixed(2);
-			document.getElementById("articleScore").innerHTML = articleScore.toFixed(2);
-			document.getElementById("ratingScore").innerHTML = ratingScore.toFixed(2);
-			document.getElementById("discussScore").innerHTML = discussScore.toFixed(2);
-			document.getElementById("ccfScore").innerHTML = ccfScore.toFixed(2);
-			document.getElementById("totalScore").innerHTML = totalScore.toFixed(2);
-			document.getElementById("ratingLevel").innerHTML = ratingLevel;
+			document.getElementById('problemScore').innerHTML = problemScore.toFixed(2);
+			document.getElementById('articleScore').innerHTML = articleScore.toFixed(2);
+			document.getElementById('ratingScore').innerHTML = ratingScore.toFixed(2);
+			document.getElementById('discussScore').innerHTML = discussScore.toFixed(2);
+			document.getElementById('ccfScore').innerHTML = ccfScore.toFixed(2);
+			document.getElementById('totalScore').innerHTML = totalScore.toFixed(2);
+			document.getElementById('ratingLevel').innerHTML = ratingLevel;
 		}
 	</script>
 </head>
 
 <body>
-	<h1 class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.name"></h1>
-	<p class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.desc"></p>
-	<h2 class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.input.title"></h2>
-	<h3 class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.input.problem.title"></h3>
+	<h1 class='wait-for-i18n' data-i18n='tool.luoguUserScoreCalc.name'></h1>
+	<p class='wait-for-i18n' data-i18n='tool.luoguUserScoreCalc.desc'></p>
+	<h2 class='wait-for-i18n' data-i18n='tool.luoguUserScoreCalc.input.title'></h2>
+	<h3 class='wait-for-i18n' data-i18n='tool.luoguUserScoreCalc.input.problem.title'></h3>
 	<table>
-		<tr class="wait-for-i18n" data-i18n="tableHead-key-value"></tr>
+		<tr class='wait-for-i18n' data-i18n='tableHead-key-value'></tr>
 		<script>
 			for (let i = 1; i < 8; i++) {
 				document.writeln(`
 					<tr>
-						<td><label for="prob${i}" id="probLabel${i}" class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.probDifficulty.p${i}"></label></td>
-						<td><input id="problem${i}" type="number" value="0" oninput="calc()" /></td>
+						<td><label for='prob${i}' id='probLabel${i}' class='wait-for-i18n' data-i18n='tool.luoguUserScoreCalc.probDifficulty.p${i}'></label></td>
+						<td><input id='problem${i}' type='number' value='0' oninput='calc()' /></td>
 					</tr>
 				`);
 			}
@@ -105,9 +105,9 @@
 	<script>
 		['article', 'other'].forEach(name => {
 			document.writeln(`
-				<h3 class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.input.${name}.title"></h3>
+				<h3 class='wait-for-i18n' data-i18n='tool.luoguUserScoreCalc.input.${name}.title'></h3>
 				<table>
-					<tr class="wait-for-i18n" data-i18n="tableHead-key-value"></tr>
+					<tr class='wait-for-i18n' data-i18n='tableHead-key-value'></tr>
 			`);
 			({
 				article: ['good-articles', 'solution', 'articles'],
@@ -115,8 +115,8 @@
 			})[name].forEach(ele => {
 				document.writeln(`
 					<tr>
-						<td><label for="${ele}" class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.input.${name}.${ele}"></label></td>
-						<td><input id="${ele}" type="number" value="0" oninput="calc()" /></td>
+						<td><label for='${ele}' class='wait-for-i18n' data-i18n='tool.luoguUserScoreCalc.input.${name}.${ele}'></label></td>
+						<td><input id='${ele}' type='number' value='0' oninput='calc()' /></td>
 					</tr>
 				`)
 			});
@@ -125,15 +125,15 @@
 			`);
 		});
 	</script>
-	<h2 class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.output.title"></h2>
+	<h2 class='wait-for-i18n' data-i18n='tool.luoguUserScoreCalc.output.title'></h2>
 	<table>
-		<tr class="wait-for-i18n" data-i18n="tableHead-key-value"></tr>
+		<tr class='wait-for-i18n' data-i18n='tableHead-key-value'></tr>
 		<script>
 			['problemScore', 'articleScore', 'ratingScore', 'discussScore', 'ccfScore', 'totalScore', 'ratingLevel'].forEach(ele => {
 				document.writeln(`
 					<tr>
-						<td class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.output.${ele}"></td>
-						<td id="${ele}"></td>
+						<td class='wait-for-i18n' data-i18n='tool.luoguUserScoreCalc.output.${ele}'></td>
+						<td id='${ele}'></td>
 					</tr>
 				`);
 			})

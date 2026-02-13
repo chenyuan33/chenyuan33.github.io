@@ -1,12 +1,12 @@
 let mdtohtml = (md) => {
-	let lines = md.split("\n\n"), html = "";
+	let lines = md.split('\n\n'), html = '';
 	lines.forEach(element => {
 		let line = element.trim();
-		if (line == "") {
+		if (line == '') {
 			return;
 		}
 		let x = line.split(/^(`{3,})(.*?)?\n([\s\S]*?)^(\1)/m), curlang = 'plain';
-		line = "";
+		line = '';
 		for (let i = 0; i < x.length; i++) {
 			if (i % 5 == 0) {
 				if (x[i].match(/^\s*>[\s\S]*/igm)) {
@@ -43,22 +43,22 @@ let mdtohtml = (md) => {
 					continue;
 				}
 				line += x[i]
-					.replace(/^# (.*?)$/igm, "</p><h1>$1</h1><p>")
-					.replace(/^## (.*?)$/igm, "</p><h2>$1</h2><p>")
-					.replace(/^### (.*?)$/igm, "</p><h3>$1</h3><p>")
-					.replace(/^#### (.*?)$/igm, "</p><h4>$1</h4><p>")
-					.replace(/^##### (.*?)$/igm, "</p><h5>$1</h5><p>")
-					.replace(/^###### (.*?)$/igm, "</p><h6>$1</h6><p>")
-					.replace(/\x20\x20\n/igm, "<br />")
-					.replace(/\*\*\*([\s\S]*?)\*\*\*/igm, "<strong><em>$1</em></strong>")
-					.replace(/\*\*([\s\S]*?)\*\*/igm, "<strong>$1</strong>")
-					.replace(/\*([\s\S]*?)\*/igm, "<em>$1</em>")
-					.replace(/\b___([\s\S]*?)___\b/igm, "<strong><em>$1</em></strong>")
-					.replace(/\b__([\s\S]*?)__\b/igm, "<strong>$1</strong>")
-					.replace(/\b_([\s\S]*?)_\b/igm, "<em>$1</em>")
-					.replace(/`(.+?)`/igm, "<code>$1</code>");
+					.replace(/^# (.*?)$/igm, '</p><h1>$1</h1><p>')
+					.replace(/^## (.*?)$/igm, '</p><h2>$1</h2><p>')
+					.replace(/^### (.*?)$/igm, '</p><h3>$1</h3><p>')
+					.replace(/^#### (.*?)$/igm, '</p><h4>$1</h4><p>')
+					.replace(/^##### (.*?)$/igm, '</p><h5>$1</h5><p>')
+					.replace(/^###### (.*?)$/igm, '</p><h6>$1</h6><p>')
+					.replace(/\x20\x20\n/igm, '<br />')
+					.replace(/\*\*\*([\s\S]*?)\*\*\*/igm, '<strong><em>$1</em></strong>')
+					.replace(/\*\*([\s\S]*?)\*\*/igm, '<strong>$1</strong>')
+					.replace(/\*([\s\S]*?)\*/igm, '<em>$1</em>')
+					.replace(/\b___([\s\S]*?)___\b/igm, '<strong><em>$1</em></strong>')
+					.replace(/\b__([\s\S]*?)__\b/igm, '<strong>$1</strong>')
+					.replace(/\b_([\s\S]*?)_\b/igm, '<em>$1</em>')
+					.replace(/`(.+?)`/igm, '<code>$1</code>');
 			} else if (i % 5 == 1) {
-				line += "<pre><code>";
+				line += '<pre><code>';
 			} else if (i % 5 == 2) {
 				if (x[i] === undefined) {
 					x[i] = '';
@@ -70,12 +70,12 @@ let mdtohtml = (md) => {
 					.replace(/</g, '&lt;')
 					.replace(/>/g, '&gt;');
 			} else if (i % 5 == 4) {
-				line += "</code></pre>";
+				line += '</code></pre>';
 			}
 		}
 		if (line.startsWith('\t') || line.startsWith('    ')) {
 			let x = line.split('\n'), i = 0;
-			line = "<pre><code>";
+			line = '<pre><code>';
 			for (; i < x.length && (x[i].startsWith('\t') || x[i].startsWith('    ')); i++) {
 				if (x[i].startsWith('\t')) {
 					line += x[i].substring(1) + '\n';
@@ -83,11 +83,11 @@ let mdtohtml = (md) => {
 					line += x[i].substring(4) + '\n';
 				}
 			}
-			line += "</code></pre>" + mdtohtml(x.slice(i));
+			line += '</code></pre>' + mdtohtml(x.slice(i));
 		}
 		html += `<p>${line}</p>`;
 	});
-	return html.replace(/<p>\s*<\/p>/igm, "");
+	return html.replace(/<p>\s*<\/p>/igm, '');
 }
 let createMdEditor = (id, lang) => {
 	if (typeof lang === 'string' && ['zh', 'zh-cn'].find(x => x == lang.toLowerCase()) !== undefined) {
@@ -97,7 +97,7 @@ let createMdEditor = (id, lang) => {
 		lang = 'en-us';
 	}
 	const i18n = {
-		"en-us": {
+		'en-us': {
 			about: mdtohtml(`
 				## About
 				In the editor above, the left pane displays your Markdown text input, while the right pane shows the rendered HTML code. As you type, the HTML code on the right updates in real time. All Markdown-to-HTML conversion and display occurs locally, eliminating concerns about data leakage.
@@ -120,7 +120,7 @@ let createMdEditor = (id, lang) => {
 				- Let the editor access your website (if you choose to) (Documentation not yet written)
 			`)
 		},
-		"zh-cn": {
+		'zh-cn': {
 			about: mdtohtml(`
 				## 关于
 				上面的编辑器中，左边是输入的 Markdown 文本，右边是渲染后的 HTML 代码。输入文本时，右边的 HTML 代码会实时更新。所有 Markdown 到 HTML 的转换和显示均在本地进行，无需担心数据泄露的问题。
@@ -291,7 +291,7 @@ let createMdEditor = (id, lang) => {
 												const tagName = node.tagName.toLowerCase();
 												const children = Array.from(node.childNodes);
 												result += indent + '<' + tagName;
-												Array.from(node.attributes).forEach(attr => result += ` ${attr.name}="${attr.value}"`);
+												Array.from(node.attributes).forEach(attr => result += ` ${attr.name}='${attr.value}'`);
 												if (children.length === 0) {
 													result += ' />\n';
 												}
@@ -352,22 +352,22 @@ let createMdEditor = (id, lang) => {
 		}
 	];
 	curMdEditor = document.createElement('div');
-	curMdEditor.classList.add("mdeditor");
+	curMdEditor.classList.add('mdeditor');
 	curMdEditor.innerHTML = `
-		<table class="mdeditor-table">
+		<table class='mdeditor-table'>
 			<tr>
-				<td colspan="2">
-					<div class="mdeditor-buttondiv">
+				<td colspan='2'>
+					<div class='mdeditor-buttondiv'>
 						${(() => {
 							let str = '';
 							features.forEach(ele => str += `
 								<button
-									id="mdeditor-button-${ele.name}${id}"
-									class="mdeditor-button"
+									id='mdeditor-button-${ele.name}${id}'
+									class='mdeditor-button'
 									onclick="document.getElementById('mdeditor-${ele.name}${id}').style.display='block'"
 								>
-									<i class="fa-solid fa-${ele.fa}"></i>
-									<div class="mdeditor-button-name" id="mdeditor-button-name-${ele.name}${id}">${ele.title[lang]}</div>
+									<i class='fa-solid fa-${ele.fa}'></i>
+									<div class='mdeditor-button-name' id='mdeditor-button-name-${ele.name}${id}'>${ele.title[lang]}</div>
 								</button>
 							`);
 							return str;
@@ -377,21 +377,21 @@ let createMdEditor = (id, lang) => {
 			</tr>
 			<tr>
 				<td>
-					<textarea class="mdeditor-input" id="mdeditor-input${id}"></textarea>
+					<textarea class='mdeditor-input' id='mdeditor-input${id}'></textarea>
 				</td>
 				<td>
-					<div class="mdeditor-output" id="mdeditor-output${id}"></div>
+					<div class='mdeditor-output' id='mdeditor-output${id}'></div>
 				</td>
 			</tr>
 		</table>
 		${(() => {
 			let str = '';
 			features.forEach(ele => str += `
-				<div class="mdeditor-doc" id="mdeditor-${ele.name}${id}">
-					<div class="mdeditor-doc-background" onclick="document.getElementById('mdeditor-${ele.name}${id}').style.display='none'"></div>
-					<div class="mdeditor-doc-content">
-						<button class="mdeditor-close-doc-button" onclick="document.getElementById('mdeditor-${ele.name}${id}').style.display='none'">
-							<i class="fa-solid fa-circle-xmark"></i>
+				<div class='mdeditor-doc' id='mdeditor-${ele.name}${id}'>
+					<div class='mdeditor-doc-background' onclick="document.getElementById('mdeditor-${ele.name}${id}').style.display='none'"></div>
+					<div class='mdeditor-doc-content'>
+						<button class='mdeditor-close-doc-button' onclick="document.getElementById('mdeditor-${ele.name}${id}').style.display='none'">
+							<i class='fa-solid fa-circle-xmark'></i>
 						</button>
 						${i18n[ele.name]}
 					</div>
@@ -408,7 +408,7 @@ let createMdEditor = (id, lang) => {
 		})()}
 	`;
 	document.body.appendChild(curMdEditor);
-	window.addEventListener('load', () => document.getElementById(`mdeditor-input${id}`).addEventListener("input", () => document.getElementById(`mdeditor-output${id}`).innerHTML = mdtohtml(document.getElementById(`mdeditor-input${id}`).value)));
+	window.addEventListener('load', () => document.getElementById(`mdeditor-input${id}`).addEventListener('input', () => document.getElementById(`mdeditor-output${id}`).innerHTML = mdtohtml(document.getElementById(`mdeditor-input${id}`).value)));
 }
 let mdEditorStyle = document.createElement('style');
 mdEditorStyle.innerHTML = `
