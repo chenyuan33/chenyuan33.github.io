@@ -151,14 +151,13 @@ fetch(`/i18n/${localStorage.lang}.json`)
 		'More information: ' + error
 	));
 window.addEventListener('load', loading);
-// https://browser-update.org/
 var $buoop = {
 	required: {
-		e:-6,
-		f:-6,
-		o:-6,
-		s:-6,
-		c:-6
+		e: -6,
+		f: -6,
+		o: -6,
+		s: -6,
+		c: -6
 	},
 	insecure: true,
 	unsupported: true,

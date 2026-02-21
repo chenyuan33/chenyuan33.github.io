@@ -15,23 +15,28 @@
 <body>
 	<h1>夸克 - 快照</h1>
 	<p><a href="/zh-cn/game/quarks/index.html">回到正式版 (v2.1.1)</a></p>
-	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv', 'changelogDiv'], 'main')">游戏</button>
-	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv', 'changelogDiv'], 'achievements')">成就</button>
-	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv', 'changelogDiv'], 'archiveDiv')">读档/存档</button>
-	<button onclick="funcs.shown(['main', 'achievements', 'archiveDiv', 'changelogDiv'], 'changelogDiv')">更新日志</button>
+	<button onclick="shown(['main', 'achievements', 'archiveDiv', 'changelogDiv'], 'main')">游戏</button>
+	<button onclick="shown(['main', 'achievements', 'archiveDiv', 'changelogDiv'], 'achievements')">成就</button>
+	<button onclick="shown(['main', 'achievements', 'archiveDiv', 'changelogDiv'], 'archiveDiv')">读档/存档</button>
+	<button onclick="shown(['main', 'achievements', 'archiveDiv', 'changelogDiv'], 'changelogDiv')">更新日志</button>
 	<div id="main" class="shown">
 	</div>
 	<div id="achievements" class="hidden">
 	</div>
 	<div id="archiveDiv" class="hidden">
 		<h2>存档/读档</h2>
-		<button onclick="funcs.get_current_archive()">存档</button>
-		<button onclick="funcs.set_current_archive()">读档</button>
+		<button onclick="get_current_archive()">存档</button>
+		<button onclick="set_current_archive()">读档</button>
 		<label for="archive">存档内容：</label>
 		<textarea id="archive" title="存档内容" placeholder="存档内容"></textarea>
 	</div>
 	<div id="changelogDiv" class="hidden">
 		<h2>更新日志</h2>
+		<h3>v3.0.0 pre 5</h3>
+		<ul>
+			<li>修复了“获取最大”按钮的部分已知 bug。</li>
+			<li>更新了成就系统的显示功能和部分成就的名称。</li>
+		</ul>
 		<h3>v3.0.0 pre 4</h3>
 		<ul>
 			<li>修复了“浮点数长度没有设置上限，导致表格直接炸好远”的问题。</li>
