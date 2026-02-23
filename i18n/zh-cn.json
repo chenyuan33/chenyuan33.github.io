@@ -67,7 +67,14 @@
 				"discussScore": "学术活跃",
 				"ccfScore": "成就分数",
 				"totalScore": "综合分数",
-				"ratingLevel": "评级"
+				"ratingLevel": "评级",
+				"ratingLevels": {
+					"lv1": "不合格",
+					"lv2": "合格",
+					"lv3": "良好",
+					"lv4": "优秀",
+					"lv5": "超级"
+				}
 			},
 			"probDifficulty": {
 				"p1": "入门",

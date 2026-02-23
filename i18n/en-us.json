@@ -67,7 +67,14 @@
 				"discussScore": "Academic Activity",
 				"ccfScore": "Achievement Score",
 				"totalScore": "Total Score",
-				"ratingLevel": "Rating"
+				"ratingLevel": "Rating",
+				"ratingLevels": {
+					"lv1": "Qualified",
+					"lv2": "Pass",
+					"lv3": "Excellent",
+					"lv4": "Outstanding",
+					"lv5": "Super"
+				}
 			},
 			"probDifficulty": {
 				"p1": "Red",

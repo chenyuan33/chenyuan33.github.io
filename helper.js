@@ -1,10 +1,10 @@
 document.writeln(`
-	<meta charset='UTF-8' />
-	<meta name='viewport' content='width=device-width, initial-scale=1' />
-	<link rel='stylesheet' type='text/css' href='/csses.css' />
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
-	<script src='https://kit.fontawesome.com/49ad5e587e.js' crossorigin='anonymous'></script>
-	<link rel='icon' type='image/png' href='/favicon.png' />
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" type="text/css" href="/csses.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<script src="https://kit.fontawesome.com/49ad5e587e.js" crossorigin="anonymous"></script>
+	<link rel="icon" type="image/png" href="/favicon.png" />
 `);
 let langList = ['en-us', 'zh-cn'];
 if (localStorage.getItem('lang') === null) {
@@ -34,39 +34,39 @@ let loading = () => {
 		let sidebar = document.createElement('div');
 		sidebar.id = 'sidebar';
 		sidebar.innerHTML = `
-			<div id='sidebarContent'>
+			<div id="sidebarContent">
 				<h3>
-					<i class='fa-solid fa-location-dot'></i>
-					<span class='sidebarTitle'>${i18n.sidebar.navigation}</span>
+					<i class="fa-solid fa-location-dot"></i>
+					<span class="sidebarTitle">${i18n.sidebar.navigation}</span>
 				</h3>
-				<p><a href='/${i18n.langName}/index.html'>
-					<i class='fa-solid fa-house'></i>
-					<span class='sidebarTitle'>${i18n.sidebar.homePage}</span>
+				<p><a href="/${i18n.langName}/index.html">
+					<i class="fa-solid fa-house"></i>
+					<span class="sidebarTitle">${i18n.sidebar.homePage}</span>
 				</a></p>
-				<p><a href='/${i18n.langName}/links.html'>
-					<i class='fa-solid fa-link'></i>
-					<span class='sidebarTitle'>${i18n.sidebar.relatedLinks}</span>
+				<p><a href="/${i18n.langName}/links.html">
+					<i class="fa-solid fa-link"></i>
+					<span class="sidebarTitle">${i18n.sidebar.relatedLinks}</span>
 				</a></p>
-				<p><a href='/${i18n.langName}/changelog.html'>
-					<i class='fa-solid fa-clock-rotate-left'></i>
-					<span class='sidebarTitle'>${i18n.sidebar.changelog}</span>
+				<p><a href="/${i18n.langName}/changelog.html">
+					<i class="fa-solid fa-clock-rotate-left"></i>
+					<span class="sidebarTitle">${i18n.sidebar.changelog}</span>
 				</a></p>
-				<p><a href='/${i18n.langName}/faqs.html'>
-					<i class='fa-solid fa-question-circle'></i>
-					<span class='sidebarTitle'>${i18n.sidebar.faqs}</span>
+				<p><a href="/${i18n.langName}/faqs.html">
+					<i class="fa-solid fa-question-circle"></i>
+					<span class="sidebarTitle">${i18n.sidebar.faqs}</span>
 				</a></p>
 				<hr>
 				<h3>
-					<i class='fa-solid fa-language'></i>
-					<span class='sidebarTitle'>${i18n.sidebar.languageChoice}</span>
+					<i class="fa-solid fa-language"></i>
+					<span class="sidebarTitle">${i18n.sidebar.languageChoice}</span>
 				</h3>
 				${
 					(() => {
 						let ret = '';
 						langList.forEach(totLang => ret += `
-							<p ${i18n.langName === totLang ? "class='sidebarCurrentChoice'" : ''}><a href="javascript:modifyLang('${totLang}')">
-								<i class='fa-solid fa-${i18n.langName == totLang ? 'check-circle' : 'circle'}'></i>
-								<span class='sidebarTitle'>${i18n.NameOfEachLang[totLang]}</span>
+							<p ${i18n.langName === totLang ? 'class="sidebarCurrentChoice"' : ''}><a href="javascript:modifyLang('${totLang}')">
+								<i class="fa-solid fa-${i18n.langName == totLang ? 'check-circle' : 'circle'}"></i>
+								<span class="sidebarTitle">${i18n.NameOfEachLang[totLang]}</span>
 							</a></p>
 						`)
 						return ret;
@@ -74,16 +74,16 @@ let loading = () => {
 				}
 				<hr>
 				<h3>
-					<i class='fa-solid fa-compass'></i>
-					<span class='sidebarTitle'>${i18n.sidebar.features}</span>
+					<i class="fa-solid fa-compass"></i>
+					<span class="sidebarTitle">${i18n.sidebar.features}</span>
 				</h3>
-				<p><a href='javascript:switchLight()'>
-					<i id='lightSwitchIcon' class='fa-solid fa-sun'></i>
-					<span class='sidebarTitle'>${i18n.sidebar.toggleTheme}</span>
+				<p><a href="javascript:switchLight()">
+					<i id="lightSwitchIcon" class="fa-solid fa-sun"></i>
+					<span class="sidebarTitle">${i18n.sidebar.toggleTheme}</span>
 				</a></p>
 				<p>
-					<i class='fa-solid fa-clock'></i>
-					<span class='sidebarTitle' id='currentDateTime'>${i18n.sidebar.loading}...</span>
+					<i class="fa-solid fa-clock"></i>
+					<span class="sidebarTitle" id="currentDateTime">${i18n.sidebar.loading}...</span>
 				</p>
 			</div>
 		`;
@@ -117,8 +117,8 @@ let loading = () => {
 		giscus.crossorigin = 'anonymous';
 		giscus.async = true;
 		document.body.appendChild(giscus);
-		Array.from(document.getElementsByClassName('supported')).forEach(x => x.innerHTML = "<i class='fa-solid fa-check'></i> " + i18n.supporting.yes);
-		Array.from(document.getElementsByClassName('unsupported')).forEach(x => x.innerHTML = "<i class='fa-solid fa-xmark'></i> " + i18n.supporting.no);
+		Array.from(document.getElementsByClassName('supported')).forEach(x => x.innerHTML = '<i class="fa-solid fa-check"></i> ' + i18n.supporting.yes);
+		Array.from(document.getElementsByClassName('unsupported')).forEach(x => x.innerHTML = '<i class="fa-solid fa-xmark"></i> ' + i18n.supporting.no);
 	}
 }, switchLight = () => {
 	if (localStorage.getItem('lightMode') === 'dark') {
@@ -164,8 +164,8 @@ var $buoop = {
 	api: 2026.02
 }; 
 function $buo_f() {
-	var e = document.createElement("script"); 
-	e.src = "//browser-update.org/update.min.js"; 
+	var e = document.createElement('script'); 
+	e.src = '//browser-update.org/update.min.js'; 
 	document.body.appendChild(e);
 };
 try {

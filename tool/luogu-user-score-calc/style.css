@@ -1,0 +1,32 @@
+input {
+	font: inherit;
+	margin: 1px;
+}
+
+#probLabel1 {
+	color: #fe4c61;
+}
+
+#probLabel2 {
+	color: #f39c11;
+}
+
+#probLabel3 {
+	color: #ffc116;
+}
+
+#probLabel4 {
+	color: #52c41a;
+}
+
+#probLabel5 {
+	color: #3498db;
+}
+
+#probLabel6 {
+	color: #9d3dcf;
+}
+
+#probLabel7 {
+	color: #0e1d69;
+}

@@ -1,3 +1,8 @@
+#archive {
+	width: 100%;
+	height: 100px;
+}
+
 .hidden {
 	display: none;
 }
@@ -5,38 +10,60 @@
 .shown {
 	display: block;
 	border-style: solid;
+	border-radius: 10px;
 	margin: 10px;
 	padding: 10px;
 }
 
 #achievement-container {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.achievement-info {
+	border-style: solid;
+	border-radius: 5px;
+	margin: 10px;
+	padding: 10px;
+	position: relative;
 }
 
 .achievement-getted {
-	border-style: solid;
-	margin: 10px;
-	padding: 10px;
-	background-color: green;
+	background-color: lightgreen;
 }
 
 .achievement-ungetted {
-	border-style: solid;
-	margin: 10px;
-	padding: 10px;
-	background-color: red;
+	background-color: pink;
 }
 
 .achievement-desc {
-	font-style: italic;
-	color: gray;
+	display: none;
+	border: solid;
+	border-radius: 5px;
+	position: absolute;
+	top: -40px;
+	left: 50%;
+	transform: translateX(-50%);
+	white-space: nowrap;
+	padding: 5px;
+	background-color: inherit;
+}
+
+.achievement-desc::after {
+	content: '';
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	border: 5px solid transparent;
+	border-top-color: rgba(0, 0, 0, 0.8);
 }
 
 #hadAchievements {
 	border-style: solid;
+	border-radius: 5px;
 	margin: 10px;
-	padding: 10px;
+	padding: 20px;
 	background-color: yellow;
 	color: black;
 	position: absolute;

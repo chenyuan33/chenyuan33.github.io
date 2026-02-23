@@ -210,7 +210,7 @@ var flush = ['all'], paused = false, get_current_archive = () => {
 			check: () => player.quark.length > 2 && player.quark[2][0].gt(new BigNumber(0))
 		},
 		quark_dimension_2_getter_4th: {
-			title: "实在不知道起啥名了啊啊啊",
+			title: "加强加强速度",
 			desc: "获取一个维度 2 的四阶夸克获取器。",
 			check: () => player.quark.length > 2 && player.quark[2].length > 4 && player.quark[2][4][0].gt(new BigNumber(0))
 		},
@@ -260,15 +260,26 @@ var flush = ['all'], paused = false, get_current_archive = () => {
 					`;
 					for (let key in achievements) {
 						str += `
-							<p class="achievement-${player.achievements[key] ? "" : "un"}getted">
-								${achievements[key].title}
-								<br />
-								<span class="achievement-desc">${achievements[key].desc}</span>
+							<p class="achievement-info achievement-${player.achievements[key] ? "" : "un"}getted" id="achievement-${key}">
+								<i class="fa-solid fa-${player.achievements[key] ? "check" : "xmark"}"></i>
+								<strong>${achievements[key].title}</strong>
+								<span class="achievement-desc" id="achievement-desc-${key}">${achievements[key].desc}</span>
 							</p>
 						`;
 					}
-					document.getElementById("achievements").innerHTML = str + `
+					str += `
 						</div>
+						<style>
+					`
+					for (let key in achievements) {
+						str += `
+							#achievement-${key}:hover #achievement-desc-${key} {
+								display: inline;
+							}
+						`;
+					}
+					document.getElementById("achievements").innerHTML = str + `
+						</style>
 					`;
 					break;
 				}
@@ -405,9 +416,9 @@ var flush = ['all'], paused = false, get_current_archive = () => {
 					<p>${achievements[key].desc}</p>
 				`;
 				setTimeout(() => document.getElementById("hadAchievements").style.display = "none", 5000);
+				flush.push('achievements');
 			}
 		}
-		flush.push('achievements');
 	}, 50);
 	setTimeout(() => setInterval(() => localStorage.game_quarks_snapshot = btoa(JSON.stringify(player)), 50), 1000);
 };

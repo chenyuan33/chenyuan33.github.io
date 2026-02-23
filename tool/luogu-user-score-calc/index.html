@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script src="/helper.js"></script>
+	<title class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.title"></title>
+	<link rel="stylesheet" type="text/css" href="/tool/luogu-user-score-calc/style.css" />
+	<script src="/tool/luogu-user-score-calc/main.js"></script>
+</head>
+
+<body>
+	<h1 class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.name"></h1>
+	<p class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.desc"></p>
+	<h2 class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.input.title"></h2>
+	<h3 class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.input.problem.title"></h3>
+	<table>
+		<tr class="wait-for-i18n" data-i18n="tableHead-key-value"></tr>
+		<script>
+			for (let i = 1; i < 8; i++) {
+				document.writeln(`
+					<tr>
+						<td><label for="prob${i}" id="probLabel${i}" class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.probDifficulty.p${i}"></label></td>
+						<td><input id="problem${i}" type="number" value="0" oninput="calc()" /></td>
+					</tr>
+				`);
+			}
+		</script>
+	</table>
+	<script>
+		["article", "other"].forEach(name => {
+			document.writeln(`
+				<h3 class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.input.${name}.title"></h3>
+				<table>
+					<tr class="wait-for-i18n" data-i18n="tableHead-key-value"></tr>
+			`);
+			({
+				article: ["good-articles", "solution", "articles"],
+				other: ["rating", "discusses", "ccf"]
+			})[name].forEach(ele => {
+				document.writeln(`
+					<tr>
+						<td><label for="${ele}" class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.input.${name}.${ele}"></label></td>
+						<td><input id="${ele}" type="number" value="0" oninput="calc()" /></td>
+					</tr>
+				`)
+			});
+			document.writeln(`
+				</table>
+			`);
+		});
+	</script>
+	<h2 class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.output.title"></h2>
+	<table>
+		<tr class="wait-for-i18n" data-i18n="tableHead-key-value"></tr>
+		<script>
+			["problemScore", "articleScore", "ratingScore", "discussScore", "ccfScore", "totalScore", "ratingLevel"].forEach(ele => {
+				document.writeln(`
+					<tr>
+						<td class="wait-for-i18n" data-i18n="tool.luoguUserScoreCalc.output.${ele}"></td>
+						<td id="${ele}"></td>
+					</tr>
+				`);
+			})
+		</script>
+	</table>
+	<script>
+		calc();
+	</script>
+</body>
+
+</html>
