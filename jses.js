@@ -111,40 +111,12 @@ let sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms)), scripts = (
 	if (localStorage.getItem("lightMode") === "dark") {
 		localStorage.lightMode = "light";
 		document.getElementById("lightSwitchIcon").classList = "fa-solid fa-sun";
-		volatileStyles.innerHTML = `
-			body, textarea {
-				color: black;
-				background-color: white;
-			}
-
-			blockquote {
-				background-color: #f9f9f9;
-				border-left: 5px solid #ccc;
-			}
-
-			a, .buttonInTable {
-				color: blue;
-			}
-		`;
+		document.documentElement.style.colorScheme = 'light';
 	}
 	else {
 		localStorage.lightMode = "dark";
 		document.getElementById("lightSwitchIcon").classList = "fa-solid fa-moon";
-		volatileStyles.innerHTML = `
-			body, textarea {
-				color: white;
-				background-color: black;
-			}
-
-			blockquote {
-				background-color: gray;
-				border-left: 5px solid #ccc;
-			}
-
-			a, .buttonInTable {
-				color: cyan;
-			}
-		`;
+		document.documentElement.style.colorScheme = 'dark';
 	}
 }, randomShuffle = arr => {
 	for (let i = arr.length - 1; i > 0; i--) {

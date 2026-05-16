@@ -13,15 +13,36 @@
 		"faqs": "常见问题",
 		"languageChoice": "切换语言",
 		"features": "功能",
-		"toggleTheme": "切换主题",
-		"loading": "加载中"
+		"toggleTheme": "切换主题"
 	},
+	"loading": "少女祈祷中……",
 	"siteName": "cy3's site",
+	"error": {
+		"title": "出错啦",
+		"about": "如有疑问，请联系网站所有者，并发送详细信息以及复现该错误的方式。",
+		"details": "详细信息：",
+		"copyDetails": "复制详细信息",
+		"type": "错误类型",
+		"openedURL": "打开的网址",
+		"error": {
+			"title": "错误",
+			"filename": "文件名",
+			"lineno": "行号",
+			"colno": "列号",
+			"message": "错误信息"
+		},
+		"unhandledrejection": {
+			"title": "未捕获的 Promise Reject",
+			"reason": "原因"
+		}
+	},
 	"supporting": {
 		"yes": "支持",
 		"no": "不支持"
 	},
-	"tableHead-key-value": "<th>项目</th><th>内容</th>",
+	"ok": "确定",
+	"cancel": "取消",
+	"tableHeadKeyValue": "<tr><th>项目</th><th>内容</th></tr>",
 	"notFoundPage": {
 		"title": "404 页面未找到",
 		"tips": "页面走丢了！",
@@ -35,16 +56,264 @@
 		"title": "博客列表",
 		"empty": "暂无。"
 	},
+	"game": {
+		"title": "游戏",
+		"quarks": {
+			"title": "夸克",
+			"game": {
+				"title": "游戏",
+				"aboutPause": "您已暂停游戏。点击设置中的<button onclick=\"pause()\">继续</button>按钮结束暂停。",
+				"currentQuark": "你有 @ 夸克",
+				"dimension": "维度",
+				"getQuark": "获取一个夸克",
+				"getQuarkGetter": "花费 @ 夸克获取一个",
+				"getQuarkMax": "获取最大",
+				"getQuarkMaxDimension": "最大化当前维度的所有夸克获取器",
+				"getQuarkMaxAll": "最大化所有夸克获取器",
+				"convertQuark": "清空这一维度并转换出下一维度 @ 夸克",
+				"convertQuarkLock": "达到 1e30 夸克后解锁",
+				"quarkPointsText": "你在这一维度有 @ 夸克点数，上一维度的夸克将会拥有 @x 的乘数。",
+				"quarkGettersTableHead": {
+					"id": "获取器编号",
+					"owned": "拥有数量",
+					"bought": "购买数量",
+					"getOne": "获取一个",
+					"getMax": "获取最大"
+				}
+			},
+			"achievements": {
+				"title": "成就",
+				"unlock": "获得成就",
+				"firstQuark": {
+					"title": "夸克",
+					"desc": "获得一个夸克。"
+				},
+				"quarkGetter": {
+					"title": "速度",
+					"desc": "获取一个夸克获取器。"
+				},
+				"quarkGetter2": {
+					"title": "加速度",
+					"desc": "用获取器获取获取器！（获取一个夸克获取器 #2）"
+				},
+				"quarkGetter3": {
+					"title": "多项式增长",
+					"desc": "用获取器获取的获取器获取获取器！（获取一个夸克获取器 #3）"
+				},
+				"quarkGetter4": {
+					"title": "无限循环",
+					"desc": "用获取器获取的获取器获取可以获取获取器的获取器！（获取一个夸克获取器 #4）"
+				},
+				"quark1e10": {
+					"title": "一个小目标",
+					"desc": "获得 1e10 夸克。"
+				},
+				"quark1e15": {
+					"title": "好多夸克",
+					"desc": "获得 1e15 夸克。"
+				},
+				"quark1e20": {
+					"title": "更多夸克",
+					"desc": "获得 1e20 夸克。"
+				},
+				"quark1e25": {
+					"title": "超多夸克",
+					"desc": "获得 1e25 夸克。"
+				},
+				"quarkDimension1": {
+					"title": "新大陆",
+					"desc": "获得一个拥有维度 1 的夸克。"
+				},
+				"quarkDimension1getted2": {
+					"title": "再一次",
+					"desc": "拥有两个维度 1 的夸克。"
+				},
+				"quarkDimension1getter": {
+					"title": "来自另一维度的速度提升方式",
+					"desc": "获取器加强获取器！（获得一个维度 1 的夸克获取器）"
+				},
+				"quarkDimension1getter2": {
+					"title": "提升速度的加速度",
+					"desc": "用获取器获取的获取器加强获取器！（获得一个维度 1 的二阶夸克获取器）"
+				},
+				"quarkDimension1getter3": {
+					"title": "指数增长的增长速度",
+					"desc": "用获取器获取的获取器获取可以加强获取器的获取器！（获取一个维度 1 的三阶夸克获取器）"
+				},
+				"quarkDimension1getter4": {
+					"title": "更多无限循环",
+					"desc": "用获取器获取的获取器获取可以获取用以加强获取器的获取器的获取器！（获取一个维度 1 的四阶夸克获取器）"
+				},
+				"quarkDimension2": {
+					"title": "禁止套娃",
+					"desc": "获取一个拥有维度 2 的夸克。"
+				},
+				"quarkDimension2getter4": {
+					"title": "加强加强速度",
+					"desc": "获取一个维度 2 的四阶夸克获取器。"
+				},
+				"quarkDimension3": {
+					"title": "层层递进",
+					"desc": "获取一个拥有维度 3 的夸克。"
+				},
+				"quarkDimension4": {
+					"title": "进化",
+					"desc": "获取一个拥有维度 4 的夸克。"
+				},
+				"theEnd": {
+					"title": "达成结局",
+					"desc": "获取一个拥有维度 10 的夸克。"
+				}
+			},
+			"settings": {
+				"title": "设置",
+				"hardReset": {
+					"btn": "硬重置",
+					"title": "提示",
+					"notice1": "你确定要重置你的进度吗？<strong>这将会导致</strong><span class=\"error\">丢失所有游戏数据和成就</span>。",
+					"notice2": "如果你想要备份存档，请先点击“取消”，然后前往存档/读档界面获取并保存。"
+				},
+				"pause": {
+					"pause": "暂停",
+					"continue": "继续"
+				},
+				"archive": {
+					"get": {
+						"btn": "查看当前存档",
+						"title": "存档内容",
+						"notice": "请注意存档可能包含 <code>+</code>、<code>/</code> 或 <code>=</code>，手动复制时<span style=\"color: red;\">不能</span>直接双击，可能导致存档内容不完整，使加载出现错误或产生非预期结果。",
+						"copy": "复制",
+						"copyAndClose": "复制并关闭",
+						"copied": "复制成功"
+					},
+					"cpy": {
+						"btn": "复制当前存档",
+						"message": "存档内容已复制到剪贴板"
+					},
+					"set": {
+						"btn": "加载存档",
+						"notice1": "<strong>加载新的存档会</strong><span class=\"error\">覆盖原有存档，并丢失所有原有游戏数据和成就</span>。",
+						"notice2": "如果你想要备份存档，请先点击“取消”，然后前往存档/读档界面获取并保存。",
+						"notice3": "请输入存档内容：",
+						"sure": "加载存档并覆盖原存档",
+						"success": "存档加载成功",
+						"failed": {
+							"header": "存档加载失败",
+							"notice1": "无法读取存档内容。<strong>请确保存档</strong><span class=\"error\">完整且无误</span>。",
+							"notice2": "<strong>如有疑问或想要修复，请咨询网站所有者，</strong><span class=\"error\">同时发送错误信息和存档内容</span>。"
+						}
+					}
+				}
+			},
+			"changelog": {
+				"title": "更新日志",
+				"content": {
+					"1": {
+						"title": "生活更新",
+						"0": {
+							"0": [
+								"添加成就、夸克和生活。"
+							]
+						}
+					},
+					"2": {
+						"title": "维度更新",
+						"0": {
+							"0": [
+								"重命名这个游戏：将 <code>从夸克到生活</code> 改为 <code>夸克</code>。",
+								"移除生活。",
+								"添加夸克维度。",
+								"添加夸克获取器最大化按钮。"
+							],
+							"1": [
+								"修复一些 bug。"
+							]
+						},
+						"1": {
+							"0": [
+								"添加更新日志。",
+								"添加硬重置功能。",
+								"现在游戏可以自动保存。"
+							]
+						},
+						"2": {
+							"0": [
+								"添加最大化这个维度的所有夸克获取器按钮。",
+								"添加最大化所有夸克获取器按钮。",
+								"修复一些 bug。"
+							],
+							"1": [
+								"修复一些 bug。"
+							]
+						}
+					},
+					"3": {
+						"title": "拓限更新",
+						"0": {
+							"0": [
+								"将数字上限从约 1e308 提升到约 1e10000000。",
+								"限制夸克获取器级别和维度数量最高为 99999。"
+							],
+							"1": [
+								"修复一些 bug。"
+							]
+						},
+						"1": {
+							"0": [
+								"增加暂停功能。",
+								"对新表格样式进行兼容。",
+								"修复一些 bug。"
+							],
+							"1": [
+								"修复一些 bug。"
+							]
+						},
+						"2": {
+							"0": [
+								"更新了成就系统的显示和部分成就的名称。",
+								"修复一些 bug。"
+							]
+						},
+						"3": {
+							"0": [
+								"更新了成就、存档/读档的显示。",
+								"更新日志对每个大版本更新添加更新名称，对应版本的主要功能。"
+							]
+						},
+						"4": {
+							"0": [
+								"多板块界面优化。",
+								"优化未解锁维度时的界面。",
+								"更新硬重置时的提示。",
+								"更新获得成就时的提示。",
+								"更新存档/读档的显示，增加复制存档功能。",
+								"将硬重置、暂停、存档/读档功能放入新增的设置板块。",
+								"更新更新日志的显示，更改了部分版本号和部分版本的描述。",
+								"修复一些 bug。"
+							]
+						}
+					}
+				}
+			}
+		}
+	},
 	"tool": {
 		"title": "工具列表",
 		"luoguUserScoreCalc": {
-			"title": "[转载] 洛谷用户分数计算器",
-			"name": "[转载] <a href='https://www.luogu.com.cn/'>洛谷</a>用户分数计算器",
+			"title": "【转载】洛谷用户分数计算器",
+			"name": "【转载】<a href='https://www.luogu.com.cn/'>洛谷</a>用户分数计算器",
 			"desc": "原作者：@<a href='https://www.luogu.com/user/1717150'>Aurelia_Veil</a> 的<a href='https://www.luogu.com/paste/c7raykd1'>云剪贴板</a>，转载时已经过原作者许可。分数仅供参考，分数计算规则可参考原剪贴板。",
 			"input": {
-				"title": "输入",
-				"problem": {
-					"title": "做题数量"
+				"title": "数据输入",
+				"prob": {
+					"title": "做题数量",
+					"prob1": "<span id=\"probLabel1\">入门</span>",
+					"prob2": "<span id=\"probLabel2\">普及-</span>",
+					"prob3": "<span id=\"probLabel3\">普及/提高-</span>",
+					"prob4": "<span id=\"probLabel4\">普及+/提高</span>",
+					"prob5": "<span id=\"probLabel5\">提高+/省选-</span>",
+					"prob6": "<span id=\"probLabel6\">省选/NOI-</span>",
+					"prob7": "<span id=\"probLabel7\">NOI/NOI+/CTSC</span>"
 				},
 				"article": {
 					"title": "文章数量",
@@ -60,7 +329,7 @@
 				}
 			},
 			"output": {
-				"title": "输出",
+				"title": "计算结果",
 				"problemScore": "练习分数",
 				"articleScore": "文章分数",
 				"ratingScore": "比赛分数",
@@ -75,19 +344,10 @@
 					"lv4": "优秀",
 					"lv5": "超级"
 				}
-			},
-			"probDifficulty": {
-				"p1": "入门",
-				"p2": "普及-",
-				"p3": "普及/提高-",
-				"p4": "普及+/提高",
-				"p5": "提高+/省选-",
-				"p6": "省选/NOI-",
-				"p7": "NOI/NOI+/CTSC"
 			}
 		},
 		"mdeditor": {
-			"title": "Markdown 编辑器"
+			"title": "【半成品】Markdown 编辑器"
 		},
 		"visualizationOfSortingAlgo": {
 			"title": "排序算法可视化",

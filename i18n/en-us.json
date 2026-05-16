@@ -13,15 +13,36 @@
 		"faqs": "FAQs",
 		"languageChoice": "Languages",
 		"features": "Features",
-		"toggleTheme": "Toggle Theme",
-		"loading": "Loading"
+		"toggleTheme": "Toggle Theme"
 	},
+	"loading": "Loading...",
 	"siteName": "cy3's site",
+	"error": {
+		"title": "Something Went Wrong",
+		"about": "If you have any questions, please contact the website owner and provide details along with instructions on how to reproduce the error.",
+		"details": "Details:",
+		"copyDetails": "Copy Details",
+		"type": "Error Type",
+		"openedURL": "The URL that was opened",
+		"error": {
+			"title": "Error",
+			"filename": "Error Filename",
+			"lineno": "Line Number",
+			"colno": "Column Number",
+			"message": "Error Message"
+		},
+		"unhandledrejection": {
+			"title": "Unhandled Rejection",
+			"reason": "Reason"
+		}
+	},
 	"supporting": {
 		"yes": "Supported",
 		"no": "Unsupported"
 	},
-	"tableHead-key-value": "<th>Key</th><th>Value</th>",
+	"ok": "OK",
+	"cancel": "Cancel",
+	"tableHeadKeyValue": "<tr><th>Key</th><th>Value</th></tr>",
 	"notFoundPage": {
 		"title": "404 Page Not Found",
 		"tips": "Page is lost!",
@@ -35,6 +56,247 @@
 		"title": "Blog List",
 		"empty": "None at present."
 	},
+	"game": {
+		"title": "Game List",
+		"quarks": {
+			"title": "Quarks",
+			"game": {
+				"title": "Game",
+				"aboutPause": "You have paused the game. Click the <button onclick=\"pause()\">Continue</button> button in Settings to resume play.",
+				"currentQuark": "You Have @ Quark(s)",
+				"dimension": "Dimension",
+				"getQuark": "Get a Quark",
+				"getQuarkGetter": "Pay @ Quarks to Get One",
+				"getQuarkMax": "Get Max",
+				"getQuarkMaxDimension": "Maximize All Quark Getters in the Current Dimension",
+				"getQuarkMaxAll": "Maximize All Quark Getters",
+				"convertQuark": "Clear This Dimension and Convert to @ Quark(s) in the Next Dimension",
+				"convertQuarkLock": "Get 1e30 Quarks to Unlock",
+				"quarkPointsText": "You have @ quark point(s) in this dimension, the quarks in previous dimension provide a @x multiplier.",
+				"quarkGettersTableHead": {
+					"id": "Getter ID",
+					"owned": "Owned",
+					"bought": "Bought",
+					"getOne": "Get One",
+					"getMax": "Get Max"
+				}
+			},
+			"achievements": {
+				"title": "Achievements",
+				"unlock": "Unlocked Achievement",
+				"firstQuark": {
+					"title": "Quarks",
+					"desc": "Get a quark."
+				},
+				"quarkGetter": {
+					"title": "Speed!",
+					"desc": "Get a quark getter."
+				},
+				"quarkGetter2": {
+					"title": "Speed up!",
+					"desc": "Get a quark getter with a getter! (Get a quark getter #2)"
+				},
+				"quarkGetter3": {
+					"title": "Polynomial growth",
+					"desc": "Get a quark getter with a getted-with-a-getter getter! (Get a quark getter #3)"
+				},
+				"quarkGetter4": {
+					"title": "Infinite loop",
+					"desc": "Get a can-get-quark-getter getter with a getted-with-a-getter getter! (Get a quark getter #4)"
+				},
+				"quark1e10": {
+					"title": "A small goal",
+					"desc": "Get 1e10 quarks."
+				},
+				"quark1e15": {
+					"title": "Many quarks",
+					"desc": "Get 1e15 quarks."
+				},
+				"quark1e20": {
+					"title": "More quarks",
+					"desc": "Get 1e20 quarks."
+				},
+				"quark1e25": {
+					"title": "Too many quarks",
+					"desc": "Get 1e25 quarks."
+				},
+				"quarkDimension1": {
+					"title": "New world",
+					"desc": "Get a quark that has a dimension of 1."
+				},
+				"quarkDimension1getted2": {
+					"title": "Again",
+					"desc": "Get 2 quarks that has a dimension of 1."
+				},
+				"quarkDimension1getter": {
+					"title": "A speed boost from another dimension",
+					"desc": "Enhancing a getter with a getter! (Get a getter of dimension 1)"
+				},
+				"quarkDimension1getter2": {
+					"title": "Acceleration of the lifting speed",
+					"desc": "Enhancing a getter with a getter-getted getter! (Get a quark getter #2 at dimension 1)"
+				},
+				"quarkDimension1getter3": {
+					"title": "The growth rate of exponential growth",
+					"desc": "Get a can-enhance-a-getter getter with a getter-getted getter! (Get a quark getter #3 at dimension 1)"
+				},
+				"quarkDimension1getter4": {
+					"title": "More infinite loops",
+					"desc": "Get a can-enhance-a-getter getter with a getter getted by a getter-getted getter! (Get a quark getter #4 at dimension 1)"
+				},
+				"quarkDimension2": {
+					"title": "Another new world",
+					"desc": "Get a quark that has a dimension of 2."
+				},
+				"quarkDimension2getter4": {
+					"title": "Enhancing the speed of enhancing",
+					"desc": "Get a quark getter #4 at dimension 2."
+				},
+				"quarkDimension3": {
+					"title": "Step by Step",
+					"desc": "Get a quark that has a dimension of 3."
+				},
+				"quarkDimension4": {
+					"title": "Evolution",
+					"desc": "Get a quark that has a dimension of 4."
+				},
+				"theEnd": {
+					"title": "The End",
+					"desc": "Get a quark that has a dimension of 10."
+				}
+			},
+			"settings": {
+				"title": "Settings",
+				"hardReset": {
+					"btn": "Hard Reset",
+					"title": "Warning",
+					"notice1": "Are you sure you want to reset your progress? <strong>This will result in </strong><span class=\"error\">the loss of all game data and achievements</span>.",
+					"notice2": "If you want to back up your archive, first click \"Cancel\", then go to the Save/Load screen to retrieve and save it."
+				},
+				"pause": {
+					"pause": "Pause",
+					"continue": "Continue"
+				},
+				"archive": {
+					"get": {
+						"btn": "Get Current Archive",
+						"title": "Archive Content",
+						"notice": "Please note that the archive may contain <code>+</code>, <code>/</code>, or <code>=</code>. When copying manually, <span style=\"color: red;\">do not</span> double-click directly, as this may result in incomplete archive contents, causing loading errors or unexpected results.",
+						"copy": "Copy",
+						"copyAndClose": "Copy and Close",
+						"copied": "Copied successfully"
+					},
+					"cpy": {
+						"btn": "Copy Current Archive",
+						"message": "The archived content has been copied to the clipboard"
+					},
+					"set": {
+						"btn": "Load an Archive",
+						"notice1": "<strong>Loading a new archive will</strong> <span class=\"error\">overwrite the existing archive and cause all existing game data and achievements to be lost</span>.",
+						"notice2": "If you want to back up your archive, first click \"Cancel\", then go to the Save/Load screen to retrieve and save it.",
+						"notice3": "Please enter the content to load:",
+						"sure": "Load the archive and overwrite the original archive",
+						"success": "Archive loaded successfully",
+						"failed": {
+							"header": "Archive Loaded Failed",
+							"notice1": "Unable to read the archive. <strong>Please ensure that the archive </strong><span class=\"error\">is complete and error-free</span>.",
+							"notice2": "<strong>If you have any questions or would like to report an issue, please contact the website owner at </strong><span class=\"error\">and include the error message and the full archive</span>."
+						}
+					}
+				}
+			},
+			"changelog": {
+				"title": "Change Log",
+				"content": {
+					"1": {
+						"title": "Life Upgrade",
+						"0": {
+							"0": [
+								"Added achievements, quarks and life."
+							]
+						}
+					},
+					"2": {
+						"title": "Dimension Upgrade",
+						"0": {
+							"0": [
+								"Renamed the game: <code>From Quark to Life</code> to <code>Quarks</code>.",
+								"Removed lifes.",
+								"Added dimensions.",
+								"Added quark getter max button."
+							],
+							"1": [
+								"Fixed some bugs."
+							]
+						},
+						"1": {
+							"0": [
+								"Added changelog.",
+								"Added hard-reset feature.",
+								"The game now saves automatically."
+							]
+						},
+						"2": {
+							"0": [
+								"Added a button to maximize all quark getters in this dimension.",
+								"Added a button to maximize all quark getters.",
+								"Fixed some bugs."
+							],
+							"1": [
+								"Fixed some bugs."
+							]
+						}
+					},
+					"3": {
+						"title": "Limit-Expanded Upgrade",
+						"0": {
+							"0": [
+								"Increased the numerical upper limit from approximately 1e308 to approximately 1e10000000.",
+								"Restricted the maximum number of quark getter levels and dimensions is 99999."
+							],
+							"1": [
+								"Fixed some bugs."
+							]
+						},
+						"1": {
+							"0": [
+								"Added a pause feature.",
+								"Ensure compatibility with the new form layout.",
+								"Fixed some bugs."
+							],
+							"1": [
+								"Fixed some bugs."
+							]
+						},
+						"2": {
+							"0": [
+								"Updated the display of the achievement system and the names of some achievements.",
+								"Fixed some bugs."
+							]
+						},
+						"3": {
+							"0": [
+								"Updated the display of achievements and save/load.",
+								"The release notes included a release name for each major version update, corresponding to the version's key features."
+							]
+						},
+						"4": {
+							"0": [
+								"Optimization of the multi-panel interface.",
+								"Optimized the interface when dimensions are not unlocked.",
+								"Updated the prompt for a hard reset.",
+								"Updated the notification that appears when an achievement is earned.",
+								"Updated the save/load interface and added a save-as feature.",
+								"Move the hard reset, pause, and save/load functions to the new settings section.",
+								"Updated the display of the release notes, some version numbers and descriptions have been changed.",
+								"Fixed some bugs."
+							]
+						}
+					}
+				}
+			}
+		}
+	},
 	"tool": {
 		"title": "Tool List",
 		"luoguUserScoreCalc": {
@@ -42,9 +304,16 @@
 			"name": "[Repost] <a href='https://www.luogu.com.cn/'>Luogu</a> User Score Calculator",
 			"desc": "Original author: @<a href='https://www.luogu.com/user/1717150'>Aurelia_Veil</a>'s <a href='https://www.luogu.com/paste/c7raykd1'>Cloud Clipboard</a>, reposted with permission. Scores are for reference only. Calculation rules can be found in the original clipboard.",
 			"input": {
-				"title": "Input",
-				"problem": {
-					"title": "Problems Count"
+				"title": "Data Entry",
+				"prob": {
+					"title": "Problems Count",
+					"prob1": "<span id=\"probLabel1\">Red</span>",
+					"prob2": "<span id=\"probLabel2\">Orange</span>",
+					"prob3": "<span id=\"probLabel3\">Yellow</span>",
+					"prob4": "<span id=\"probLabel4\">Green</span>",
+					"prob5": "<span id=\"probLabel5\">Blue</span>",
+					"prob6": "<span id=\"probLabel6\">Purple</span>",
+					"prob7": "<span id=\"probLabel7\">Black</span>"
 				},
 				"article": {
 					"title": "Articles Count",
@@ -60,7 +329,7 @@
 				}
 			},
 			"output": {
-				"title": "Output",
+				"title": "Calculation results",
 				"problemScore": "Practice Score",
 				"articleScore": "Article Score",
 				"ratingScore": "Contest Score",
@@ -75,19 +344,10 @@
 					"lv4": "Outstanding",
 					"lv5": "Super"
 				}
-			},
-			"probDifficulty": {
-				"p1": "Red",
-				"p2": "Orange",
-				"p3": "Yellow",
-				"p4": "Green",
-				"p5": "Blue",
-				"p6": "Purple",
-				"p7": "Black"
 			}
 		},
 		"mdeditor": {
-			"title": "Markdown Editor"
+			"title": "[semi-finished] Markdown Editor"
 		},
 		"visualizationOfSortingAlgo": {
 			"title": "Visualization of Sorting Algorithms",

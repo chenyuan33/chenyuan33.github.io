@@ -1,5 +1,6 @@
-let curArray = [], paused = false, stoped = false, algoList = ['bubbleSort', 'selectionSort', 'insertionSort', 'gnomeSort', 'cocktailSort', 'shellSort', 'heapSort', 'mergeSort', 'quickSort', 'bogoSort', 'bogoBogoSort', 'permutationSort', 'slowSort', 'stoogeSort'], genInc = () => {
-	let n = document.getElementById('array-size').value, x = document.getElementById('many-duplicated').checked, ret = [];
+let curArray = [], paused = false, stoped = false;
+const algoList = ['bubbleSort', 'selectionSort', 'insertionSort', 'gnomeSort', 'cocktailSort', 'shellSort', 'heapSort', 'mergeSort', 'quickSort', 'bogoSort', 'bogoBogoSort', 'permutationSort', 'slowSort', 'stoogeSort'], genInc = () => {
+	const n = document.getElementById('array-size').value, x = document.getElementById('many-duplicated').checked, ret = [];
 	for (let i = 0; i < n; i++) {
 		ret.push(x ? Math.floor(i / Math.sqrt(n)) + 1 : i + 1);
 	}
@@ -7,7 +8,7 @@ let curArray = [], paused = false, stoped = false, algoList = ['bubbleSort', 'se
 }, displayArray = () => {
 	document.getElementById('visu-box').innerHTML = '';
 	for (let i = 0; i < curArray.length; i++) {
-		let cur = document.createElement('div');
+		const cur = document.createElement('div');
 		cur.classList = 'element-of-visu';
 		cur.style.height = curArray[i].num / Math.max.apply(null, curArray.map(v => v.num)) * 100 + '%';
 		cur.style.width = 100 / curArray.length + '%';
@@ -21,7 +22,7 @@ let curArray = [], paused = false, stoped = false, algoList = ['bubbleSort', 'se
 	}
 	displayArray();
 }, makeRand = () => {
-	let arr = genInc();
+	const arr = genInc();
 	randomShuffle(arr);
 	whiteArrayDisplay(arr);
 }, makeInc = () => {
@@ -37,17 +38,16 @@ let curArray = [], paused = false, stoped = false, algoList = ['bubbleSort', 'se
 }, checkArraySize = () => {
 	arrayRemakerDisable(!Number.isInteger(Number(document.getElementById('array-size').value)) || document.getElementById('array-size').value < 1);
 }, updateMergeSortName = () => {
-	let v = document.getElementById('mergeSortWayCount').value;
+	const v = document.getElementById('mergeSortWayCount').value;
 	document.getElementById('mergeSortWayCountDisplay').style.display = Number.isInteger(Number(v)) && v >= 3 ? 'inline' : 'none';
-	document.getElementById('mergeSortWayCountDisplayNumber').innerHTML = v;
-}, pause = () => {
+	document.getElementById('mergeSortWayCountDisplayNumber').innerText = v;
+}, pause = async () => {
 	if (paused) {
 		paused = false;
-		document.getElementById('pause').innerHTML = i18n.tool.visualizationOfSortingAlgo.settings.pause;
-	}
-	else {
+		document.getElementById('pause').innerText = await i18nValue('tool.visualizationOfSortingAlgo.settings.pause');
+	} else {
 		paused = true;
-		document.getElementById('pause').innerHTML = i18n.tool.visualizationOfSortingAlgo.settings.continue;
+		document.getElementById('pause').innerText = await i18nValue('tool.visualizationOfSortingAlgo.settings.continue');
 	}
 }, stop = () => {
 	stoped = true;
@@ -58,15 +58,12 @@ let curArray = [], paused = false, stoped = false, algoList = ['bubbleSort', 'se
 		if (paused) {
 			if (stoped) {
 				reject();
-			}
-			else {
+			} else {
 				setTimeout(f, 50);
 			}
-		}
-		else if (stoped) {
+		} else if (stoped) {
 			reject();
-		}
-		else {
+		} else {
 			resolve();
 		}
 	})(), document.getElementById('delay').value));
@@ -121,8 +118,7 @@ let curArray = [], paused = false, stoped = false, algoList = ['bubbleSort', 'se
 			await tick();
 			if (j > 0 && curArray[j].num < curArray[j - 1].num) {
 				[curArray[j], curArray[j - 1]] = [curArray[j - 1], curArray[j]];
-			}
-			else {
+			} else {
 				curArray[j].color = 'green';
 				break;
 			}
@@ -135,8 +131,7 @@ let curArray = [], paused = false, stoped = false, algoList = ['bubbleSort', 'se
 		if (i > 0 && curArray[i].num < curArray[i - 1].num) {
 			[curArray[i], curArray[i - 1]] = [curArray[i - 1], curArray[i]];
 			i--;
-		}
-		else {
+		} else {
 			curArray[i].color = 'green';
 			i++;
 		}
@@ -171,18 +166,15 @@ let curArray = [], paused = false, stoped = false, algoList = ['bubbleSort', 'se
 		await tick();
 		for (let i = 0; i < curArray.length; i++) {
 			for (let j = 0; j < curArray.length; j++) {
-				if (j % k == i % k) {
+				if (j % k === i % k) {
 					if (j < i) {
 						curArray[j].color = 'green';
-					}
-					else if (j == i) {
+					} else if (j === i) {
 						curArray[j].color = 'red';
-					}
-					else {
+					} else {
 						curArray[j].color = 'blue';
 					}
-				}
-				else {
+				} else {
 					curArray[j].color = 'white';
 				}
 			}
@@ -190,8 +182,7 @@ let curArray = [], paused = false, stoped = false, algoList = ['bubbleSort', 'se
 				await tick();
 				if (j >= k && curArray[j].num < curArray[j - k].num) {
 					[curArray[j], curArray[j - k]] = [curArray[j - k], curArray[j]];
-				}
-				else {
+				} else {
 					curArray[j].color = 'green';
 					break;
 				}
@@ -199,7 +190,7 @@ let curArray = [], paused = false, stoped = false, algoList = ['bubbleSort', 'se
 		}
 	}
 }, heapSort = async () => {
-	let binlen = (x) => {
+	const binlen = (x) => {
 		let ret = 0;
 		while (x) {
 			x >>= 1;
@@ -228,8 +219,7 @@ let curArray = [], paused = false, stoped = false, algoList = ['bubbleSort', 'se
 			color(largest);
 			await tick();
 			await heapify(n, largest);
-		}
-		else {
+		} else {
 			color(i);
 			if (left < n) color(left);
 			if (right < n) color(right);
@@ -255,7 +245,7 @@ let curArray = [], paused = false, stoped = false, algoList = ['bubbleSort', 'se
 	if (!Number.isInteger(Number(k)) || k < 3) {
 		k = 2;
 	}
-	let fill = (l, r) => {
+	const fill = (l, r) => {
 		for (let i = 0; i <= curArray.length - 1; i++)
 		{
 			curArray[i].color = i >= l && i <= r ? Math.floor((i - l) / Math.ceil((r - l + 1) / k)) % 2 ? 'yellow' : 'cyan' : 'white';
@@ -263,13 +253,13 @@ let curArray = [], paused = false, stoped = false, algoList = ['bubbleSort', 'se
 		return tick();
 	}, f = async (l, r) => {
 		if (l >= r) {
-			if (l == r) {
+			if (l === r) {
 				curArray[l].color = 'green';
 				await tick();
 			}
 			return;
 		}
-		let j = [];
+		const j = [];
 		for (let i = 0; i < k; i++) {
 			j.push(Math.min(l + Math.ceil((r - l + 1) / k) * i, r));
 		}
@@ -279,14 +269,14 @@ let curArray = [], paused = false, stoped = false, algoList = ['bubbleSort', 'se
 			await f(j[i], j[i + 1] - 1);
 			await fill(l, r);
 		}
-		let ans = [], j2 = [];
+		const ans = [], j2 = [];
 		for (let i = 0; i < k; i++) {
 			j2.push(j[i]);
 		}
 		for (let i = l; i <= r; i++) {
 			let p = -1;
 			for (let q = 0; q < k; q++) {
-				if (j2[q] < j[q + 1] && (p == -1 || curArray[j2[q]].num < curArray[j2[p]].num)) {
+				if (j2[q] < j[q + 1] && (p === -1 || curArray[j2[q]].num < curArray[j2[p]].num)) {
 					p = q;
 				}
 			}
@@ -299,15 +289,16 @@ let curArray = [], paused = false, stoped = false, algoList = ['bubbleSort', 'se
 	};
 	await f(0, curArray.length - 1);
 }, quickSort = async () => {
-	let f = async (l, r) => {
+	const f = async (l, r) => {
 		if (l >= r) {
-			if (l == r) {
+			if (l === r) {
 				curArray[l].color = 'green';
 				await tick();
 			}
 			return;
 		}
-		let i = l, j = r, k = curArray[l].num;
+		let i = l, j = r;
+		const k = curArray[l].num;
 		curArray[i].color = curArray[j].color = 'red';
 		await tick();
 		while (i < j) {
@@ -334,7 +325,7 @@ let curArray = [], paused = false, stoped = false, algoList = ['bubbleSort', 'se
 	};
 	await f(0, curArray.length - 1);
 }, bogoSort = async () => {
-	let isSorted = () => {
+	const isSorted = () => {
 		for (let i = 0; i < curArray.length - 1; i++) {
 			if (curArray[i].num > curArray[i + 1].num) {
 				return false;
@@ -355,7 +346,7 @@ let curArray = [], paused = false, stoped = false, algoList = ['bubbleSort', 'se
 		await tick();
 	}
 }, bogoBogoSort = async () => {
-	let isSorted = n => {
+	const isSorted = n => {
 		for (let i = 0; i < n - 1; i++) {
 			if (curArray[i].num > curArray[i + 1].num) {
 				return false;
@@ -381,7 +372,7 @@ let curArray = [], paused = false, stoped = false, algoList = ['bubbleSort', 'se
 		}
 	}
 }, permutationSort = async () => {
-	let val = [], p = [], nextPermutation = arr => {
+	const val = [], p = [], nextPermutation = arr => {
 		let i = arr.length - 2;
 		while (i >= 0 && arr[i] >= arr[i + 1]) {
 			i--;
@@ -393,8 +384,7 @@ let curArray = [], paused = false, stoped = false, algoList = ['bubbleSort', 'se
 			}
 			[arr[i], arr[j]] = [arr[j], arr[i]];
 		}
-		let left = i + 1;
-		let right = arr.length - 1;
+		let left = i + 1, right = arr.length - 1;
 		while (left < right) {
 			[arr[left], arr[right]] = [arr[right], arr[left]];
 			left++;
@@ -421,7 +411,8 @@ let curArray = [], paused = false, stoped = false, algoList = ['bubbleSort', 'se
 		await tick();
 	}
 }, slowSort = async () => {
-	let did = curArray.length, fill = (l, r) => {
+	let did = curArray.length;
+	const fill = (l, r) => {
 		for (let i = 0; i <= curArray.length - 1; i++)
 		{
 			curArray[i].color = i < did ? i >= l && i <= r ? i <= (l + r >> 1) ? 'yellow' : 'cyan' : 'white' : 'green';
@@ -429,13 +420,13 @@ let curArray = [], paused = false, stoped = false, algoList = ['bubbleSort', 'se
 		return tick();
 	}, f = async (l, r, mainly = true) => {
 		if (l >= r) {
-			if (l == r) {
+			if (l === r) {
 				curArray[l].color = 'green';
 				await tick();
 			}
 			return;
 		}
-		let mid = l + r >> 1;
+		const mid = l + r >> 1;
 		await fill(l, r);
 		await f(l, mid, false);
 		await fill(l, r);
@@ -453,22 +444,22 @@ let curArray = [], paused = false, stoped = false, algoList = ['bubbleSort', 'se
 	};
 	await f(0, curArray.length - 1);
 }, stoogeSort = async () => {
-	let did = curArray.length, fill = (l, r) => {
-		let k = Math.floor((r - l + 1) / 3);
+	const fill = (l, r) => {
+		const k = Math.floor((r - l + 1) / 3);
 		for (let i = 0; i <= curArray.length - 1; i++)
 		{
-			curArray[i].color = i < did ? i >= l && i <= r ? i <= r - k ? i < l + k ? 'yellow' : 'cyan' : 'purple' : 'white' : 'green';
+			curArray[i].color = i < curArray.length ? i >= l && i <= r ? i <= r - k ? i < l + k ? 'yellow' : 'cyan' : 'purple' : 'white' : 'green';
 		}
 		return tick();
 	}, f = async (l, r) => {
 		if (l >= r) {
-			if (l == r) {
+			if (l === r) {
 				curArray[l].color = 'green';
 				await tick();
 			}
 			return;
 		}
-		if (r - l == 1) {
+		if (r - l === 1) {
 			curArray[l].color = curArray[r].color = 'red';
 			if (curArray[l].num > curArray[r].num) {
 				[curArray[l], curArray[r]] = [curArray[r], curArray[l]];
@@ -477,7 +468,7 @@ let curArray = [], paused = false, stoped = false, algoList = ['bubbleSort', 'se
 			await tick();
 			return;
 		}
-		let k = Math.floor((r - l + 1) / 3);
+		const k = Math.floor((r - l + 1) / 3);
 		await fill(l, r);
 		await f(l, r - k);
 		await fill(l, r);
@@ -488,3 +479,9 @@ let curArray = [], paused = false, stoped = false, algoList = ['bubbleSort', 'se
 	};
 	await f(0, curArray.length - 1);
 };
+document.addEventListener('DOMContentLoaded', async () => {
+	makeRand();
+	for (const name of algoList) {
+		document.getElementById('sortingButtons').insertAdjacentHTML('beforeend', `<button onclick="run(${name})" class="sortingButton">${await i18nValue(`tool.visualizationOfSortingAlgo.sorting.name.${name}`)}</button>`);
+	}
+});
