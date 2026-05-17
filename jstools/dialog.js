@@ -66,6 +66,8 @@ document.head.insertAdjacentHTML('beforeend', `
 			border-radius: 10px;
 			background-color: inherit;
 			padding: 20px;
+			max-height: 80%;
+			overflow: auto;
 		}
 		.dialog-close-btn {
 			position: absolute;

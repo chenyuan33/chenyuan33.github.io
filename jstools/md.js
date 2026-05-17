@@ -1,5 +1,9 @@
-document.head.insertAdjacentHTML('beforeend', `
+document.head.append(document.createRange().createContextualFragment(`
 	<style>
+		.mdeditor-table, .mdeditor-table tbody, .mdeditor-table tr, .mdeditor-table td, .mdeditor-button, .mdeditor-button-name {
+			background-color: inherit;
+		}
+
 		.mdeditor-input {
 			resize: none;
 			height: 300px;
@@ -24,9 +28,12 @@ document.head.insertAdjacentHTML('beforeend', `
 			color: inherit;
 		}
 
+		.mdeditor-close-doc-button {
+			background-color: unset;
+		}
+
 		.mdeditor-button, .mdeditor-close-doc-button {
 			border: none;
-			background-color: unset;
 			font: inherit;
 		}
 
@@ -36,11 +43,10 @@ document.head.insertAdjacentHTML('beforeend', `
 
 		.mdeditor-button-name {
 			position: absolute;
-			top: -35px;
+			top: -40px;
 			border: solid;
 			border-radius: 5px;
 			padding: 5px;
-			background-color: white;
 			left: 50%;
 			transform: translateX(-50%);
 			opacity: 0;
@@ -52,11 +58,11 @@ document.head.insertAdjacentHTML('beforeend', `
 		.mdeditor-button-name::after {
 			content: '';
 			position: absolute;
-			top: 100%;
+			top: 110%;
 			left: 50%;
 			transform: translateX(-50%);
 			border: 5px solid transparent;
-			border-top-color: rgba(0, 0, 0, 0.8);
+			border-top-color: inherit;
 		}
 
 		.mdeditor-doc {
@@ -97,7 +103,8 @@ document.head.insertAdjacentHTML('beforeend', `
 			background-color: white;
 		}
 	</style>
-`);
+	<script src="https://chenyuan33.github.io/jstools/dialog.js"></script>
+`));
 const mdtohtml = (md) => {
 	let html = '';
 	md.split('\n\n').forEach(element => {
@@ -198,51 +205,135 @@ const mdtohtml = (md) => {
 	}
 	const i18n = {
 		'en-us': {
-			about: mdtohtml(`
-				## About
-				In the editor above, the left pane displays your Markdown text input, while the right pane shows the rendered HTML code. As you type, the HTML code on the right updates in real time. All Markdown-to-HTML conversion and display occurs locally, eliminating concerns about data leakage.
-			`),
-			futureSupportedFeatures: mdtohtml(`
-				## Future supported features
-				- Support for more Markdown syntax
-				- Optional markdown syntax:
-					- Title: Display works fine even without a space between the \`#\` and the content
-					- Line breaks: Use [\`\\\` + line break] or [direct line break] to create line breaks
-					- Bold/Italic: Whether to render when using underline with no spaces on either side of the underline
-					- Code Block: Syntax Highlighting
-				- Synchronous scrolling (can be customized to enable or disable)
-				- The right side displays the unrendered HTML source code (can be toggled on or off)
-				- Auxiliary button row:
-					- Functionality: Save Drafts (cached), Auto-Save (cached, configurable), Import Markdown, Export/Copy Markdown/HTML, Customize Synchronized Scrolling, Customize Real-Time Rendering
-					- Content-based: Pressing the button adds the corresponding element to the input field. For example, H1 generates a level-1 heading.
-				- Syntax Highlighting
-				- Custom Editor Size, Full-Screen Editor
-				- Let the editor access your website (if you choose to) (Documentation not yet written)
-			`)
+			ok: 'OK'
 		},
 		'zh-cn': {
-			about: mdtohtml(`
-				## 关于
-				上面的编辑器中，左边是输入的 Markdown 文本，右边是渲染后的 HTML 代码。输入文本时，右边的 HTML 代码会实时更新。所有 Markdown 到 HTML 的转换和显示均在本地进行，无需担心数据泄露的问题。
-			`),
-			futureSupportedFeatures: mdtohtml(`
-				## 未来将会支持的功能
-				- 支持更多 Markdown 语法
-				- 可选的 Markdown 语法：
-					- 标题：如果 \`#\` 和内容之间没有空格也可以正常显示
-					- 换行：使用【\`\\\`+换行】或【直接换行】进行换行
-					- 粗体/斜体：使用下划线并且下划线两边均无空格时是否渲染
-					- 代码块：语法高亮
-				- 同步滚动（可自设是否开启）
-				- 右边显示未渲染的 HTML 源代码（可自设是否开启）
-				- 用于辅助的按钮行：
-					- 功能类：保存草稿（缓存）、自动保存（缓存，可设置是否开启）、导入 Markdown、导出/复制 Markdown/HTML、自设是否开启同步滚动、自设是否实时渲染
-					- 内容类：按钮按下后会在输入框内增加对应的东西，如 H1 会产生一级标题
-				- 语法高亮
-				- 自定义编辑器的大小、全屏编辑器
-				- 让编辑器进入你的网站（如果你愿意的话）（暂未编写文档）
-			`),
-			markdownSyntax: `
+			ok: '确定'
+		}
+	}[lang];
+	const features = [
+		{
+			name: 'about',
+			icon: 'question-circle',
+			title: {
+				'en-us': 'About',
+				'zh-cn': '关于'
+			}[lang],
+			content: mdtohtml({
+				'en-us': '## About\nIn the editor above, the left pane displays your Markdown text input, while the right pane shows the rendered HTML code. As you type, the HTML code on the right updates in real time. All Markdown-to-HTML conversion and display occurs locally, eliminating concerns about data leakage.',
+				'zh-cn': '## 关于\n上面的编辑器中，左边是输入的 Markdown 文本，右边是渲染后的 HTML 代码。输入文本时，右边的 HTML 代码会实时更新。所有 Markdown 到 HTML 的转换和显示均在本地进行，无需担心数据泄露的问题。'
+			}[lang])
+		},
+		{
+			name: 'futureSupportedFeatures',
+			icon: 'flask',
+			title: {
+				'en-us': 'Future supported features',
+				'zh-cn': '未来将会支持的功能'
+			}[lang],
+			content: mdtohtml({
+				'en-us': `
+## Future supported features
+- Support for more Markdown syntax
+- Optional markdown syntax:
+	- Title: Display works fine even without a space between the \`#\` and the content
+	- Line breaks: Use [\`\\\` + line break] or [direct line break] to create line breaks
+	- Bold/Italic: Whether to render when using underline with no spaces on either side of the underline
+	- Code Block: Syntax Highlighting
+- Extended Markdown syntax: 
+	- Warning: ([See here](https://squidfunk.github.io/mkdocs-material/reference/admonitions/)), a block with an optional title and content; options include whether it is collapsible, whether it is collapsed by default, and whether it includes an icon:
+		\`\`\` yaml
+		note: fontawesome/solid/note-sticky
+		abstract: fontawesome/solid/book
+		info: fontawesome/solid/circle-info
+		tip: fontawesome/solid/bullhorn
+		success: fontawesome/solid/check
+		question: fontawesome/solid/circle-question
+		warning: fontawesome/solid/triangle-exclamation
+		failure: fontawesome/solid/bomb
+		danger: fontawesome/solid/skull
+		bug: fontawesome/solid/robot
+		example: fontawesome/solid/flask
+		quote: fontawesome/solid/quote-left
+		\`\`\`
+	- Notes: ([See here](https://squidfunk.github.io/mkdocs-material/reference/annotations/)), allows collapsing inline text (supported only comments in code blocks)
+	- Attributes can be added to text (e.g., #xxx for id, .xxx for class, xxx=yyy denotes the value of xxx), [.md-button](https://squidfunk.github.io/mkdocs-material/reference/buttons/) button styles, and [.card and .grid](https://squidfunk.github.io/mkdocs-material/reference/grids/) grid styles
+	- Code blocks can include titles, support line number display (with customizable line numbers for the first line), highlight specific lines, and feature inline code highlighting. Optional automatic parsing or view-only modes are available for Mermaid, Markdown, HTML, JSON, YAML, and diff.
+	- Multiple content tabs
+	- Footnotes
+	- Colors and background colors
+	- Highlighting and underlining
+	- Superscript and subscript
+	- Expressions [Keyboard shortcuts](https://squidfunk.github.io/mkdocs-material/reference/formatting/#adding-keyboard-keys)
+	- Icons and Emojis
+	- Task lists
+	- Mathematical formulas
+	- Allow outline syntaxes to be inserted in places where only inline syntaxes is permitted
+- Synchronous scrolling (can be customized to enable or disable)
+- The right side displays the unrendered HTML source code (can be toggled on or off)
+- Auxiliary button row:
+	- Functionality: Save Drafts (cached), Auto-Save (cached, configurable), Import Markdown, Export/Copy Markdown/HTML, Customize Synchronized Scrolling, Customize Real-Time Rendering
+	- Content-based: Pressing the button adds the corresponding element to the input field. For example, H1 generates a level-1 heading.
+- Syntax Highlighting
+- Custom Editor Size, Full-Screen Editor
+- Let the editor access your website (if you choose to) (Documentation not yet written)
+`,
+				'zh-cn': `
+## 未来将会支持的功能
+- 支持更多 Markdown 语法
+- 可选的 Markdown 语法：
+	- 标题：如果 \`#\` 和内容之间没有空格也可以正常显示
+	- 换行：使用【\`\\\`+换行】或【直接换行】进行换行
+	- 粗体/斜体：使用下划线并且下划线两边均无空格时是否渲染
+	- 代码块：语法高亮
+- 扩展 Markdown 语法：
+	- 警告：（[可参考](https://squidfunk.github.io/mkdocs-material/reference/admonitions/)），带有可选标题和内容的框，可选是否可折叠，可选是否默认折叠，可选是否包含图标：
+		\`\`\` yaml
+		note: fontawesome/solid/note-sticky
+		abstract: fontawesome/solid/book
+		info: fontawesome/solid/circle-info
+		tip: fontawesome/solid/bullhorn
+		success: fontawesome/solid/check
+		question: fontawesome/solid/circle-question
+		warning: fontawesome/solid/triangle-exclamation
+		failure: fontawesome/solid/bomb
+		danger: fontawesome/solid/skull
+		bug: fontawesome/solid/robot
+		example: fontawesome/solid/flask
+		quote: fontawesome/solid/quote-left
+		\`\`\`
+	- 注释：（[可参考](https://squidfunk.github.io/mkdocs-material/reference/annotations/)），可以折叠行内文本（代码块支持且只支持）
+	- 可以对文本添加属性（#xxx 表示 id，.xxx 表示 class，xxx=yyy 表示 xxx 的值），[.md-button](https://squidfunk.github.io/mkdocs-material/reference/buttons/) 按钮样式，[.card 和 .grid](https://squidfunk.github.io/mkdocs-material/reference/grids/) 网格样式
+	- 代码块可以添加标题，支持显示行号（允许自定义第一行的行号），可以高亮特定行，行内代码高亮，可选的自动解析/只查看解析 Mermaid、Markdown、HTML、JSON、YAML、diff
+	- 多标签页
+	- 脚注
+	- 颜色和背景颜色
+	- 高亮和下划线
+	- 上标和下标
+	- 表达[键盘快捷键](https://squidfunk.github.io/mkdocs-material/reference/formatting/#adding-keyboard-keys)
+	- 图标和 Emojis
+	- 任务列表
+	- 数学公式
+	- 允许通过某种方式将行间语法放入仅行内语法允许的位置
+- 同步滚动（可自设是否开启）
+- 右边显示未渲染的 HTML 源代码（可自设是否开启）
+- 用于辅助的按钮行：
+	- 功能类：保存草稿（缓存）、自动保存（缓存，可设置是否开启）、导入 Markdown、导出/复制 Markdown/HTML、自设是否开启同步滚动、自设是否实时渲染
+	- 内容类：按钮按下后会在输入框内增加对应的东西，如 H1 会产生一级标题
+- 语法高亮
+- 自定义编辑器的大小、全屏编辑器
+- 让编辑器进入你的网站（如果你愿意的话）（暂未编写文档）
+			`
+			}[lang])
+		},
+		{
+			name: 'markdownSyntax',
+			icon: 'code',
+			title: {
+				'en-us': 'Markdown Syntax (Only Supported in Chinese version yet)',
+				'zh-cn': 'Markdown 语法'
+			}[lang],
+			content: `
 				<h2>已支持的 Markdown 语法</h2>
 				<table>
 					<thead>
@@ -425,87 +516,33 @@ const mdtohtml = (md) => {
 				</table>
 			`
 		}
-	}[lang];
-	const features = [
-		{
-			name: 'about',
-			icon: 'question-circle',
-			title: {
-				'en-us': 'About',
-				'zh-cn': '关于'
-			}
-		},
-		{
-			name: 'futureSupportedFeatures',
-			icon: 'flask',
-			title: {
-				'en-us': 'Future supported features',
-				'zh-cn': '未来将会支持的功能'
-			}
-		},
-		{
-			name: 'markdownSyntax',
-			icon: 'code',
-			title: {
-				'en-us': 'Markdown Syntax (Only Supported in Chinese version yet)',
-				'zh-cn': 'Markdown 语法'
-			}
-		}
 	];
 	return `
 		<table class='mdeditor-table'>
 			<tbody>
 				<tr>
-					<td colspan='2'>
-						<div class='mdeditor-buttondiv'>
-							${(() => {
-								let str = '';
-								features.forEach(ele => str += `
-									<button
-										id='mdeditor-button-${ele.name}${id}'
-										class='mdeditor-button'
-										onclick="document.getElementById('mdeditor-${ele.name}${id}').style.display='block'"
-									>
-										<i class='fa-solid fa-${ele.icon}'></i>
-										<div class='mdeditor-button-name' id='mdeditor-button-name-${ele.name}${id}'>${ele.title[lang]}</div>
-									</button>
-								`);
-								return str;
-							})()}
-						</div>
+					<td colspan='2' class='mdeditor-buttondiv'>
+						${(() => {
+							let str = '';
+							features.forEach(ele => str += `
+								<button
+									id='mdeditor-button-${ele.name}${id}'
+									class='mdeditor-button'
+									onclick="createDialog(\`${ele.content.replaceAll('\\', '\\\\').replaceAll('`', '\\`')}\`, [{html: '${i18n.ok}'}])"
+								>
+									<i class='fa-solid fa-${ele.icon}'></i>
+									<div class='mdeditor-button-name' id='mdeditor-button-name-${ele.name}${id}'>${ele.title}</div>
+								</button>
+							`);
+							return str;
+						})()}
 					</td>
 				</tr>
 				<tr>
-					<td>
-						<textarea class='mdeditor-input' id='mdeditor-input${id}' oninput="document.getElementById('mdeditor-output${id}').innerHTML = mdtohtml(document.getElementById('mdeditor-input${id}').value)"></textarea>
-					</td>
-					<td>
-						<div class='mdeditor-output' id='mdeditor-output${id}'></div>
-					</td>
+					<td><textarea class='mdeditor-input' id='mdeditor-input${id}' oninput="document.getElementById('mdeditor-output${id}').innerHTML = mdtohtml(document.getElementById('mdeditor-input${id}').value)"></textarea></td>
+					<td class='mdeditor-output' id='mdeditor-output${id}'></td>
 				</tr>
 			</tbody>
 		</table>
-		${(() => {
-			let str = '';
-			features.forEach(ele => str += `
-				<div class='mdeditor-doc' id='mdeditor-${ele.name}${id}'>
-					<div class='mdeditor-doc-background' onclick="document.getElementById('mdeditor-${ele.name}${id}').style.display='none'"></div>
-					<div class='mdeditor-doc-content'>
-						<button class='mdeditor-close-doc-button' onclick="document.getElementById('mdeditor-${ele.name}${id}').style.display='none'">
-							<i class='fa-solid fa-circle-xmark'></i>
-						</button>
-						${i18n[ele.name]}
-					</div>
-				</div>
-			`);
-			str += '<style>';
-			features.forEach(ele => str += `
-				#mdeditor-button-${ele.name}${id}:hover #mdeditor-button-name-${ele.name}${id} {
-					opacity: 1;
-				}
-			`);
-			str += '</style>';
-			return str;
-		})()}
 	`;
 }
