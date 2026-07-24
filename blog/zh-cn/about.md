@@ -1,0 +1,1 @@
+一个网站，你可以看看[博客](/blog/index.html)，用用[工具](/tool/index.html)，玩玩[游戏](/game/index.html)。

@@ -7,13 +7,13 @@
 	},
 	"sidebar": {
 		"navigation": "导航",
-		"homePage": "首页",
-		"relatedLinks": "友情链接",
-		"changelog": "更新日志",
-		"faqs": "常见问题",
 		"languageChoice": "切换语言",
 		"features": "功能",
-		"toggleTheme": "切换主题"
+		"toggleTheme": "切换主题",
+		"link": "相关链接",
+		"about": "关于",
+		"contact": "联系我们",
+		"changelog": "更新日志"
 	},
 	"loading": "少女祈祷中……",
 	"siteName": "cy3's site",
@@ -43,6 +43,10 @@
 	"ok": "确定",
 	"cancel": "取消",
 	"tableHeadKeyValue": "<tr><th>项目</th><th>内容</th></tr>",
+	"home": {
+		"title": "首页",
+		"more": "查看更多"
+	},
 	"notFoundPage": {
 		"title": "404 页面未找到",
 		"tips": "页面走丢了！",
@@ -54,10 +58,12 @@
 	},
 	"blog": {
 		"title": "博客列表",
-		"empty": "暂无。"
+		"name": "博客",
+		"select": "筛选",
+		"clearSelection": "清除筛选"
 	},
 	"game": {
-		"title": "游戏",
+		"title": "游戏列表",
 		"quarks": {
 			"title": "夸克",
 			"game": {
@@ -171,7 +177,8 @@
 					"btn": "硬重置",
 					"title": "提示",
 					"notice1": "你确定要重置你的进度吗？<strong>这将会导致</strong><span class=\"error\">丢失所有游戏数据和成就</span>。",
-					"notice2": "如果你想要备份存档，请先点击“取消”，然后前往存档/读档界面获取并保存。"
+					"notice2": "如果你想要备份存档，请先点击“取消”，然后前往存档/读档界面获取并保存。",
+					"success": "硬重置成功"
 				},
 				"pause": {
 					"pause": "暂停",
@@ -291,6 +298,12 @@
 								"更新更新日志的显示，更改了部分版本号和部分版本的描述。",
 								"修复一些 bug。"
 							]
+						},
+						"5": {
+							"0": [
+								"优化硬重置后的提示",
+								"优化获得成就时的提示"
+							]
 						}
 					}
 				}
@@ -302,9 +315,8 @@
 		"luoguUserScoreCalc": {
 			"title": "【转载】洛谷用户分数计算器",
 			"name": "【转载】<a href='https://www.luogu.com.cn/'>洛谷</a>用户分数计算器",
-			"desc": "原作者：@<a href='https://www.luogu.com/user/1717150'>Aurelia_Veil</a> 的<a href='https://www.luogu.com/paste/c7raykd1'>云剪贴板</a>，转载时已经过原作者许可。分数仅供参考，分数计算规则可参考原剪贴板。",
+			"desc": "原作者：@<a href='https://www.luogu.com.cn/user/1717150'>Aurelia_Veil</a> 的<a href='https://www.luogu.com.cn/paste/c7raykd1'>云剪贴板</a>，转载时已经过原作者许可。分数仅供参考，分数计算规则可参考原剪贴板。",
 			"input": {
-				"title": "数据输入",
 				"prob": {
 					"title": "做题数量",
 					"prob1": "<span id=\"probLabel1\">入门</span>",

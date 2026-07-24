@@ -1,0 +1,22 @@
+#items {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	justify-content: center;
+}
+
+.card {
+	position: relative;
+	padding: 20px;
+	width: 300px;
+}
+
+h1, h2 {
+	text-align: center;
+}
+
+#items > div > p {
+	position: absolute;
+	bottom: 0;
+	right: 20px;
+}

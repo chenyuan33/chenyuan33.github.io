@@ -1,0 +1,27 @@
+{
+	"blog": {
+		"about": {
+			"title": "About",
+			"summary": "About this website."
+		},
+		"contact": {
+			"title": "Contact",
+			"summary": "The website's owner's social media accounts. You can contact the website's owner by these accounts."
+		},
+		"faq": {
+			"title": "FAQs",
+			"summary": "Frequently Asked Questions."
+		},
+		"friendlyLinks": {
+			"title": "Friendly Links",
+			"summary": "Friendly Links."
+		},
+		"changelog": {
+			"title": "Changelog",
+			"summary": "Release notes of this site."
+		}
+	},
+	"category": {
+		"website": "Website"
+	}
+}

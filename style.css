@@ -6,19 +6,29 @@ a {
 	text-decoration: none;
 }
 
-a:hover, #sidebar a:hover {
+a:hover {
 	color: red;
 	text-decoration: underline;
 }
 
-blockquote {
+blockquote, body, nav:hover .sidebarCurrentChoice {
 	background-color: light-dark(lightgray, darkgray);
+}
+
+button, input[type=submit] {
+	background-color: unset;
+    padding: 5px;
+    border: solid 1px;
+    border-radius: 5px;
+}
+
+blockquote {
 	border-left: 5px solid;
 	margin: 20px 0;
 	padding: 10px 20px;
 }
 
-body, textarea {
+nav, textarea, .card {
 	color: light-dark(black, white);
 	background-color: light-dark(white, black);
 }
@@ -52,9 +62,8 @@ details[open] > summary {
 
 hr {
 	border: none;
-	border-top: 1px solid black;
+	border-top: 1px solid;
 	margin: 20px 0;
-	left: -10px;
 	position: relative;
 }
 
@@ -68,18 +77,22 @@ pre, code:not(pre code) {
 	border-radius: 5px;
 }
 
-table, th, td {
+table, thead, tbody, tr, th, td {
 	border: solid 1px;
+	border-spacing: 0;
 }
 
-#sidebar {
+th, td {
+	padding: 5px;
+}
+
+nav {
 	position: fixed;
 	top: 0px;
 	left: 0px;
 	height: 100%;
 	width: 50px;
-	color: black;
-	background-color: light-dark(lightgray, darkgray);
+	padding: 10px;
 	overflow-x: hidden;
 	overflow-y: auto;
 	white-space: nowrap;
@@ -87,27 +100,21 @@ table, th, td {
 	z-index: 1;
 }
 
-#sidebar a {
-	color: blue;
+nav > p, nav > h3 {
+	height: 23px;
 }
 
-#sidebar:hover {
-	width: 150px;
-}
-
-#sidebarContent {
-	position: relative;
-	left: 10px;
+nav:hover {
+	width: 170px;
 }
 
 .sidebarTitle {
 	display: none;
 	position: absolute;
-	left: 30px;
-	align-self: center;
+	left: 40px;
 }
 
-#sidebar:hover .sidebarTitle {
+nav:hover .sidebarTitle {
 	display: inline;
 }
 
@@ -120,11 +127,7 @@ table, th, td {
 	margin-bottom: 10px;
 }
 
-#sidebar:hover .sidebarCurrentChoice {
-	background-color: light-dark(darkgray, lightgray);
-}
-
-#sidebar:hover .sidebarCurrentChoice .sidebarTitle {
+nav:hover .sidebarCurrentChoice .sidebarTitle {
 	left: 35px;
 }
 
@@ -155,13 +158,6 @@ table, th, td {
 	top: 10px;
 }
 
-.block-item {
-	display: inline-block;
-	padding: 10px;
-	border: 5px solid;
-	border-radius: 10px;
-}
-
 .buttonInTable:hover {
 	cursor: pointer;
 }
@@ -178,15 +174,24 @@ table, th, td {
 	text-align: center;
 	color: white;
 	background-color: green;
+	border-color: inherit;
 }
 
 .unsupported {
 	text-align: center;
 	color: white;
 	background-color: red;
+	border-color: inherit;
 }
 
 .error {
 	color: red;
 	font-weight: bold;
+}
+
+.card {
+	border: 1px solid lightgray;
+	border-radius: 10px;
+	box-shadow: 0 0 5px light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
+	padding: 10px;
 }

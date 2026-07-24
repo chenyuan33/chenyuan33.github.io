@@ -1,0 +1,9 @@
+#summary {
+	font-style: italic;
+}
+
+#category > a {
+	border-radius: 5px;
+	background-color: light-dark(cyan, blue);
+	padding: 5px;
+}

@@ -1,0 +1,1 @@
+A website. You can read the [Blogs](/blog/index.html), use the [Tools](/tool/index.html), or play the [Games](/game/index.html).

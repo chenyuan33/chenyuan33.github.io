@@ -2,7 +2,7 @@ document.head.append(document.createRange().createContextualFragment(`
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" type="text/css" href="/style.css" />
-	<script src="https://kit.fontawesome.com/49ad5e587e.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/49ad5e587e.js" integrity="sha384-JS66aVpuIs3f5V8MeNv+Anch7nVGy/Qlr+74+ZDHJw70V3FGV8vjgiVhfmgJ+r6d" crossorigin="anonymous"></script>
 	<link rel="icon" type="image/png" href="/favicon.ico" />
 `));
 const langList = ['en-us', 'zh-cn'];
@@ -19,8 +19,11 @@ if (localStorage.getItem('lang') === null) {
 	}
 }
 let i18n = undefined, messageCount = 0, errorMessageCount = 0;
+if (localStorage.getItem('lightMode') === null) {
+	localStorage.lightMode = 'system';
+}
 const pageLoad = Promise.all([
-	new Promise(resolve => document.addEventListener('DOMContentLoaded', resolve)),
+	new Promise(resolve => document.readyState == 'loading' ? document.addEventListener('DOMContentLoaded', resolve) : resolve()),
 	new Promise(resolve => fetch(`/i18n/${localStorage.lang}.json`).then(response => response.json()).then(i18nContent => {
 			i18n = i18nContent;
 			resolve();
@@ -32,12 +35,38 @@ const pageLoad = Promise.all([
 	str.split('.').forEach(str => ret = ret[str]);
 	return ret;
 }, switchLight = () => {
-	if (localStorage.getItem('lightMode') === 'dark') {
-		localStorage.lightMode = document.documentElement.style.colorScheme = 'light';
-		document.getElementById('lightSwitchIcon').classList = 'fa-solid fa-sun';
-	} else {
-		localStorage.lightMode = document.documentElement.style.colorScheme = 'dark';
-		document.getElementById('lightSwitchIcon').classList = 'fa-solid fa-moon';
+	switch (localStorage.lightMode) {
+		case 'dark':
+			localStorage.lightMode = 'system';
+			break;
+		case 'system':
+			localStorage.lightMode = 'light';
+			break;
+		case 'light':
+			localStorage.lightMode = 'dark';
+			break;
+		default:
+			localStorage.lightMode = 'system';
+	}
+	loadLight();
+}, loadLight = () => {
+	switch (localStorage.lightMode) {
+		case 'system':
+			document.documentElement.style.colorScheme = 'light dark';
+			document.getElementById('lightSwitchIcon').classList = 'fa-solid fa-circle-half-stroke';
+			break;
+		case 'light':
+			document.documentElement.style.colorScheme = 'light';
+			document.getElementById('lightSwitchIcon').classList = 'fa-solid fa-sun';
+			break;
+		case 'dark':
+			document.documentElement.style.colorScheme = 'dark';
+			document.getElementById('lightSwitchIcon').classList = 'fa-solid fa-moon';
+			break;
+		default:
+			localStorage.lightMode = 'system';
+			document.documentElement.style.colorScheme = 'light dark';
+			document.getElementById('lightSwitchIcon').classList = 'fa-solid fa-circle-half-stroke';
 	}
 }, randomShuffle = arr => {
 	for (let i = arr.length - 1; i > 0; i--) {
@@ -90,66 +119,82 @@ pageLoad.then(async () => {
 	}
 	document.getElementsByTagName('title')[0].innerText += ' - ' + i18n.siteName;
 	document.body.insertAdjacentHTML('afterbegin', `
-		<div id="sidebar">
-			<div id="sidebarContent">
-				<h3>
-					<i class="fa-solid fa-location-dot"></i>
-					<span class="sidebarTitle">${i18n.sidebar.navigation}</span>
-				</h3>
-				<p><a href="/${i18n.langName}/index.html">
-					<i class="fa-solid fa-house"></i>
-					<span class="sidebarTitle">${i18n.sidebar.homePage}</span>
-				</a></p>
-				<p><a href="/${i18n.langName}/links.html">
-					<i class="fa-solid fa-link"></i>
-					<span class="sidebarTitle">${i18n.sidebar.relatedLinks}</span>
-				</a></p>
-				<p><a href="/${i18n.langName}/changelog.html">
-					<i class="fa-solid fa-clock-rotate-left"></i>
-					<span class="sidebarTitle">${i18n.sidebar.changelog}</span>
-				</a></p>
-				<p><a href="/${i18n.langName}/faqs.html">
-					<i class="fa-solid fa-question-circle"></i>
-					<span class="sidebarTitle">${i18n.sidebar.faqs}</span>
-				</a></p>
-				<hr>
-				<h3>
-					<i class="fa-solid fa-language"></i>
-					<span class="sidebarTitle">${i18n.sidebar.languageChoice}</span>
-				</h3>
-				${
-					(() => {
-						let ret = '';
-						langList.forEach(totLang => ret += `
-							<p ${i18n.langName === totLang ? 'class="sidebarCurrentChoice"' : ''}><a href="javascript:modifyLang('${totLang}')">
-								<i class="fa-solid fa-${i18n.langName === totLang ? 'check-circle' : 'circle'}"></i>
-								<span class="sidebarTitle">${i18n.NameOfEachLang[totLang]}</span>
-							</a></p>
-						`)
-						return ret;
-					})()
-				}
-				<hr>
-				<h3>
-					<i class="fa-solid fa-compass"></i>
-					<span class="sidebarTitle">${i18n.sidebar.features}</span>
-				</h3>
-				<p><a href="javascript:switchLight()">
-					<i id="lightSwitchIcon" class="fa-solid fa-sun"></i>
-					<span class="sidebarTitle">${i18n.sidebar.toggleTheme}</span>
-				</a></p>
-				<p>
-					<i class="fa-solid fa-calendar"></i>
-					<span class="sidebarTitle" id="currentDate">${i18n.loading}</span>
-				</p>
-				<p>
-					<i class="fa-solid fa-clock"></i>
-					<span class="sidebarTitle" id="currentTime">${i18n.loading}</span>
-				</p>
-			</div>
-		</div>
+		<nav>
+			<h3>
+				<i class="fa-solid fa-location-dot"></i>
+				<span class="sidebarTitle">${i18n.sidebar.navigation}</span>
+			</h3>
+			<p><a href="/index.html">
+				<i class="fa-solid fa-house"></i>
+				<span class="sidebarTitle">${i18n.home.title}</span>
+			</a></p>
+			<p><a href="/blog/index.html">
+				<i class="fa-solid fa-blog"></i>
+				<span class="sidebarTitle">${i18n.blog.title}</span>
+			</a></p>
+			<p><a href="/game/index.html">
+				<i class="fa-solid fa-gamepad"></i>
+				<span class="sidebarTitle">${i18n.game.title}</span>
+			</a></p>
+			<p><a href="/tool/index.html">
+				<i class="fa-solid fa-toolbox"></i>
+				<span class="sidebarTitle">${i18n.tool.title}</span>
+			</a></p>
+			<hr />
+			<h3>
+				<i class="fa-solid fa-language"></i>
+				<span class="sidebarTitle">${i18n.sidebar.languageChoice}</span>
+			</h3>
+			${
+				(() => {
+					let ret = '';
+					langList.forEach(totLang => ret += `
+						<p ${i18n.langName === totLang ? 'class="sidebarCurrentChoice"' : ''}><a href="javascript:modifyLang('${totLang}')">
+							<i class="fa-solid fa-${i18n.langName === totLang ? 'check-circle' : 'circle'}"></i>
+							<span class="sidebarTitle">${i18n.NameOfEachLang[totLang]}</span>
+						</a></p>
+					`)
+					return ret;
+				})()
+			}
+			<hr />
+			<h3>
+				<i class="fa-solid fa-compass"></i>
+				<span class="sidebarTitle">${i18n.sidebar.features}</span>
+			</h3>
+			<p><a href="javascript:switchLight()">
+				<i id="lightSwitchIcon" class="fa-solid fa-sun"></i>
+				<span class="sidebarTitle">${i18n.sidebar.toggleTheme}</span>
+			</a></p>
+			<p>
+				<i class="fa-solid fa-calendar"></i>
+				<span class="sidebarTitle" id="currentDate">${i18n.loading}</span>
+			</p>
+			<p>
+				<i class="fa-solid fa-clock"></i>
+				<span class="sidebarTitle" id="currentTime">${i18n.loading}</span>
+			</p>
+			<hr />
+			<h3>
+				<i class="fa-solid fa-link"></i>
+				<span class="sidebarTitle">${i18n.sidebar.link}</span>
+			</h3>
+			<p><a href="/blog/show/index.html?id=about">
+				<i class="fa-solid fa-info"></i>
+				<span class="sidebarTitle">${i18n.sidebar.about}</span>
+			</a></p>
+			<p><a href="/blog/show/index.html?id=contact">
+				<i class="fa-solid fa-question"></i>
+				<span class="sidebarTitle">${i18n.sidebar.contact}</span>
+			</a></p>
+			<p><a href="/blog/show/index.html?id=changelog">
+				<i class="fa-solid fa-clock-rotate-left"></i>
+				<span class="sidebarTitle">${i18n.sidebar.changelog}</span>
+			</a></p>
+		</nav>
 		<div id="messageList"></div>
 	`);
+	loadLight();
 	let errorMessageCount = 0;
 	window.addEventListener('error', event => addErrorMessage([
 		[i18n.error.type, i18n.error.error.title],
@@ -188,8 +233,6 @@ pageLoad.then(async () => {
 		document.getElementById('currentDate').innerHTML = dateFormatter.format(new Date());
 		document.getElementById('currentTime').innerHTML = timeFormatter.format(new Date());
 	}, 50);
-	switchLight();
-	switchLight();
 	document.body.append(document.createRange().createContextualFragment(`
 		<script
 			src="https://giscus.app/client.js"
@@ -205,6 +248,7 @@ pageLoad.then(async () => {
 			data-theme="preferred_color_scheme"
 			data-lang="${i18n.htmlLangName}"
 			data-loading="lazy"
+			integrity="sha384-UwLZGbJGvkTzz0719+xEzUm/idqwzs0yZN8aB9Se5vUXHbyRyDWw9yqZTIsOsJ7x"
 			crossorigin="anonymous"
 			async=true
 		></script>
@@ -225,11 +269,15 @@ const $buoop = {
 	api: 2026.02
 }, $buo_f = () => {
 	const e = document.createElement('script'); 
-	e.src = '//browser-update.org/update.min.js'; 
+	e.src = 'https://browser-update.org/update.min.js';
 	document.body.appendChild(e);
 };
 try {
-	document.addEventListener('DOMContentLoaded', $buo_f, false);
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', $buo_f, false);
+	} else {
+		$buo_f();
+	}
 }
 catch (e) {
 	window.attachEvent('onload', $buo_f);

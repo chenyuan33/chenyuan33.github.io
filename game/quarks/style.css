@@ -69,6 +69,10 @@ textarea.archive {
 	right: 10px;
 }
 
+.unlockedAchievementName {
+	color: darkgray;
+}
+
 .about-quark-points {
 	font-size: 50%;
 	color: gray;

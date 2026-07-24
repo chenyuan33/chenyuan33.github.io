@@ -3,12 +3,25 @@
 
 <head>
 	<script src="/helper.js"></script>
+	<script src="/jstools/md.js"></script>
+	<script src="/blog/main.js"></script>
 	<title data-i18n="blog.title"></title>
+	<link rel="stylesheet" type="text/css" href="/blog/style.css" />
 </head>
 
 <body>
-	<h1 data-i18n="blog.title"></h1>
-	<p data-i18n="blog.empty"></p>
+	<div class="card">
+		<h1 data-i18n="blog.title"></h1>
+		<details open>
+			<summary data-i18n="blog.select"></summary>
+			<form action="" method="get">
+				<p id="categorySelector"></p>
+				<a href="?" data-i18n="blog.clearSelection"></a>
+				<input type="submit" />
+			</form>
+		</details>
+	</div>
+	<div id="list"></div>
 </body>
 
 </html>

@@ -478,10 +478,14 @@ const algoList = ['bubbleSort', 'selectionSort', 'insertionSort', 'gnomeSort', '
 		await fill(l, r);
 	};
 	await f(0, curArray.length - 1);
-};
-document.addEventListener('DOMContentLoaded', async () => {
+}, load = async () => {
 	makeRand();
 	for (const name of algoList) {
 		document.getElementById('sortingButtons').insertAdjacentHTML('beforeend', `<button onclick="run(${name})" class="sortingButton">${await i18nValue(`tool.visualizationOfSortingAlgo.sorting.name.${name}`)}</button>`);
 	}
-});
+}
+if (document.readyState === 'loading') {
+	document.addEventListener('DOMContentLoaded', load);
+} else {
+	load();
+}

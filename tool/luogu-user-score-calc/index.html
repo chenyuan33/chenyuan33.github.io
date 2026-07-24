@@ -9,17 +9,22 @@
 </head>
 
 <body>
-	<h1 data-i18n="tool.luoguUserScoreCalc.name"></h1>
-	<p data-i18n="tool.luoguUserScoreCalc.desc"></p>
-	<h2 data-i18n="tool.luoguUserScoreCalc.input.title"></h2>
-	<div id="probDiv"></div>
-	<div id="articleDiv"></div>
-	<div id="otherDiv"></div>
-	<h2 data-i18n="tool.luoguUserScoreCalc.output.title"></h2>
-	<table>
-		<thead data-i18n="tableHeadKeyValue"></thead>
-		<tbody></tbody>
-	</table>
+	<div class="card">
+		<h1 data-i18n="tool.luoguUserScoreCalc.name"></h1>
+		<p data-i18n="tool.luoguUserScoreCalc.desc"></p>
+	</div>
+	<div style="display: flex">
+		<div class="card" id="probDiv"></div>
+		<div class="card" id="articleDiv"></div>
+		<div class="card" id="otherDiv"></div>
+		<div class="card">
+			<h2 data-i18n="tool.luoguUserScoreCalc.output.title"></h2>
+			<table>
+				<thead data-i18n="tableHeadKeyValue"></thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
 </body>
 
 </html>

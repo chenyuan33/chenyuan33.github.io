@@ -1,5 +1,23 @@
 let contentTabsId = 0;
+/**
+ * The object to be in a param in the function `contentTabs`.
+ * @typedef {Object} ContentTab
+ * @property {string | HTMLElement} name The name of the tab. Allowed HTML if it is a string.
+ * @property {string | HTMLElement} content The content of the tab. Allowed HTML if it is a string.
+ */
+/**
+ * Generate content tabs from params.
+ * @param {ContentTab[]} list The content tabs. Each item should be `{ name: 'Tab 1', content: '<p>This is the first tab.</p>' }`.
+ * @param {Number} [defaultId=0] The default showing tab id (default 0).
+ * @returns {string} The full HTML.
+ */
 const contentTabs = (list, defaultId = 0) => {
+	const DOMGener = new DOMParser(), toRawHTMLString = t => typeof t === "string" ? DOMGener.parseFromString(t, 'text/html').body.innerHTML : t.outerHTML;
+	let fixedList = [];
+	for (const ele of list) {
+		fixedList.push({ name: toRawHTMLString(ele.name), content: toRawHTMLString(ele.content) });
+	}
+	list = fixedList;
 	defaultId = Number(defaultId);
 	contentTabsId++;
 	let ret = '';
@@ -10,7 +28,8 @@ const contentTabs = (list, defaultId = 0) => {
 		ret += `<div id="contentTab${contentTabsId}-${i}" class="contentTab${defaultId === i ? ' contentTabSelected' : ''}">${list[i].content}</div>`;
 	}
 	return `<div>${ret}</div>`;
-}, contentTabDisplay = (tabsId, tabLength, tabId) => {
+};
+const contentTabDisplay = (tabsId, tabLength, tabId) => {
 	for (let i = 0; i < tabLength; i++) {
 		if (document.getElementById(`contentTab${tabsId}-${i}`).classList.contains('contentTabSelected')) {
 			document.getElementById(`contentTab${tabsId}-${i}`).classList.remove('contentTabSelected');

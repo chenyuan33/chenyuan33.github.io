@@ -1,22 +1,35 @@
 let dialogId = 0;
+/**
+ * A button to do something, and displays in the end of a dialog.
+ * @typedef {Object} DialogBtn
+ * @property {String | HTMLElement} [text=''] The content of the button. Allowed HTML if it is a string.
+ * @property {boolean} [close=true] Close the dialog if the value is `true`.
+ * @property {Function} [callback=()=>{}] Called when the button is clicked.
+ */
+/**
+ * Create a dialog.
+ * @param {String | HTMLElement} content The content of the dialog. Allowed HTML if it is a string.
+ * @param {DialogBtn[]} buttons Buttons to do something, and display in the end of the dialog.
+ * @returns {Promise<*>} A Promise indicating whether the dialog has been closed.
+ * The value of this Promise is equal to the return value of the callback function provided by the close button,
+ * or `undefined` if the dialog was closed by clicking the close button displayed in the upper-right corner of the dialog or the shadow outside the dialog.
+ */
 function createDialog(content, buttons) {
 	dialogId++;
 	const dialog = document.createElement('div'), dialogMain = document.createElement('div'), closeBtn = document.createElement('i'), dialogBtns = document.createElement('div');
 	let resolver;
 	const ret = new Promise(resolve => resolver = resolve);
 	dialogBtns.classList.add('dialog-buttons');
-	buttons.forEach((info, id) => {
-		if (!info.hasOwnProperty('html')) {
-			info.html = '';
-		}
-		if (!info.hasOwnProperty('close')) {
-			info.close = true;
-		}
-		if (!info.hasOwnProperty('callback')) {
-			info.callback = () => {};
-		}
+	buttons.forEach(info => {
+		info.text ??= '';
+		info.close ??= true;
+		info.callback ??= () => {};
 		const btn = document.createElement('button');
-		btn.innerHTML = info.html;
+		if (typeof info.text === "string") {
+			btn.innerHTML = info.text;
+		} else {
+			btn.append(content);
+		}
 		btn.addEventListener('click', info.close ? () => {
 			resolver(info.callback());
 			dialog.remove();

@@ -1,20 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>Main Page Jumper - cy3's site</title>
+	<script src="/helper.js"></script>
+	<title data-i18n="home.title"></title>
+	<link rel="stylesheet" type="text/css" href="/home/style.css" />
+	<script src="/jstools/md.js"></script>
+	<script src="/home/main.js"></script>
 </head>
 
 <body>
-	<script>
-		if (navigator.language === "zh" || navigator.language === "zh-CN") {
-			location.href = "/zh-cn/index.html";
-		} else {
-			location.href = "/en-us/index.html";
-		}
-	</script>
+	<h1 data-i18n="siteName"></h1>
+	<div id="items">
+		<div class="card">
+			<h2 data-i18n="blog.title"></h2>
+			<ul id="blogList"></ul>
+			<p><a href="/blog/index.html"><span data-i18n="home.more"></span><i class="fa-solid fa-arrow-right"></i></a></p>
+		</div>
+		<div class="card">
+			<h2 data-i18n="game.title"></h2>
+			<ul>
+				<li><a href="/game/quarks/index.html" data-i18n="game.quarks.title"></a></li>
+			</ul>
+			<p><a href="/game/index.html"><span data-i18n="home.more"></span><i class="fa-solid fa-arrow-right"></i></a></p>
+		</div>
+		<div class="card">
+			<h2 data-i18n="tool.title"></h2>
+			<ul>
+				<li><a href="/tool/luogu-user-score-calc/index.html" data-i18n="tool.luoguUserScoreCalc.title"></a></li>
+				<li><a href="/tool/mdeditor.html" data-i18n="tool.mdeditor.title"></a></li>
+				<li><a href="/tool/visualization-of-sorting-algo/index.html" data-i18n="tool.visualizationOfSortingAlgo.title"></a></li>
+			</ul>
+			<p><a href="/tool/index.html"><span data-i18n="home.more"></span><i class="fa-solid fa-arrow-right"></i></a></p>
+		</div>
+	</div>
 </body>
 
 </html>

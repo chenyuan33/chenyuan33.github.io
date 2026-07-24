@@ -2,7 +2,7 @@
 name: 添加一个新的友情链接
 about: 为网站添加一个新的相关链接。
 title: ''
-labels: Add a Related Link
+labels: Add a Friend Link
 assignees: ''
 
 ---

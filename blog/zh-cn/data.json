@@ -1,0 +1,27 @@
+{
+	"blog": {
+		"about": {
+			"title": "关于",
+			"summary": "关于这个网站。"
+		},
+		"contact": {
+			"title": "联系我们",
+			"summary": "网站所有者的社交媒体账号。您可以通过这些账号联系网站所有者。"
+		},
+		"faq": {
+			"title": "常见问题",
+			"summary": "常见问题。"
+		},
+		"friendlyLinks": {
+			"title": "友情链接",
+			"summary": "友情链接。"
+		},
+		"changelog": {
+			"title": "更新日志",
+			"summary": "更新日志。"
+		}
+	},
+	"category": {
+		"website": "网站相关"
+	}
+}

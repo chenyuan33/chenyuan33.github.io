@@ -1,0 +1,1 @@
+如果想要提问，请参考[联系方式](/blog/show/index.html?id=concact)一文。

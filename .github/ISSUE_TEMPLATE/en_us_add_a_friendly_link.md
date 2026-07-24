@@ -1,8 +1,8 @@
 ---
-name: Add a New Related Link
-about: Add a new related link to the website.
+name: Add a New Friendly Link
+about: Add a new friendly link to the website.
 title: ''
-labels: Add a Related Link
+labels: Add a Friendly Link
 assignees: ''
 
 ---

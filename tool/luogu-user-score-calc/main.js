@@ -29,11 +29,10 @@ const q = id => Number(document.getElementById(id).value), p = id => q('prob' + 
 	document.getElementById('totalScore').innerText = totalScore.toFixed(2);
 	document.getElementById('ratingLevel').style.color = '#' + [, 'bfbfbf', '3498db', '52c41a', 'f39c11', 'fe4c61'][ratingLevel];
 	document.getElementById('ratingLevel').innerText = await i18nValue('tool.luoguUserScoreCalc.output.ratingLevels.lv' + ratingLevel);
-}
-document.addEventListener('DOMContentLoaded', () => {
+}, load = () => {
 	const f = async name => {
 		document.getElementById(name + 'Div').insertAdjacentHTML('beforeend', `
-			<h3>${await i18nValue(`tool.luoguUserScoreCalc.input.${name}.title`)}</h3>
+			<h2>${await i18nValue(`tool.luoguUserScoreCalc.input.${name}.title`)}</h2>
 			<table>
 				<thead>${await i18nValue('tableHeadKeyValue')}</thead>
 				<tbody>
@@ -71,4 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			`);
 		}
 	})()]).then(calc);
-});
+};
+if (document.readyState === 'loading') {
+	document.addEventListener('DOMContentLoaded', load);
+} else {
+	load();
+}

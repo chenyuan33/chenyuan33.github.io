@@ -1,0 +1,22 @@
+#list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: 5px;
+	margin-top: 10px;
+}
+
+.card {
+	position: relative;
+	left: 0%;
+	right: 0%;
+}
+
+#list > div > h3 + p {
+	font-style: italic;
+}
+
+.category {
+	border-radius: 5px;
+	background-color: light-dark(cyan, blue);
+	padding: 5px;
+}

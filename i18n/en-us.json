@@ -7,13 +7,13 @@
 	},
 	"sidebar": {
 		"navigation": "Navigation",
-		"homePage": "Home Page",
-		"relatedLinks": "Related Links",
-		"changelog": "Changelog",
-		"faqs": "FAQs",
 		"languageChoice": "Languages",
 		"features": "Features",
-		"toggleTheme": "Toggle Theme"
+		"toggleTheme": "Toggle Theme",
+		"link": "Related Links",
+		"about": "About",
+		"contact": "Contact",
+		"changelog": "Changelog"
 	},
 	"loading": "Loading...",
 	"siteName": "cy3's site",
@@ -43,6 +43,10 @@
 	"ok": "OK",
 	"cancel": "Cancel",
 	"tableHeadKeyValue": "<tr><th>Key</th><th>Value</th></tr>",
+	"home": {
+		"title": "Home",
+		"more": "See More"
+	},
 	"notFoundPage": {
 		"title": "404 Page Not Found",
 		"tips": "Page is lost!",
@@ -54,7 +58,9 @@
 	},
 	"blog": {
 		"title": "Blog List",
-		"empty": "None at present."
+		"name": "Blog",
+		"select": "Select",
+		"clearSelection": "Clear Selection"
 	},
 	"game": {
 		"title": "Game List",
@@ -171,7 +177,8 @@
 					"btn": "Hard Reset",
 					"title": "Warning",
 					"notice1": "Are you sure you want to reset your progress? <strong>This will result in </strong><span class=\"error\">the loss of all game data and achievements</span>.",
-					"notice2": "If you want to back up your archive, first click \"Cancel\", then go to the Save/Load screen to retrieve and save it."
+					"notice2": "If you want to back up your archive, first click \"Cancel\", then go to the Save/Load screen to retrieve and save it.",
+					"success": "Hard reset successful"
 				},
 				"pause": {
 					"pause": "Pause",
@@ -285,11 +292,17 @@
 								"Optimization of the multi-panel interface.",
 								"Optimized the interface when dimensions are not unlocked.",
 								"Updated the prompt for a hard reset.",
-								"Updated the notification that appears when an achievement is earned.",
+								"Updated the notification that appears when unlocked an achievement.",
 								"Updated the save/load interface and added a save-as feature.",
 								"Move the hard reset, pause, and save/load functions to the new settings section.",
 								"Updated the display of the release notes, some version numbers and descriptions have been changed.",
 								"Fixed some bugs."
+							]
+						},
+						"5": {
+							"0": [
+								"Optimized the prompt after hard reset.",
+								"Optimized the prompt when unlocked an achievement."
 							]
 						}
 					}
@@ -301,10 +314,9 @@
 		"title": "Tool List",
 		"luoguUserScoreCalc": {
 			"title": "[Repost] Luogu User Score Calculator",
-			"name": "[Repost] <a href='https://www.luogu.com.cn/'>Luogu</a> User Score Calculator",
+			"name": "[Repost] <a href='https://www.luogu.com/'>Luogu</a> User Score Calculator",
 			"desc": "Original author: @<a href='https://www.luogu.com/user/1717150'>Aurelia_Veil</a>'s <a href='https://www.luogu.com/paste/c7raykd1'>Cloud Clipboard</a>, reposted with permission. Scores are for reference only. Calculation rules can be found in the original clipboard.",
 			"input": {
-				"title": "Data Entry",
 				"prob": {
 					"title": "Problems Count",
 					"prob1": "<span id=\"probLabel1\">Red</span>",

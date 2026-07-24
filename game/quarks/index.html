@@ -4,7 +4,7 @@
 <head>
 	<script src="/helper.js"></script>
 	<title data-i18n="game.quarks.title"></title>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/8.0.2/bignumber.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/8.0.2/bignumber.min.js" integrity="sha384-CfYyOpqxT6Hm7hkg2hTLlXItzgjG3qcVeW4gQthWxrhtHVTsC+7IIT+W9wPH7mSY" crossorigin="anonymous"></script>
 	<script src="/jstools/contentTabs.js"></script>
 	<script src="/jstools/dialog.js"></script>
 	<link rel="stylesheet" type="text/css" href="/game/quarks/style.css" />
@@ -12,8 +12,10 @@
 </head>
 
 <body>
-	<h1 data-i18n="game.quarks.title"></h1>
-	<div id="game"></div>
+	<div class="card">
+		<h1 data-i18n="game.quarks.title"></h1>
+		<div id="game"></div>
+	</div>
 </body>
 
 </html>

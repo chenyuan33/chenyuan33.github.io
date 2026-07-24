@@ -63,16 +63,16 @@ const flush = ['start'], achievements = {}, playerDefault = () => ({
 }, doCpyCurrentArchive = () => navigator.clipboard.writeText(btoa(JSON.stringify(player))), cpyCurrentArchiveThenDialog = () => doCpyCurrentArchive().then(async () => createDialog(`
 	<h2>${await i18nValue('game.quarks.settings.archive.get.copied')}</h2>
 	<p>${await i18nValue('game.quarks.settings.archive.cpy.message')}</p>
-`, [{html: await i18nValue('ok')}])), getCurrentArchive = async () => createDialog(
+`, [{text: await i18nValue('ok')}])), getCurrentArchive = async () => createDialog(
 	`
 		<h2>${await i18nValue('game.quarks.settings.archive.get.title')}</h2>
 		<pre class="archive"><code>${btoa(JSON.stringify(player))}</code></pre>
 		<p><strong>${await i18nValue('game.quarks.settings.archive.get.notice')}</strong></p>
 	`,
 	[
-		{html: await i18nValue('game.quarks.settings.archive.get.copy'), callback: cpyCurrentArchiveThenDialog, close: false},
-		{html: await i18nValue('game.quarks.settings.archive.get.copyAndClose'), callback: cpyCurrentArchiveThenDialog},
-		{html: await i18nValue('ok')}
+		{text: await i18nValue('game.quarks.settings.archive.get.copy'), callback: cpyCurrentArchiveThenDialog, close: false},
+		{text: await i18nValue('game.quarks.settings.archive.get.copyAndClose'), callback: cpyCurrentArchiveThenDialog},
+		{text: await i18nValue('ok')}
 	]
 ), cpyCurrentArchive = () => doCpyCurrentArchive().then(async () => addMessage(await i18nValue('game.quarks.settings.archive.cpy.message'), 'light-dark(lightgreen, darkgreen)')), setCurrentArchive = async () => createDialog(
 	`
@@ -83,9 +83,9 @@ const flush = ['start'], achievements = {}, playerDefault = () => ({
 		<textarea class="archive"></textarea>
 	`,
 	[
-		{html: await i18nValue('cancel')},
+		{text: await i18nValue('cancel')},
 		{
-			html: `<span class="error">${await i18nValue('game.quarks.settings.archive.set.sure')}</span>`,
+			text: `<span class="error">${await i18nValue('game.quarks.settings.archive.set.sure')}</span>`,
 			callback: () => updateData(
 				document.querySelector('textarea.archive').value,
 				async () => addMessage(await i18nValue('game.quarks.settings.archive.set.success'), 'light-dark(lightgreen, darkgreen)'),
@@ -103,7 +103,7 @@ const flush = ['start'], achievements = {}, playerDefault = () => ({
 							})()}</pre>
 						</details>
 					`,
-					[{html: await i18nValue('ok')}]
+					[{text: await i18nValue('ok')}]
 				)
 			)
 		}
@@ -133,16 +133,17 @@ const flush = ['start'], achievements = {}, playerDefault = () => ({
 }, doHardReset = () => {
 	player = playerDefault();
 	flush.push('start');
-}, hardReset = async () => {
-	createDialog(`
-		<h2>${await i18nValue('game.quarks.settings.hardReset.title')}</h2>
-		<p>${await i18nValue('game.quarks.settings.hardReset.notice1')}</p>
-		<p>${await i18nValue('game.quarks.settings.hardReset.notice2')}</p>
-	`, [
-		{html: await i18nValue('cancel')},
-		{html: `<span class="error">${await i18nValue('ok')}</span>`, callback: doHardReset}
-	]);
-}, getQuark = (dimension, level) => {
+}, hardReset = async () => createDialog(`
+	<h2>${await i18nValue('game.quarks.settings.hardReset.title')}</h2>
+	<p>${await i18nValue('game.quarks.settings.hardReset.notice1')}</p>
+	<p>${await i18nValue('game.quarks.settings.hardReset.notice2')}</p>
+`, [
+	{text: await i18nValue('cancel')},
+	{text: `<span class="error">${await i18nValue('ok')}</span>`, callback: async () => {
+		doHardReset();
+		addMessage(await i18nValue('game.quarks.settings.hardReset.success'), 'light-dark(lightgreen, darkgreen)');
+	}}
+]), getQuark = (dimension, level) => {
 	let ret = false;
 	if (!level) {
 		if (dimension) {
@@ -341,7 +342,7 @@ const flush = ['start'], achievements = {}, playerDefault = () => ({
 		if (!player.achievements[key] && achievements[key].check()) {
 			player.achievements[key] = true;
 			addMessage(`
-				<h2>${await i18nValue('game.quarks.achievements.unlock')} [${achievements[key].title}]</h2>
+				<h2>${await i18nValue('game.quarks.achievements.unlock')} <span class="unlockedAchievementName">${achievements[key].title}</span></h2>
 				<p>${achievements[key].desc}</p>
 			`, 'light-dark(lightgreen, darkgreen)');
 			flush.push('achievements');
@@ -372,8 +373,7 @@ const flush = ['start'], achievements = {}, playerDefault = () => ({
 		flush.push('quark');
 	}
 	setTimeout(updateQuark, 1000);
-};
-document.addEventListener('DOMContentLoaded', async () => {
+}, load = async () => {
 	for (const [name, check] of [
 		['firstQuark', () => player.quark[0][0].gt(new BigNumber(0))],
 		['quarkGetter', () => player.quark[0].length > 1 && player.quark[0][1][0].gt(new BigNumber(0))],
@@ -464,5 +464,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 	flushing();
 	checkAchievements();
 	setTimeout(updateQuark, 1000);
-	setInterval(() => localStorage.gameQuarks = btoa(JSON.stringify(player)), 50);
-});
+	setInterval(() => localStorage.gameQuarks = btoa(JSON.stringify(player)), 1000);
+};
+if (document.readyState === 'loading') {
+	document.addEventListener('DOMContentLoaded', load);
+} else {
+	load();
+}
